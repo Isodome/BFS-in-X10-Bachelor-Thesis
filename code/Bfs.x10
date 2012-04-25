@@ -1,7 +1,7 @@
 import graph.*;
 import bfs.*;
 
-public class Hello {
+public class Bfs{
 	/**
 	 * The main method for the Hello class
 	 */

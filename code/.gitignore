@@ -1,0 +1,13 @@
+# Mac OS X Finder 
+.DS_Store
+
+# Build Productes
+*.h
+*.cc
+*.java
+*.class
+hello
+
+
+# VIM Swap file
+*.swp

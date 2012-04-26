@@ -1,4 +1,4 @@
-package graph;
+package parser;
 
 import x10.io.*;
 public class Graph {

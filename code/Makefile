@@ -4,7 +4,7 @@ JCC=$(BINDIR)x10c
 JSIM=$(BINDIR)x10
 BINARY=bfs_start
 
-FILES = Bfs.x10 graph/IGraph.x10 graph/Graph.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
+FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
 
 
 

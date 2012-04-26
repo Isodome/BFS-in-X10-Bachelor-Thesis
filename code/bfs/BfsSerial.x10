@@ -1,14 +1,21 @@
 package bfs;
 
 import x10.util.*;
+import parser.GraphStrucure;
 
-public class BfsSerial {
+public class BfsSerial implements GraphStructure{
 	
 	private static val INF : Int = Int.MAX_VALUE;
 	
-	public def this() {
-	}
 	
+	def setVertexCount(m: Int) {
+
+	}
+
+	def addEdge(from:Int, to:Int) {
+
+	}
+
 	public def bfs(adj :Array[Boolean](2), start : Int, n : Int) : Array[Int](1) {
 		// assert adj is square
 

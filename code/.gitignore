@@ -6,8 +6,7 @@
 *.cc
 *.java
 *.class
-hello
-
+bfs_start
 
 # VIM Swap file
 *.swp

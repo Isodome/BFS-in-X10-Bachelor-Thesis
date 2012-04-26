@@ -1,6 +1,7 @@
 package bfs;
+import parser.GraphStructure;
 
-public interface IBfs {
+abstract class BfsAlgorithm implements GraphStructure {
 
-
+	abstract run();
 }

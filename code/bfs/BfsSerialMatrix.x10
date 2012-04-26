@@ -5,21 +5,25 @@ import parser.GraphStrucure;
 
 public class BfsSerial implements GraphStructure{
 	
-	private static val INF : Int = Int.MAX_VALUE;
-	
-	
-	def setVertexCount(m: Int) {
+	private static val INF : UInt = UInt.MAX_VALUE;
+	private var vertexCount : UInt  = 0;
+	private var adj : Array[Boolean](2);
 
+	
+	def setVertexCount(n: Int) {
+		this.vertexCount = m;
+		this.adj = new Array[Boolean](2)( (1..n)*(1..n), false);
 	}
 
 	def addEdge(from:Int, to:Int) {
-
+		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
+		adj( [from, to] ) = true;
 	}
 
-	public def bfs(adj :Array[Boolean](2), start : Int, n : Int) : Array[Int](1) {
+	public def bfs(start : Int) : Array[Int](1) {
 		// assert adj is square
 
-		var d : Array[Int](1) = new Array[Int]((1..n), INF);
+		var d : Array[Int](1) = new Array[Int]((1..vertexCount), INF);
 		d([start]) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();

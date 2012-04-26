@@ -9,7 +9,7 @@ public interface GraphStrucure {
 	 * all edges he already knew.
 	 *@param m the new number of vertices 
 	 */
-	def setVertexCount(m: Int);
+	def setVertexCount(n: Int);
 
 	/**
 	 * Tells the callee about a new edge he should add to the graph

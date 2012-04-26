@@ -55,6 +55,13 @@ public class Bfs{
 		 */
 
 		for (file in fileList) {
+			var p : Parser;
+			if (file.endsWith(".sgraph") {
+					p = new SGraphParser();
+			} else {
+				continue;
+			}
+
 			if (bfs == BFS_SERIAL_MATRIX) {
 				bfsSerialMatrix();
 			}

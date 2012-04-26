@@ -16,7 +16,7 @@ cpp: $(BINARY)
 
 .PHONY: csim
 csim: $(BINARY)
-	./$(BINARY) -alg serial_matrix  test.tgf
+	./$(BINARY) -alg serial_matrix  test.sgraph
 
 
 # Java Regeln
@@ -28,7 +28,7 @@ java: Bfs.class
 
 .PHONY: jsim
 jsim:
-	$(JSIM) Bfs
+	$(JSIM) Bfs -alg serial_matrix test.sgraph
 
 
 # Aufreaumen

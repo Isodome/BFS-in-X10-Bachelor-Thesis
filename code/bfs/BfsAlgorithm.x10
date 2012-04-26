@@ -1,7 +1,7 @@
 package bfs;
 import parser.GraphStructure;
 
-abstract class BfsAlgorithm implements GraphStructure {
+public abstract class BfsAlgorithm implements GraphStructure {
 
-	abstract run(start : Int) : Array[UInt](1);
+	public abstract def run(start : Int) : Array[Int](1);
 }

@@ -53,18 +53,30 @@ public class Bfs{
 		/* 
 		 * Parsing done, start algorithm
 		 */
-
 		for (file in fileList) {
-			var p : Parser;
+			var parser : Parser;
 
 			if (file.endsWith(".sgraph")) {
-				p = new SGraphParser();
+				parser = new SGraphParser();
 			} else {
 				continue;
 			}
 
+			var algo : BfsAlgorithm;
+
 			if (bfs == BFS_SERIAL_MATRIX) {
+				algo = new BfsSerialMatrix();
+			} else {
+				continue;
 			}
+
+			// Parse the graph file into to chosen algorithm
+			parser.parse(algo, file);
+
+			//run the algorithm
+			val d : Array[Int](1) = algo.run(1);
+			print(d);
+
 		}
 	}
 
@@ -94,7 +106,14 @@ public class Bfs{
 		}
 	}
 
-	//	private static def print(s:String) {
-	//		x10.io.Console.OUT.println(s);
-	//	}
+	private static def print(s:String) {
+		x10.io.Console.OUT.println(s);
+	}
+
+
+	private static def print( a: Array[Int](1) ) {
+		for (i in a) {
+			print (i(0).toString() + "\t: " + a(i).toString());
+		}
+	}
 }

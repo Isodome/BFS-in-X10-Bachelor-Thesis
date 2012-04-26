@@ -9,12 +9,12 @@ public interface GraphStructure {
 	 * all edges he already knew.
 	 *@param m the new number of vertices 
 	 */
-	def setVertexCount(n: Int) : void;
+	public def setVertexCount(n: Int) : void;
 
 	/**
 	 * Tells the callee about a new edge he should add to the graph
 	 *@param from the starting vertex of the new edge 
 	 *@param to the target vertex of the new edge
 	 */
-	def addEdge(from:Int, to:Int) : void;
+	public def addEdge(from:Int, to:Int) : void;
 }

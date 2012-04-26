@@ -14,7 +14,7 @@ public class IOHelper {
 		return sum;
 	}
 	
-	private static def getFileReader(val file:String ) :FileReader {
+	public static def getFileReader(val file:String ) :FileReader {
 		val I = new File(file);
 		if (!I.exists()) {
 			throw new FileNotFoundException();

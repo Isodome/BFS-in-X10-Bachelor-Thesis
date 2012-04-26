@@ -1,21 +1,21 @@
 package bfs;
 
 import x10.util.*;
-import parser.GraphStrucure;
+import parser.GraphStructure;
 
-public class BfsSerialMatrix implements GraphStructure{
+public class BfsSerialMatrix extends BfsAlgorithm {
 	
-	private static val INF : UInt = UInt.MAX_VALUE;
-	private var vertexCount : UInt  = 0;
+	private static val INF : Int = Int.MAX_VALUE;
+	private var vertexCount : Int  = 0;
 	private var adj : Array[Boolean](2);
 
 	
-	def setVertexCount(n: Int) {
-		this.vertexCount = m;
-		this.adj = new Array[Boolean](2)( (1..n)*(1..n), false);
+	public def setVertexCount(n: Int) {
+		this.vertexCount = n;
+		this.adj = new Array[Boolean]( (1..n)*(1..n), false);
 	}
 
-	def addEdge(from:Int, to:Int) {
+	public def addEdge(from:Int, to:Int) {
 		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
 		adj( [from, to] ) = true;
 	}
@@ -35,7 +35,7 @@ public class BfsSerialMatrix implements GraphStructure{
 
 		while(!current.isEmpty()) {
 			for (vertex in current) {
-				for (var idx : Int = 1; idx <= n; idx++) {
+				for (var idx : Int = 1; idx <= vertexCount; idx++) {
 					if (adj([vertex, idx]) && d([idx]) == INF) {
 						next.add(idx);
 						d([idx]) = depth;

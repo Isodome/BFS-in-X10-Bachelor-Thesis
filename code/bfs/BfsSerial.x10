@@ -4,7 +4,7 @@ import x10.util.*;
 
 public class BfsSerial {
 	
-	private val INF : Int = Int.MAX_VALUE;
+	private static val INF : Int = Int.MAX_VALUE;
 	
 	public def this() {
 	}

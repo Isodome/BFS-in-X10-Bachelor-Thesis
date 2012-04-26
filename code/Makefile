@@ -1,5 +1,5 @@
 BINDIR = ../../x10-2.2.2.2/bin/
-CC=$(BINDIR)x10c++
+CC=$(BINDIR)x10c++ -VERBOSE_CHECKS
 JCC=$(BINDIR)x10c 
 JSIM=$(BINDIR)x10
 BINARY=bfs_start
@@ -9,7 +9,7 @@ FILES = Bfs.x10 graph/IGraph.x10 graph/Graph.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
 
 
 # c++ Regeln
-$(BINARY): 
+$(BINARY): $(FILES)
 	$(CC) Bfs.x10 -o $(BINARY)
 
 .PHONY: cpp 
@@ -17,11 +17,11 @@ cpp: $(BINARY)
 
 .PHONY: csim
 csim: $(BINARY)
-	./$(BINARY)
+	./$(BINARY) -alg serial_matrix  test.tgf
 
 
 # Java Regeln
-Bfs.class:
+Bfs.class:$(FILES)
 	$(JCC) -VERBOSE_CHECKS Bfs.x10
 
 .PHONY: java

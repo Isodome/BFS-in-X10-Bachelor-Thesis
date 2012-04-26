@@ -23,7 +23,7 @@ public class Graph {
 	}
 	
 	
-	public static def makeMatrixFromTGF(val file: String) :Array[Boolean](2) {
+	public static def makeMatrixFromTGF(val file: String, datastructure : Int) :Array[Boolean](2) {
 		reader: FileReader  =  getFileReader(file);
 		val edgeCount = readTGFEdges(reader);
 		val r  = Region.makeRectangular([1,1], [edgeCount, edgeCount]);

@@ -1,7 +1,7 @@
-BINDIR = ../../x10-2.2.2.2/bin/
-CC=$(BINDIR)x10c++ -VERBOSE_CHECKS
-JCC=$(BINDIR)x10c 
-JSIM=$(BINDIR)x10
+CCDIR = ../../x10-2.2.2.2/bin/
+CC=$(CCDIR)x10c++ -VERBOSE_CHECKS
+JCC=$(CCDIR)x10c 
+JSIM=$(CCDIR)x10
 BINARY=bfs_start
 
 # FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10

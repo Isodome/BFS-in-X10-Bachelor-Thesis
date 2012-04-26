@@ -1,1 +1,12 @@
-README:
+Breadth-first search written in X10
+
+Compile:
+Edit the Makefile in the 'code' folder. Change CCDIR to the directory containing the x10c++ or/and x10c (java-backend)compiler. 
+ -> make cpp : compile using the c++ backend
+ -> make java: compile using the java backend
+
+Use with c++ backend
+Execute bfs_start. Type bfs_start --help for more information
+
+Use with java backend
+Execute 'x10' from the X10 bin-folder with 'Bfs' as first argument 

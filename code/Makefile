@@ -35,4 +35,8 @@ jsim:
 # Aufreaumen
 .PHONY:	clean
 clean: 
-	rm -Rf *.cc *.h *.java $(BINARY)
+	rm -rf $(BINARY)
+	find . -type f -name "*.cc" -delete
+	find . -type f -name "*.h" -delete
+	find . -type f -name "*.java" -delete
+	find . -type f -name "*.class" -delete

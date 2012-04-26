@@ -3,7 +3,7 @@ package bfs;
 import x10.util.*;
 import parser.GraphStrucure;
 
-public class BfsSerial implements GraphStructure{
+public class BfsSerialMatrix implements GraphStructure{
 	
 	private static val INF : UInt = UInt.MAX_VALUE;
 	private var vertexCount : UInt  = 0;

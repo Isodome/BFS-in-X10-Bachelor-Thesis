@@ -1,9 +1,8 @@
 package parser;
 
+public class SGraphParser implements Parser {
 
-public class SGraphParser extends Parser {
-
-	public def parse(gs :GraphStructure, filename :String){filename != null && gs != null} {
+	public def parse(gs :GraphStructure, filename :String) : void {
 
 	}
 }

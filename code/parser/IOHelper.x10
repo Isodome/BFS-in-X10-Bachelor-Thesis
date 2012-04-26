@@ -1,7 +1,7 @@
 package parser;
 
 import x10.io.*;
-public class Graph {
+public class IOHelper {
 	
 	/**
 	 * Skips all rows before th "#" and counts them. Returns the number of rows before the "#"

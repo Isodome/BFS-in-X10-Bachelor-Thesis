@@ -7,8 +7,6 @@ BINARY=bfs_start
 # FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
 FILES = $(wildcard *.x10) $(wildcard parser/*.x10) $(wildcard bfs/*.x10)
 
-
-
 # c++ Regeln
 $(BINARY): $(FILES)
 	$(CC) Bfs.x10 -o $(BINARY)

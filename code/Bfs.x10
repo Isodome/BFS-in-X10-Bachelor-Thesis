@@ -1,3 +1,4 @@
+//import parser.Parser;
 import parser.*;
 import bfs.*;
 import x10.util.*;
@@ -11,12 +12,11 @@ public class Bfs{
 	 * The main method for the Hello class
 	 */
 	public static def main(args: Array[String]) {
-		
 
 		// Start parsing command line arguments
 		var bfs : Int = BFS_NONE;
 		var fileList : List[String] = new ArrayList[String]();
-		
+
 		var i : Int = args.region.minPoint()(0);
 		while(args.region.contains(i)) {
 			val argument : String = args(i); 
@@ -43,7 +43,7 @@ public class Bfs{
 
 		if (bfs == BFS_NONE) {
 			printError("Unvalid BFS-algorithm selected.");
-				return;
+			return;
 		}
 		if (fileList.isEmpty()) {
 			printError("You must specify at least one graph file.");
@@ -56,7 +56,8 @@ public class Bfs{
 
 		for (file in fileList) {
 			var p : Parser;
-			if (file.endsWith(".sgraph") {
+
+			if (file.endsWith(".sgraph")) {
 				p = new SGraphParser();
 			} else {
 				continue;
@@ -66,7 +67,7 @@ public class Bfs{
 			}
 		}
 	}
-	
+
 	private static def bfsSerialMatrix() {
 		//	val a : Array[Boolean](2) = Graph.makeMatrixFromTGF(file, graph);
 		//	var algo : BfsSerial = new BfsSerial();
@@ -92,8 +93,8 @@ public class Bfs{
 			return BFS_NONE;
 		}
 	}
-	
-//	private static def print(s:String) {
-//		x10.io.Console.OUT.println(s);
-//	}
+
+	//	private static def print(s:String) {
+	//		x10.io.Console.OUT.println(s);
+	//	}
 }

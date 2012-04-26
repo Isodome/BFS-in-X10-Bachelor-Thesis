@@ -3,5 +3,5 @@ import parser.GraphStructure;
 
 abstract class BfsAlgorithm implements GraphStructure {
 
-	abstract run();
+	abstract run(start : Int) : Array[UInt](1);
 }

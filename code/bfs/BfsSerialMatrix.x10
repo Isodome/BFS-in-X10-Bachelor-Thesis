@@ -20,7 +20,7 @@ public class BfsSerialMatrix implements GraphStructure{
 		adj( [from, to] ) = true;
 	}
 
-	public def bfs(start : Int) : Array[Int](1) {
+	public def run(start : Int) : Array[Int](1) {
 		// assert adj is square
 
 		var d : Array[Int](1) = new Array[Int]((1..vertexCount), INF);

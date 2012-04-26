@@ -1,4 +1,6 @@
 package parser;
-abstract class Parser {
-	abstract parse(gs :GraphStructure, filename :String){filename != null && gs != null};
+import parser.GraphStructure;
+
+public interface Parser {
+	def parse(gs :GraphStructure, filename :String): void;
 }

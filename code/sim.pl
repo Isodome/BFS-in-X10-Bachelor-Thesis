@@ -1,5 +1,6 @@
 use strict;
 use Term::ANSIColor qw(:constants);
+my @modes = qw(serial_matrix serial_list serial_sparse 1d_matrix);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "sim_results";
@@ -22,7 +23,6 @@ if (system("make", "cpp") != -0) {
 	print RED, "make failed!\n", RESET;
 	exit -1;
 }
-my @modes = qw(serial_matrix serial_list serial_sparse);
 
 #############################
 # Execute bfs with every algorithm

@@ -52,17 +52,21 @@ public class Bfs {
             i++;
         }
 
+		// You always need at least '-alg', '<alg>' and the input file, thus, at least 3 arguments 
         if (args.size < 3) {
             printError("Too few arguments.");
             return;
         }
 
+		// Exit with error if the -alg argument is missing or die value didn't match
         if (bfs == BFS_NONE) {
             printError("Unvalid BFS-algorithm selected.");
             return;
         }
+
+		// Exit with error, if no input file was specified
         if (file == null) {
-            printError("You must specify at least one graph file.");
+            printError("You must specify a graph file.");
             return;
         }
 
@@ -71,6 +75,7 @@ public class Bfs {
 		 */
 		var parser : Parser;
 
+		// choose parser corresponding to the file ending
 		if (file.endsWith(".sgraph")) {
 			parser = new SGraphParser();
 		} else {
@@ -79,21 +84,27 @@ public class Bfs {
 		}
 
 		var algo : BfsAlgorithm;
-
+		// choose algorithm
 		if (bfs == BFS_SERIAL_MATRIX) {
 			algo = new BfsSerialMatrix();
 		} else if (bfs == BFS_SERIAL_LIST) {
 			algo = new BfsSerialList();   
 		} else if (bfs == BFS_SERIAL_SPARSE) {
 			algo = new BfsSerialSparse(); 
+		} else if (bfs == BFS_1D_MATRIX) {
+			algo = new Bfs1DMatrix(); 
 		} else {
 			printError("Unknown algorithm.");
 			return;
 		}
 
-		// Parse the graph file into to chosen algorithm
-		parser.fillGraphInDataStructure(algo, file);
-
+		/* Parse the graph file into to chosen algorithm */
+		val f = file;
+		val a = algo;
+		val p = parser;
+		finish async p.fillGraphInDataStructure(a, f);
+		
+		
 		//trigger garbage collection and run the algorithm
 		x10.lang.System.gc();
 		val d : Array[Int](1) = algo.run(1);
@@ -107,7 +118,7 @@ public class Bfs {
 
     private static def printHelp() {
         var s : String = "usage: bfs_start -alg <alg> -o <result> input \n" + 
-            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix, serial_list, serial_sparse]\n";
+            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix, serial_list, serial_sparse, 1d_matrix]\n";
         x10.io.Console.OUT.println(s);
     }
 
@@ -126,6 +137,8 @@ public class Bfs {
             return BFS_SERIAL_LIST;
         } else if (s.trim().equals("serial_sparse")) {
             return BFS_SERIAL_SPARSE;
+        } else if (s.trim().equals("1d_matrix")) {
+            return BFS_1D_MATRIX;
         } else {
             return BFS_NONE;
         }

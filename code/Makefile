@@ -16,7 +16,7 @@ cpp: $(BINARY)
 
 .PHONY: csim
 csim: $(BINARY)
-	./$(BINARY) -alg serial_matrix  test.sgraph
+	./$(BINARY) -alg 1d_matrix  test.sgraph
 
 
 # Java Regeln

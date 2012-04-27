@@ -19,7 +19,7 @@ public interface GraphStructure {
 	public def addEdge(from:Int, to:Int) : void;
 
 	/**
-	 * Tells the callee, that the graph parsing has finished
+	 * Tells the callee, that the graph has finished parsing.
 	 */
-	public def finish() : void;
+	public def finished() : void;
 }

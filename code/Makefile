@@ -39,3 +39,7 @@ clean:
 	find . -type f -name "*.h" -delete
 	find . -type f -name "*.java" -delete
 	find . -type f -name "*.class" -delete
+
+.PHONY: simclean
+simclean:
+	rm -f -dr sim_results

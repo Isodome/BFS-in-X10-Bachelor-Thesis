@@ -1,10 +1,9 @@
 package parser;
-import x10.io.FileReader;
-import x10.io.IOException;
+import x10.io.*;
 
 public class SGraphParser implements Parser {
 
-	public def fillGraphInDataStructure(gs :GraphStructure, filename :String) : void {
+	public def fillGraphInDataStructure (gs : parser.GraphStructure, filename :String) : void {
 
 		var vertexCountRead : Boolean = false;
 
@@ -29,7 +28,7 @@ public class SGraphParser implements Parser {
 				if (a.size >= 2) {
 					try{
 						val from : Int = Int.parse(a(0) );
-						for (var i : Int = 1; i < a.size() && a.region.contains(i); i++) {
+						for (var i : Int = 1; i < a.size && a.region.contains(i); i++) {
 							val to: Int = Int.parse(a(i));
 							gs.addEdge(from,to);
 						}
@@ -45,7 +44,7 @@ public class SGraphParser implements Parser {
 			}
 
 		} catch (eof : x10.io.EOFException) {
-			//done
+			gs.finished();
 		} finally {
 			if (!vertexCountRead) {
 				throw new IOException();

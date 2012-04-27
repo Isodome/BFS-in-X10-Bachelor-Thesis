@@ -10,3 +10,6 @@ bfs_start
 
 # VIM Swap file
 *.swp
+
+# Folder for simulation results
+sim_results

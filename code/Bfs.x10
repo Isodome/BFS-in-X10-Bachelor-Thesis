@@ -2,8 +2,11 @@
 import parser.*;
 import bfs.*;
 import x10.util.*;
+import x10.io.*;
 
 public class Bfs {
+
+	public static val INF : Int = -1;
     // Constants specifying the algorithm   
     public static val BFS_NONE          : Int = 0;
     public static val BFS_SERIAL_MATRIX : Int = 1;
@@ -17,10 +20,10 @@ public class Bfs {
      * The main method for the Hello class
      */
     public static def main(args: Array[String]) {
-
         // Start parsing command line arguments
         var bfs : Int = BFS_NONE;
-        var fileList : List[String] = new ArrayList[String]();
+        var file : String = null;
+		var resultFile : String = null;
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -35,8 +38,16 @@ public class Bfs {
                     printError("No BFS-algorithm specified.");
                     return;
                 }
+            } else if (argument.equals("-o")) {
+                if ( args.region.contains(i+1)){
+                    i++;
+					resultFile = args(i);
+                } else {
+                    printError("No output file specified.");
+                    return;
+                }
             } else {
-                fileList.add(args(i));
+				file = args(i);
             }
             i++;
         }
@@ -50,44 +61,44 @@ public class Bfs {
             printError("Unvalid BFS-algorithm selected.");
             return;
         }
-        if (fileList.isEmpty()) {
+        if (file == null) {
             printError("You must specify at least one graph file.");
             return;
         }
 
         /* 
          * Parsing done, start algorithm
-         */
-        for (file in fileList) {
-            var parser : Parser;
+		 */
+		var parser : Parser;
 
-            if (file.endsWith(".sgraph")) {
-                parser = new SGraphParser();
-            } else {
-                continue;
-            }
+		if (file.endsWith(".sgraph")) {
+			parser = new SGraphParser();
+		} else {
+			printError("Unknown file type.");
+			return;
+		}
 
-            var algo : BfsAlgorithm;
+		var algo : BfsAlgorithm;
 
-            if (bfs == BFS_SERIAL_MATRIX) {
-                algo = new BfsSerialMatrix();
-            } else if (bfs == BFS_SERIAL_LIST) {
-                //algo = new BfsSerialList();   
-            } else if (bfs == BFS_SERIAL_SPARSE) {
-                //algo = new BfsSerialSparse(); 
-            } else {
-                continue;
-            }
+		if (bfs == BFS_SERIAL_MATRIX) {
+			algo = new BfsSerialMatrix();
+		} else if (bfs == BFS_SERIAL_LIST) {
+			algo = new BfsSerialList();   
+		} else if (bfs == BFS_SERIAL_SPARSE) {
+			algo = new BfsSerialSparse(); 
+		} else {
+			printError("Unknown algorithm.");
+			return;
+		}
 
-            // Parse the graph file into to chosen algorithm
-            parser.parse(algo, file);
+		// Parse the graph file into to chosen algorithm
+		parser.fillGraphInDataStructure(algo, file);
 
-            //run the algorithm
-            val d : Array[Int](1) = algo.run(1);
-            print(d);
-
-        }
-    }
+		//trigger garbage collection and run the algorithm
+		x10.lang.System.gc();
+		val d : Array[Int](1) = algo.run(1);
+		printOutput(d, resultFile);
+	}
 
     private static def bfsSerialMatrix() {
         //  val a : Array[Boolean](2) = Graph.makeMatrixFromTGF(file, graph);
@@ -95,8 +106,8 @@ public class Bfs {
     }
 
     private static def printHelp() {
-        var s : String = "usage: bfs_start -alg <alg> -ds <ds> input1 input2 ... \n" + 
-            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix]\n";
+        var s : String = "usage: bfs_start -alg <alg> -o <result> input \n" + 
+            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix, serial_list, serial_sparse]\n";
         x10.io.Console.OUT.println(s);
     }
 
@@ -104,12 +115,17 @@ public class Bfs {
     private static def printError(s : String) {
         x10.io.Console.OUT.println("ERROR! " + s + "\n");
         printHelp();
+		x10.lang.System.setExitCode(1);
     }
 
 
     private static def selectBFS(s :String) : Int {
         if (s.trim().equals("serial_matrix")) {
             return BFS_SERIAL_MATRIX;
+        } else if (s.trim().equals("serial_list")) {
+            return BFS_SERIAL_LIST;
+        } else if (s.trim().equals("serial_sparse")) {
+            return BFS_SERIAL_SPARSE;
         } else {
             return BFS_NONE;
         }
@@ -120,9 +136,20 @@ public class Bfs {
     }
 
 
-    private static def print( a: Array[Int](1) ) {
-        for (i in a) {
-            print (i(0).toString() + "\t: " + a(i).toString());
-        }
+    private static def printOutput( a: Array[Int](1), result : String ) {
+		if ( result == null) {
+			for (i in a) {
+				print (i(0).toString() + "\t: " + a(i).toString());
+			}
+		} else {
+			val o = new File(result);
+			val p = o.printer();
+			for (i in a) {
+				val value : String = a(i) == INF ? "INF" : a(i).toString();
+				p.print(i(0).toString() + ":" + value + "\n");
+			}
+			p.flush();
+			p.close();
+		}
     }
 }

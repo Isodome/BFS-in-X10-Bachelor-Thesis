@@ -1,11 +1,12 @@
 package bfs;
 
 import x10.util.*;
-import parser.GraphStructure;
+import parser.*;
+import Bfs;
 
 public class BfsSerialMatrix extends BfsAlgorithm {
 
-	private static val INF : Int = Int.MAX_VALUE;
+	private static val INF : Int = Bfs.INF;
 	private var vertexCount : Int  = 0;
 	private var adj : Array[Boolean](2);
 
@@ -15,13 +16,13 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 		this.adj = new Array[Boolean]( (1..n)*(1..n), false);
 	}
 
-	public def addEdge(from:Int, to:Int) {
+	public def addEdge(from : Int, to : Int) {
 		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
 			adj( [from, to] ) = true;
 	}
-
-	public def finish() : void {
-		// not requiered
+	
+	public def finished() : void {
+		// not required
 	}
 
 	public def run(start : Int) : Array[Int](1) {

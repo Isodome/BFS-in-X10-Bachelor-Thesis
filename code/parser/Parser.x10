@@ -1,6 +1,5 @@
 package parser;
-import parser.*;
 
 public interface Parser {
-	def fillGraphInDataStructure(gs :GraphStructure, filename :String): void;
+	def fillGraphInDataStructure(gs : parser.GraphStructure, filename :String): void;
 }

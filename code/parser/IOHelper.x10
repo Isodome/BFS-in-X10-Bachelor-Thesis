@@ -21,46 +21,18 @@ public class IOHelper {
 		}
 		return  new FileReader(I);	
 	}
-	
-	
-	public static def makeMatrixFromTGF(val file: String, datastructure : Int) :Array[Boolean](2) {
-		reader: FileReader  =  getFileReader(file);
-		val edgeCount = readTGFEdges(reader);
-		val r  = Region.makeRectangular([1,1], [edgeCount, edgeCount]);
-		var adj : Array[Boolean](2) = new Array[Boolean](r, false);
 
-		try{
-			while(true) {
-				val line : String = reader.readLine();
-				val a = line.split(" ");
-				
-				if (a.size >= 2) {
-					try{
-						val p  = Point.make(Int.parse(a(0)),Int.parse(a(1)));	
-						adj(p) = true;
-						
-					} catch (nfe : NumberFormatException) {
-						//print error "bad numbers"
-					}
-						
-				} else {
-					//print error "Unparsable Line"
-					break;
-				}
-				 
+	public static def print (a : Array[String]) : void {
+
+			for (i in a) {
+				x10.io.Console.OUT.println (i(0).toString() + "\t: " + a(i).toString());
 			}
-			
-		} catch (eof: x10.io.EOFException) {
-			//done
-		} finally {
-			if(reader != null) {
-				reader.close();
-			}
-		}
+	}
 
-		 
-		
-		return adj;
-	}			
-
+	public static def print(s : String) {
+		x10.io.Console.OUT.println(s);
+	}
+	public static def print(i : Int) {
+		print(i.toString());
+	}
 }

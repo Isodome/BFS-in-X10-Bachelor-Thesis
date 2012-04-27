@@ -17,4 +17,9 @@ public interface GraphStructure {
 	 *@param to the target vertex of the new edge
 	 */
 	public def addEdge(from:Int, to:Int) : void;
+
+	/**
+	 * Tells the callee, that the graph parsing has finished
+	 */
+	public def finish() : void;
 }

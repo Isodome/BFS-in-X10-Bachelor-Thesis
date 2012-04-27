@@ -4,7 +4,7 @@ import x10.io.IOException;
 
 public class SGraphParser implements Parser {
 
-	public def parse(gs :GraphStructure, filename :String) : void {
+	public def fillGraphInDataStructure(gs :GraphStructure, filename :String) : void {
 
 		var vertexCountRead : Boolean = false;
 
@@ -28,9 +28,13 @@ public class SGraphParser implements Parser {
 
 				if (a.size >= 2) {
 					try{
-						gs.addEdge(Int.parse(a(0)), Int.parse(a(1)));
+						val from : Int = Int.parse(a(0) );
+						for (var i : Int = 1; i < a.size() && a.region.contains(i); i++) {
+							val to: Int = Int.parse(a(i));
+							gs.addEdge(from,to);
+						}
 					} catch (nfe : NumberFormatException) {
-						//print error "bad numbers"
+						continue;
 					}
 
 				} else {

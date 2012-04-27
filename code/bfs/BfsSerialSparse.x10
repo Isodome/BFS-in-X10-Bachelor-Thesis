@@ -3,13 +3,12 @@ package bfs;
 import x10.util.*;
 import parser.GraphStructure;
 
-public class BfsSerialMatrix extends BfsAlgorithm {
-
+public class BfsSerialSparse extends BfsAlgorithm {
+	
 	private static val INF : Int = Int.MAX_VALUE;
 	private var vertexCount : Int  = 0;
-	private var adj : Array[Boolean](2);
 
-
+	
 	public def setVertexCount(n: Int) {
 		this.vertexCount = n;
 		this.adj = new Array[Boolean]( (1..n)*(1..n), false);
@@ -17,12 +16,13 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 
 	public def addEdge(from:Int, to:Int) {
 		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
-			adj( [from, to] ) = true;
+		adj( [from, to] ) = true;
 	}
 
 	public def finish() : void {
 		// not requiered
 	}
+
 
 	public def run(start : Int) : Array[Int](1) {
 		// assert adj is square
@@ -36,6 +36,8 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 		current.add(start);
 
 		var depth : Int = 1;
+
+		// adjust everything from here on
 
 		while(!current.isEmpty()) {
 			for (vertex in current) {

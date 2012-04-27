@@ -10,3 +10,33 @@ Execute bfs_start. Type bfs_start --help for more information
 
 Use with java backend
 Execute 'x10' from the X10 bin-folder with 'Bfs' as first argument 
+
+
+
+
+Which algorithms are implemented?
+-----------------------------------------------
+The following algorithm are supported ( -alg <alg>).
+Let n be the number of vertices and m be the total number of edges
+
+    serial_matrix   The graph will be represented by a twodimensional array
+                    of boolean values i.e. you need memory for n * n boolean values.
+                    The bfs-algorithm is executed only in place 0 in a serial
+                    manner using two lists, one for the active vertices and one
+                    for the newly found neighbors (which are active by themselfs
+                    in the next iteration).
+
+    serial_list     The graph will be represented as an array of lists. The array
+                    has the length n. The list of all adjacent vertices of vertex i
+                    is stored at the i-th place in the array. The algorithm is the
+                    same as described 'serial_matrix'
+
+    serial_sparse  The graph will be represented as two arrays of the sizes n+1 and m.
+                   Let the array of the size n+1 be 'index' and the other one 'values'.
+                   The index array points to the beginning of the secion of
+                   the values array, where the corresponding edges are stored. All
+                   adjacent vertices of the vertix i are stores from values[index[i]]
+                   to values[index[i+1] -1] (inclusive). The algorithm used is the 
+                   same as in 'serial_matrix'
+
+    1d_matrix       

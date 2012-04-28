@@ -40,3 +40,11 @@ Let n be the number of vertices and m be the total number of edges
                    same as in 'serial_matrix'
 
     1d_matrix       
+ 
+
+Graph file formats
+------------------------------------------
+    .sgraph         The first line must only consist of the number of vertices (i.e. n).
+                    All other lines must contain at least 2 numbers between 0 and n (exclusive),
+                    the line 'v u1 u2 u3 u4 ...' means that (v,u1), (v,u2), (v,u3), (v,u4)... are 
+                    edges of the graph. 

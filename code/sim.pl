@@ -1,9 +1,9 @@
 use strict;
 use Term::ANSIColor qw(:constants);
-my @modes = qw(serial_matrix serial_list serial_sparse 1d_matrix);
+my @modes = qw(serial_matrix serial_list serial_sparse);
 
 my $bfs = "./bfs_start";
-my $resultFolder = "sim_results";
+my $resultFolder = "simresults";
 
 my $num_args = $#ARGV + 1;
 if ($num_args != 1) {

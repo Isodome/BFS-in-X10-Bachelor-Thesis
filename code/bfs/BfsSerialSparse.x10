@@ -9,6 +9,7 @@ public class BfsSerialSparse extends BfsAlgorithm {
 	
 	private static val INF : Int = Bfs.INF;
 	private var vertexCount : Int  = 0;
+    private var edgeCount : Int =0;
 	private var adj_tmp : Array[ArrayList[Int]](1);
 	private var locked : Boolean = false;
 
@@ -17,44 +18,44 @@ public class BfsSerialSparse extends BfsAlgorithm {
 
 	public def setVertexCount(n: Int) : void {
 		this.vertexCount = n;
-		this.adj_tmp = new Array[ArrayList[Int]]( (1..n), null as ArrayList[Int]);
-		for (i in adj_tmp) {
-			adj_tmp(i) = new ArrayList[Int]();
-		}
+        this.edgeCount = 0;
+		this.adj_tmp = new Array[ArrayList[Int]](n, ( i: Int) => new ArrayList[Int]() );
 	}
 
-	public def addEdge(from:Int, to:Int) : void {
+	public def addEdge(from : Int, to : Int) : void {
 		assert (!locked) : "Not allowed to add edges after having called 'finished'";
-		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
+		assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
+        assert (from >=0 && to >=0) : "Vertex out of range";
+
 		adj_tmp(from).add(to);
+        edgeCount++;
 	}
 
 	
 	public def finished() : void {
 		locked = true;
-		val edgeCount : Int = adj_tmp.reduce( (i : Int, a : ArrayList[Int]) => i + a.size(), 0);
-		adj_idx = new Array[Int] ( (1..(vertexCount + 1)) ); // the last value is for easier iteration while the algorithm is running
-		adj_idx(vertexCount + 1) = edgeCount + 1;
-		adj_val = new Array[Int] ( (1..edgeCount) );
+		adj_idx = new Array[Int] (vertexCount + 1, 0); // the last value is for easier iteration while the algorithm is running
+		adj_idx(vertexCount) = edgeCount; // set the index of the vertexcount +1 -th edge directly behind the edge array
+		adj_val = new Array[Int] (edgeCount, 0);
 
 
-		var idx : Int = 1;
-		for (vertex in adj_tmp) {
-			val out : ArrayList[Int] = adj_tmp(vertex);
+		var idx : Int = 0;
+		for (vertex in adj_tmp) { // Iterates over all vertices
+            val from : ArrayList[Int]   = adj_tmp(vertex);
 			adj_idx(vertex) = idx;
-			for ( to in out) {
+			for ( to in from) { // Iterates over all vertices reachable from 'from'
 				adj_val(idx) = to;
 				idx++;
 			}
 		}
-		adj_tmp = null; // no longer needed
+		adj_tmp = null; // no longer needed, feed to GC :)
 	}
 
 
 	public def run(start : Int) : Array[Int](1) {
 		// assert adj is square
 
-		var d : Array[Int](1) = new Array[Int]((1..vertexCount), INF);
+		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
 		d([start]) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();
@@ -71,7 +72,7 @@ public class BfsSerialSparse extends BfsAlgorithm {
 				for (var idx : Int = adj_idx(vertex); idx < adj_idx(vertex + 1); idx++) {
 					val to : Int = adj_val(idx);
 					if (d([to]) == INF) {
-						next.add(idx);
+						next.add(to);
 						d([to]) = depth;
 					}
 				}

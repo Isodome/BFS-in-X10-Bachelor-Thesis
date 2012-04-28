@@ -13,11 +13,12 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 
 	public def setVertexCount(n: Int) {
 		this.vertexCount = n;
-		this.adj = new Array[Boolean]( (1..n)*(1..n), false);
+		this.adj = new Array[Boolean]( (0..(n-1))*(0..(n-1)), false);
 	}
 
 	public def addEdge(from : Int, to : Int) {
-		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
+		assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
+        assert (from >= 0 && to >=0) : "Vertex out of range";
 			adj( [from, to] ) = true;
 	}
 	
@@ -28,7 +29,7 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 	public def run(start : Int) : Array[Int](1) {
 		// assert adj is square
 
-		var d : Array[Int](1) = new Array[Int]((1..vertexCount), INF);
+		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
 		d([start]) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();
@@ -40,16 +41,16 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 
 		while(!current.isEmpty()) {
 			for (vertex in current) {
-				for (var idx : Int = 1; idx <= vertexCount; idx++) {
-					if (adj([vertex, idx]) && d([idx]) == INF) {
-						next.add(idx);
-						d([idx]) = depth;
+				for (var to : Int = 0; to < vertexCount; to++) {
+					if (adj([vertex, to]) && d([to]) == INF) {
+						next.add(to);
+						d([to]) = depth;
 					}
 				}
 			}
 			depth++;
 			current.clear();
-			var tmpList : List[Int] = current;
+			val tmpList = current;
 			current = next;
 			next = tmpList;
 		}

@@ -12,14 +12,12 @@ public class BfsSerialList extends BfsAlgorithm {
 
 	public def setVertexCount(n: Int) : void {
 		this.vertexCount = n;
-		this.adj = new Array[ArrayList[Int]]( (1..n), null as ArrayList[Int]);
-		for (i in adj) {
-			adj(i) = new ArrayList[Int]();
-		}
+		this.adj = new Array[ArrayList[Int]]( n, (i:Int) => new ArrayList[Int]());
 	}
 
 	public def addEdge(from:Int, to:Int) : void {
-		assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
+		assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
+        assert (from >=0 && to >= 0) : "Vertex out of range";
 		adj(from).add(to);
 	}
 
@@ -27,7 +25,7 @@ public class BfsSerialList extends BfsAlgorithm {
 		// nothing to do
 	}
 	public def run(start : Int) : Array[Int](1) {
-		var d : Array[Int](1) = new Array[Int]((1..vertexCount), INF);
+		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
 		d([start]) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();
@@ -48,7 +46,7 @@ public class BfsSerialList extends BfsAlgorithm {
 			}
 			depth++;
 			current.clear();
-			var tmpList : List[Int] = current;
+			val tmpList = current;
 			current = next;
 			next = tmpList;
 		}

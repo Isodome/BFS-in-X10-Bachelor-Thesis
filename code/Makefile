@@ -42,4 +42,4 @@ clean:
 
 .PHONY: simclean
 simclean:
-	rm -f -dr sim_results
+	rm -f -dr simresults

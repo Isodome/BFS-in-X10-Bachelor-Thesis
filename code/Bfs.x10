@@ -107,7 +107,7 @@ public class Bfs {
 		
 		//trigger garbage collection and run the algorithm
 		x10.lang.System.gc();
-		val d : Array[Int](1) = algo.run(1);
+		val d : Array[Int](1) = algo.run(0);
 		printOutput(d, resultFile);
 	}
 

@@ -30,7 +30,7 @@ public class SGraphParser implements Parser {
 						val from : Int = Int.parse(a(0) );
 						for (var i : Int = 1; i < a.size && a.region.contains(i); i++) {
 							val to: Int = Int.parse(a(i));
-							gs.addEdge(from,to);
+                            gs.addEdge(from,to);
 						}
 					} catch (nfe : NumberFormatException) {
 						continue;

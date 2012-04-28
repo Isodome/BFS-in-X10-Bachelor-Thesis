@@ -24,7 +24,7 @@ Let n be the number of vertices and m be the total number of edges
                     The bfs-algorithm is executed only in place 0 in a serial
                     manner using two lists, one for the active vertices and one
                     for the newly found neighbors (which are active by themselfs
-                    in the next iteration).
+                    in the next iteration). Be carefull, very slow for big graphs!
 
     serial_list     The graph will be represented as an array of lists. The array
                     has the length n. The list of all adjacent vertices of vertex i

@@ -12,4 +12,4 @@ bfs_start
 *.swp
 
 # Folder for simulation results
-sim_results
+simresults

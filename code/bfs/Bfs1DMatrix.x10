@@ -1,5 +1,6 @@
 package bfs;
 
+import x10.lang.*;
 import x10.array.*;
 import x10.util.*;
 import parser.*;
@@ -14,7 +15,7 @@ public class Bfs1DMatrix extends BfsAlgorithm {
 
 	public def setVertexCount(n: Int) {
 		this.vertexCount = n;
-		val dist : Dist(2) = Dist.makeBlock( (1..n) * (1..n), 0, PlaceGroup.WORLD);
+		val dist : Dist(2) = Dist.makeBlock( (0..(n-1)) * (0..(n-1)), 0 /*0 -> only split along 0th axis */, PlaceGroup.WORLD);
 		adj = DistArray.make[Boolean](dist, false);
 	}
 
@@ -30,7 +31,29 @@ public class Bfs1DMatrix extends BfsAlgorithm {
 	}
 
 	public def run(start : Int) : Array[Int](1) {
-		return null;
+        val dist = Dist.makeBlock( (0..(vertexCount-1)), 0, PlaceGroup.WORLD);
+        val d = DistArray.make[Int](dist, INF);
+        val d_local = new Array[Int]( vertexCount, INF);
+        val resultRef = GlobalRef[Array[Int]](d_local);
+
+        val clock = Clock.make();
+        for (place in d.dist.places()) at (place) async clocked(clock) {
+
+            var depht : Int = 1;
+            var current : ArrayList[Int] = new ArrayList[Int]();
+            var next : ArrayList[Int] = new ArrayList[Int]();
+            if (dist(start) == here) {
+                d(start) = 0;
+                current.add(start);
+            }
+
+            Clock.resumeAll();
+            at(resultRef.home()) {
+             
+            }
+        }
+
+		return d_local;
 	}
 
 }

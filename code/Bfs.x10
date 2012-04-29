@@ -152,7 +152,7 @@ public class Bfs {
     private static def printOutput( a: Array[Int](1), result : String ) {
 		if ( result == null) {
 			for (i in a) {
-				print (i(0).toString() + "\t: " + a(i).toString());
+				print (i(0).toString() + ":" + a(i).toString());
 			}
 		} else {
 			val o = new File(result);

@@ -1,6 +1,7 @@
 use strict;
 use Term::ANSIColor qw(:constants);
-my @modes = qw(serial_matrix serial_list serial_sparse);
+use File::Basename;
+my @modes = qw(serial_list serial_sparse 1d_matrix);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "simresults";
@@ -13,6 +14,7 @@ my $file = @ARGV[0];
 if (not (-e $file)) {
 	die "Error! File '$file' does not exist";
 }
+my $basename = basename($file);
 # start magic
 
 print GREEN, "creating folder 'sim_results':\n", RESET;
@@ -29,7 +31,7 @@ if (system("make", "cpp") != -0) {
 ##############################
 my @resultFiles;
 for (@modes) { # current value in $_
-	my $outputfile = $resultFolder."/".$file."_".$_.".txt";	
+	my $outputfile = $resultFolder."/".$basename."_".$_.".txt";	
 	print GREEN, "Running simulation in $_ mode...\n", RESET;
 	if (system($bfs, "-alg", $_, "-o", $outputfile, $file) != 0){
 		print RED, "Simulation with graph $file and mode $_ failed\n", RESET;

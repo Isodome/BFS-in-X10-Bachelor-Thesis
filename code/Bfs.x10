@@ -152,8 +152,10 @@ public class Bfs {
     private static def printOutput( a: Array[Int](1), result : String ) {
 		if ( result == null) {
 			for (i in a) {
-				print (i(0).toString() + ":" + a(i).toString());
-			}
+                val value : String = (a(i) == INF) ? "INF" : a(i).toString();
+				print (i(0).toString() + ":" + value);
+            }
+			
 		} else {
 			val o = new File(result);
 			val p = o.printer();

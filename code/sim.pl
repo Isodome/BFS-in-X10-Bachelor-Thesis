@@ -1,7 +1,7 @@
 use strict;
 use Term::ANSIColor qw(:constants);
 use File::Basename;
-my @modes = qw(serial_list serial_sparse 1d_matrix);
+my @modes = qw(serial_list 1d_list);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "simresults";
@@ -48,7 +48,7 @@ my $failedDiffs = 0;
 for (my $i = 0 ; $i < $num_files; $i++) {
 	my $file1 = @resultFiles[$i];
 	my $file2 = @resultFiles[$i+1];
-	my $result = `diff -q $file1 $file2`;  
+	my $result = `diff  $file1 $file2`;  
 
 	if (length($result) >0) {
 		print RED "WARNING: ".$file1." and ".$file2." differ!\n", RESET;

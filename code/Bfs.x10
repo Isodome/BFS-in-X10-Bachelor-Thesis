@@ -93,6 +93,8 @@ public class Bfs {
 			algo = new BfsSerialSparse(); 
 		} else if (bfs == BFS_1D_MATRIX) {
 			algo = new Bfs1DMatrix(); 
+		} else if (bfs == BFS_1D_LIST) {
+			algo = new Bfs1DList(); 
 		} else {
 			printError("Unknown algorithm.");
 			return;
@@ -139,6 +141,8 @@ public class Bfs {
             return BFS_SERIAL_SPARSE;
         } else if (s.trim().equals("1d_matrix")) {
             return BFS_1D_MATRIX;
+        } else if (s.trim().equals("1d_list")) {
+            return BFS_1D_LIST;
         } else {
             return BFS_NONE;
         }

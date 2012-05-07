@@ -38,7 +38,6 @@ public class Bfs1DList extends BfsAlgorithm {
         val d = DistArray.make[Int](adjacency.dist, INF);
 
         val recBuffers : DistArray[Array[ArrayList[Int]]](1) = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](Place.places().size(), new ArrayList[Int]()));
-        val hasJobs : DistArray[Boolean](1) = DistArray.make[Boolean](Dist.makeUnique(), true);
         val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
 
 
@@ -46,11 +45,18 @@ public class Bfs1DList extends BfsAlgorithm {
         val resultRef = GlobalRef[Array[Int]](result_local);
 
         val adj = this.adjacency;
-        clocked finish {
+
+        /*delete the following when clocks are finally working */
+        val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
+        val team = new Team(isAt);
+
+
+        finish {
             for (place in d.dist.places())  at (place)  {
-                clocked async  {
+                async  {
 
                     var depth : Int = 1;
+                    var done : Boolean = false;
                     var current : ArrayList[Int] = new ArrayList[Int]();
                     if (d.dist(start) == here) {
                         d(start) = 0;
@@ -58,8 +64,7 @@ public class Bfs1DList extends BfsAlgorithm {
                     }
 
 
-                    while(hasJobs(here.id)) {
-                        say("Anfang Phase 1 in place " + here.id + " depth ist: " + depth);
+                    while(!done) {
 
                         // Sort reachable vertices by owning place
                         for (from in current) {
@@ -80,11 +85,8 @@ public class Bfs1DList extends BfsAlgorithm {
                                 buffer.clear(); // only clean the local copy, even if targetPlace and sourcePlace are even!
                             }
                         }
-                        say("Ende Phase 1 in place " + here.id + " depth ist: " + depth  );
-                        Clock.advanceAll();
-                        say("Anfang Phase 2 in place " + here.id + " depth ist: " + depth );
+                        team.barrier(here.id);
 
-                        // Todo: Loop parallelism possible here
                         val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
                         for (iBuf in receiveBuffers) {
                             for (vertex in receiveBuffers(iBuf)) {
@@ -95,26 +97,10 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                             receiveBuffers(iBuf).clear();
                         }
-                        hasJobs(here.id) = current.size() > 0;
-                        //say("Jobs in Platz " + here.id + " " + current.size());
-                        say("Ende Phase 2 in place " + here.id  + " depth ist: " + depth );
-                        Clock.advanceAll();
-                        say("Anfang Phase 3 in place " + here.id + " depth ist: " + depth );
+                        val jobsLeft = team.allreduce(here.id, current.size(), Team.ADD);
+                        done = (jobsLeft==0);
 
-                        hasJobs(here.id) = hasJobs.reduce( (a:Boolean, b: Boolean)=> a || b ,false);
-                        /*
-                           if (here.id == 0) {
-                           val gotJobsLeft = hasJobs.reduce( (a:Boolean, b: Boolean)=> a || b ,false);
-                           hasJobs.map(hasJobs, (a : Boolean) => gotJobsLeft);
-                           } 
-                         */
                         depth++;
-                        say("Ende Phase 3 in place " + here.id  + " depth ist: " + depth );
-                        Clock.advanceAll();
-
-                        //say("Platz " + here.id + " macht weiter: " + hasJobs(here.id));
-
-
                     }
 
                     // Copy place-local content of d in result array at place 0
@@ -126,18 +112,17 @@ public class Bfs1DList extends BfsAlgorithm {
                         }
                     }
 
-                    say("Kopieren fertig in place " + here.id);
                 }}}
 
-        say("Returning");
         return result_local;
     }
 
+
     static public def say(s:String) {
-		atomic{
-			x10.io.Console.OUT.println(s);
-		}
-	}
+        atomic{
+            x10.io.Console.OUT.println(s);
+        }
+    }
 
 }
 

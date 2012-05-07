@@ -31,6 +31,11 @@ public class BfsSerialSparse extends BfsAlgorithm {
         edgeCount++;
 	}
 
+    public def addEdge(from : Int, to : Array[Int]) {
+        for (i in to) {
+            addEdge(from, to(i));
+        }
+    }
 	
 	public def finished() : void {
 		locked = true;

@@ -24,8 +24,18 @@ public class Bfs1DList extends BfsAlgorithm {
     public def addEdge(from : Int, to : Int) {
         assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
             async at (adjacency.dist(from)) {
-                adjacency(from).add(to);
+                atomic adjacency(from).add(to);
             }
+    }
+
+    public def addEdge(from : Int, to : Array[Int]) {
+        at(adjacency.dist(from)) async {
+            atomic {
+                for (i in to) {
+                    adjacency(from).add(to(i));
+                }
+            }
+        }
     }
 
     public def finished() : void {
@@ -57,6 +67,7 @@ public class Bfs1DList extends BfsAlgorithm {
 
                     var depth : Int = 1;
                     var done : Boolean = false;
+                    val dTemp = new Array[Boolean](vertexCount, false);
                     var current : ArrayList[Int] = new ArrayList[Int]();
                     if (d.dist(start) == here) {
                         d(start) = 0;
@@ -65,24 +76,30 @@ public class Bfs1DList extends BfsAlgorithm {
 
 
                     while(!done) {
-
                         // Sort reachable vertices by owning place
                         for (from in current) {
                             for (to in adj(from)) {
-                                sendBuffer(d.dist(to).id).add(to);
+                                if (!dTemp(to)) {
+                                    sendBuffer(d.dist(to).id).add(to);
+                                    dTemp(to) = true;
+                                }
                             }
                         }
-
                         current.clear();
 
-                        finish for( targetPlace in d.dist.places()) {
+                        finish for( targetPlace in d.dist.places()) async {
                             val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
                             val sourcePlace = here.id;
                             if (!buffer.isEmpty()) {
-                                async at(targetPlace) {
-                                    recBuffers(here.id)(sourcePlace) = buffer;
+                                if (targetPlace == here) {
+                                    recBuffers(here.id)(here.id) = buffer;
+                                    sendBuffer(here.id) = new ArrayList[Int]();
+                                } else {
+                                    at(targetPlace) {
+                                        recBuffers(here.id)(sourcePlace) = buffer;
+                                    }
+                                    buffer.clear(); // only clean the local copy, even if targetPlace and sourcePlace are even!
                                 }
-                                buffer.clear(); // only clean the local copy, even if targetPlace and sourcePlace are even!
                             }
                         }
                         team.barrier(here.id);
@@ -97,6 +114,7 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                             receiveBuffers(iBuf).clear();
                         }
+                        team.barrier(here.id);
                         val jobsLeft = team.allreduce(here.id, current.size(), Team.ADD);
                         done = (jobsLeft==0);
 

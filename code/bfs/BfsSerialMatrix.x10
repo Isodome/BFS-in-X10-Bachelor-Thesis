@@ -21,6 +21,14 @@ public class BfsSerialMatrix extends BfsAlgorithm {
         assert (from >= 0 && to >=0) : "Vertex out of range";
 			adj( [from, to] ) = true;
 	}
+
+    public def addEdge(from : Int, to : Array[Int]) {
+        async {
+            for (i in to) {
+                addEdge(from, to(i));
+            }
+        }
+    }
 	
 	public def finished() : void {
 		// not required

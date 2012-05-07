@@ -28,6 +28,14 @@ public class Bfs1DMatrix extends BfsAlgorithm {
             }
     }
 
+    public def addEdge(from : Int, to : Array[Int]) {
+        at (adj.dist(from,from)) async {
+            for (i in to) {
+                adj(from, to(i)) = true;
+            }
+        }
+    }
+
     public def finished() : void {
         // not required
     }

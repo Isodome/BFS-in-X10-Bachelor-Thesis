@@ -18,6 +18,14 @@ public interface GraphStructure {
 	 */
 	public def addEdge(from:Int, to:Int) : void;
 
+    /**
+     * Tells the calle about new edges he should add to the graph.    
+     * Not  all edges starting at 'from' must be included
+     *@param from the starting vertex of the new edge
+     *@param to a list of target edges
+     */
+    public def addEdge(from:Int, to: Array[Int]) : void;
+
 	/**
 	 * Tells the callee, that the graph has finished parsing.
 	 */

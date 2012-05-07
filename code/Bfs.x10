@@ -109,7 +109,11 @@ public class Bfs {
 		
 		//trigger garbage collection and run the algorithm
 		x10.lang.System.gc();
+        x10.io.Console.OUT.println("Parsing complete, starting algorithm ");
+        val startingTime : Long = System.currentTimeMillis();
 		val d : Array[Int](1) = algo.run(0);
+        val duration = System.currentTimeMillis() - startingTime;
+        x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
 		printOutput(d, resultFile);
 	}
 

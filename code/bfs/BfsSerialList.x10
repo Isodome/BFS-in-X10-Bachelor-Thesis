@@ -21,6 +21,12 @@ public class BfsSerialList extends BfsAlgorithm {
 		adj(from).add(to);
 	}
 
+    public def addEdge(from : Int, to : Array[Int]) {
+        for (i in to) {
+            addEdge(from, to(i));
+        }
+    }
+
 	public def finished() : void {
 		// nothing to do
 	}

@@ -1,5 +1,6 @@
 package parser;
 import x10.io.*;
+import x10.util.ArrayBuilder;
 
 public class SGraphParser implements Parser {
 
@@ -27,11 +28,12 @@ public class SGraphParser implements Parser {
 
 				if (a.size >= 2) {
 					try{
+                        val to = new ArrayBuilder[Int]();
 						val from : Int = Int.parse(a(0) );
 						for (var i : Int = 1; i < a.size && a.region.contains(i); i++) {
-							val to: Int = Int.parse(a(i));
-                            gs.addEdge(from,to);
+							to.add(Int.parse(a(i)));
 						}
+                        gs.addEdge(from, to.result());
 					} catch (nfe : NumberFormatException) {
 						continue;
 					}

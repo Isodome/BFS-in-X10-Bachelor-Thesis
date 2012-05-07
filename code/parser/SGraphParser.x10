@@ -26,20 +26,16 @@ public class SGraphParser implements Parser {
 				line = reader.readLine();
 				val a = line.split(" ");
 
-				if (a.size >= 2) {
-					try{
-                        val to = new ArrayBuilder[Int]();
-						val from : Int = Int.parse(a(0) );
-						for (var i : Int = 1; i < a.size && a.region.contains(i); i++) {
-							to.add(Int.parse(a(i)));
-						}
-                        gs.addEdge(from, to.result());
-					} catch (nfe : NumberFormatException) {
-						continue;
-					}
+                if (a.size >= 2) {
+                    val to = new ArrayBuilder[Int]();
+                    val from : Int = Int.parse(a(0) );
+                    for (var i : Int = 1; i < a.size && a.region.contains(i); i++) {
+                        to.add(Int.parse(a(i)));
+                    }
+                    gs.addEdge(from, to.result());
 
-				} else {
-					//print error "Unparsable Line"
+                } else {
+                    //print error "Unparsable Line"
 					break;
 				}
 
@@ -47,8 +43,10 @@ public class SGraphParser implements Parser {
 
 		} catch (eof : x10.io.EOFException) {
 			gs.finished();
-		} finally {
-			if (!vertexCountRead) {
+        } catch (nfe : NumberFormatException) {
+           
+        } finally {
+            if (!vertexCountRead) {
 				throw new IOException();
 			}
 		}

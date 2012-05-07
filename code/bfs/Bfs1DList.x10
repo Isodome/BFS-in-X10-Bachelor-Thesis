@@ -114,7 +114,6 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                             receiveBuffers(iBuf).clear();
                         }
-                        team.barrier(here.id);
                         val jobsLeft = team.allreduce(here.id, current.size(), Team.ADD);
                         done = (jobsLeft==0);
 

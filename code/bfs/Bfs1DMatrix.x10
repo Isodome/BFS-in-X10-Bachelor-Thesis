@@ -6,7 +6,6 @@ import x10.util.*;
 import parser.*;
 import Bfs;
 
-
 public class Bfs1DMatrix extends BfsAlgorithm {
 
     private static val INF : Int = Bfs.INF;

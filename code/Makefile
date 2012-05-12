@@ -3,7 +3,7 @@ CC=$(CCDIR)x10c++
 JCC=$(CCDIR)x10c 
 JSIM=$(CCDIR)x10
 BINARY=bfs_start
-TAGS= #-O #-VERBOSE_CHECKS
+TAGS= -O -VERBOSE_CHECKS
 
 # FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
 FILES = $(wildcard *.x10) $(wildcard parser/*.x10) $(wildcard bfs/*.x10)

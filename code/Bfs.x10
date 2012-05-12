@@ -15,6 +15,7 @@ public class Bfs {
     public static val BFS_1D_MATRIX     : Int = 4;
     public static val BFS_1D_SPARSE     : Int = 5;
     public static val BFS_1D_LIST       : Int = 6;
+    public static val BFS_2D_MATRIX     : Int = 7;
     
     /**
      * The main method for the Hello class
@@ -95,7 +96,9 @@ public class Bfs {
 			algo = new Bfs1DMatrix(); 
 		} else if (bfs == BFS_1D_LIST) {
 			algo = new Bfs1DList(); 
-		} else {
+		} else if (bfs == BFS_2D_MATRIX) {
+            algo = new Bfs2DMatrix();
+        } else {
 			printError("Unknown algorithm.");
 			return;
 		}
@@ -137,16 +140,20 @@ public class Bfs {
 
 
     private static def selectBFS(s :String) : Int {
-        if (s.trim().equals("serial_matrix")) {
+
+        val trimmed = s.trim();
+        if (trimmed.equals("serial_matrix")) {
             return BFS_SERIAL_MATRIX;
-        } else if (s.trim().equals("serial_list")) {
+        } else if (trimmed.equals("serial_list")) {
             return BFS_SERIAL_LIST;
-        } else if (s.trim().equals("serial_sparse")) {
+        } else if (trimmed.equals("serial_sparse")) {
             return BFS_SERIAL_SPARSE;
-        } else if (s.trim().equals("1d_matrix")) {
+        } else if (trimmed.equals("1d_matrix")) {
             return BFS_1D_MATRIX;
-        } else if (s.trim().equals("1d_list")) {
+        } else if (trimmed.equals("1d_list")) {
             return BFS_1D_LIST;
+        } else if (trimmed.equals("2d_matrix")){
+            return BFS_2D_MATRIX;
         } else {
             return BFS_NONE;
         }

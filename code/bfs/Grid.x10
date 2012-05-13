@@ -9,7 +9,7 @@ public class Grid {
     public val rows : Int;
     public val cols : Int;
     private val pg : PlaceGroup;
-    private var myPoint : Point(2);
+    private transient var myPoint : Point(2);
     private val n : Int;
 
     public val rowSize : Int;

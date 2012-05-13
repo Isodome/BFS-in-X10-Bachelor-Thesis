@@ -12,6 +12,7 @@ public class Bfs2DMatrix extends BfsAlgorithm {
     private var vertexCount : Int = 0;
     private var adj : DistArray[Array[Boolean]](1);
     private var grid : Grid;
+    private var arrayPartSize : int;
 
     public def setVertexCount(n : Int) {
         this.vertexCount = n;
@@ -28,12 +29,17 @@ public class Bfs2DMatrix extends BfsAlgorithm {
                     val minRowCoord = myRow * grid.rowSize;
                     val minColCoord = myCol * grid.colSize;
 
-                    val maxRowCoord = x10.lang.Math.min(minRowCoord + grid.rowSize, n-1);
-                    val maxColCoord = x10.lang.Math.min(minColCoord + grid.colSize, n-1);
+                    val maxRowCoord = x10.lang.Math.min(minRowCoord + grid.rowSize - 1, n-1);
+                    val maxColCoord = x10.lang.Math.min(minColCoord + grid.colSize - 1, n-1);
                     adj(p.id) = new Array[Boolean]( (minRowCoord..maxRowCoord) * (minColCoord..maxColCoord),false);
                 }
             }
         }
+        var partSize : int = vertexCount / PlaceGroup.WORLD.size();
+        if (partSize * PlaceGroup.WORLD.size() < vertexCount) {
+            partSize++;
+        }
+        this.arrayPartSize = partSize;
     }
 
     public def addEdge(from : Int, to : Int) {
@@ -59,11 +65,14 @@ public class Bfs2DMatrix extends BfsAlgorithm {
 
     public def run(start : Int) : Array[Int](1) {
 
-        val dist = Dist.makeBlockCyclic( (0..(vertexCount-1)), 0, 5);//adj.rowSize);
-        val d = DistArray.make[Int](dist, INF);
-        val f = DistArray.make[Boolean](dist, false);
-
-
+        val d = DistArray.make[Array[Int]](Dist.makeUnique(), null as Array[Int]);
+        val f = DistArray.make[Array[Int]](Dist.makeUnique(), null as Array[Int]);
+        for (place in PlaceGroup.WORLD) async {
+            val arrayFrom = this.arrayPartSize * place.id;
+            val arrayTo   = x10.lang.Math.min(arrayFrom + this.arrayPartSize-1, vertexCount - 1);
+            d(place.id) = new Array[Int]( arrayFrom..arrayTo, INF);
+            f(place.id) = new Array[Int]( arrayFrom..arrayTo, INF);
+        }
 
 
         // Array to collect all results in Place 0 after calculation
@@ -75,13 +84,13 @@ public class Bfs2DMatrix extends BfsAlgorithm {
             for (place in d.dist.places()) at (place) {
                 async clocked(clock) {
 
-                    if (d.dist(start) == here) {
-                        d(start) = 0;
-                        f(start) = true;
+                    if (d.dist(start / this.arrayPartSize) == here) {
+                        d(here.id)(start) = 0;
+                        f(here.id)(start) = 0;
                     }
 
                     // Copy local conten of d in result array at place 0
-                    val localPortion = d.getLocalPortion();
+                    val localPortion = d(here.id);
                     at(resultRef) async {
                         val r  = resultRef();
                         for (i : Point in localPortion) {

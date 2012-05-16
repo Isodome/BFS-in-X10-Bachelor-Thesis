@@ -2,9 +2,10 @@ package bfs;
 
 import x10.array.PlaceGroup;
 import x10.lang.*;
+import x10.util.ArrayBuilder;
 
 public class Grid {
-    
+
 
     public val rows : Int;
     public val cols : Int;
@@ -14,33 +15,58 @@ public class Grid {
 
     public val rowSize : Int;
     public val colSize : Int;
-    
+
+    private var placesByRow : Array[PlaceGroup];
+    private var placesByCol : Array[PlaceGroup];
+
     private def this (rows : Int, cols : Int, pg : PlaceGroup, n : int ) {
-       this.rows = rows;
-       this.cols = cols;
-       this.pg = pg;
-       this.n=n;
+        // saving attributes
+        this.rows = rows;
+        this.cols = cols;
+        this.pg = pg;
+        this.n=n;
 
-       var colSize : Int = n / cols;
-       if (colSize * cols < n) {
-           colSize++;
-       }
+        // calculating the width of each column and the height of each row
+        var colSize : Int = n / cols;
+        if (colSize * cols < n) {
+            colSize++;
+        }
 
-       var rowSize : Int = n / rows;
-       if (rowSize * rows < n) {
-           rowSize++;
-       }
+        var rowSize : Int = n / rows;
+        if (rowSize * rows < n) {
+            rowSize++;
+        }
 
-       this.rowSize = rowSize;
-       this.colSize = colSize;
+        this.rowSize = rowSize;
+        this.colSize = colSize;
+
+        // generate Placegroups per row and col
     }
 
+    private def fillPlaceGroups() {
+
+        val rowPlacesTemp = new Array[ArrayBuilder[Place]](rows, (i:Int) => new ArrayBuilder[Place]());
+        val colPlacesTemp = new Array[ArrayBuilder[Place]](cols, (i:Int) => new ArrayBuilder[Place]());
+        for (var i:int = 0; i< rows; i++) {
+            for (var j:int = 0; j< cols; j++) {
+                val pl = getPlaceForGridPosition(i,j);
+                rowPlacesTemp(i).add(pl);
+                colPlacesTemp(j).add(pl);
+            }
+        }
+
+        placesByRow = new Array[PlaceGroup](rows, (i:Int)=> new SparsePlaceGroup(rowPlacesTemp(i).result().sequence() ));
+        placesByCol = new Array[PlaceGroup](cols, (i:Int)=> new SparsePlaceGroup(colPlacesTemp(i).result().sequence() ));
+
+    }
 
     public static def make(rows : Int, cols : Int, pg : PlaceGroup, n : int) : Grid {
         if (rows * cols != pg.size()) {
             throw new IllegalArgumentException("Number of Places does not equal rows * cols");
         }
-        return new Grid(rows, cols, pg, n);
+        val g = new Grid(rows, cols, pg, n);
+        g.fillPlaceGroups();
+        return g;
     }
 
     public static def make (pg: PlaceGroup, n: int) {
@@ -88,4 +114,12 @@ public class Grid {
         return myPoint;
     }
 
+    public def getPlacesForRow(val i:int) : PlaceGroup {
+        return this.placesByRow(i);
+    }
+
+
+    public def getPlacesForColumn(val i:int) : PlaceGroup {
+        return this.placesByCol(i);
+    }
 }

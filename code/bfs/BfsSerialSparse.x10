@@ -37,6 +37,10 @@ public class BfsSerialSparse extends BfsAlgorithm {
         }
     }
 	
+    public def checkStartNode(numberToCheck : Int) : boolean {
+        return numberToCheck >=0 && numberToCheck < vertexCount;
+    }
+
 	public def finished() : void {
 		locked = true;
 		adj_idx = new Array[Int] (vertexCount + 1, 0); // the last value is for easier iteration while the algorithm is running

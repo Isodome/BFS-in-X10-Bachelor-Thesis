@@ -30,6 +30,10 @@ public class BfsSerialMatrix extends BfsAlgorithm {
         }
     }
 	
+    public def checkStartNode(numberToCheck : Int) : boolean {
+        return numberToCheck >=0 && numberToCheck < vertexCount;
+    }
+
 	public def finished() : void {
 		// not required
 	}

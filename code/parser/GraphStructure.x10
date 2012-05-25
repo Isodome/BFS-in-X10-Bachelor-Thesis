@@ -30,4 +30,6 @@ public interface GraphStructure {
 	 * Tells the callee, that the graph has finished parsing.
 	 */
 	public def finished() : void;
+
+    public def checkStartNode(numberToCheck : Int) : boolean;
 }

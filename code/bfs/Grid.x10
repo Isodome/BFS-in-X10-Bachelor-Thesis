@@ -122,4 +122,10 @@ public class Grid {
     public def getPlacesForColumn(val i:int) : PlaceGroup {
         return this.placesByCol(i);
     }
+    public def getColumnForPlace(val p:Place) : Int {
+        return p.id % cols;
+    }
+    public def getRowForPlace(val p:Place) : Int {
+        return p.id / cols;
+    }
 }

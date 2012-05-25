@@ -3,6 +3,7 @@ import parser.*;
 import bfs.*;
 import x10.util.*;
 import x10.io.*;
+import x10.lang.*;
 
 public class Bfs {
 
@@ -25,6 +26,8 @@ public class Bfs {
         var bfs : Int = BFS_NONE;
         var file : String = null;
 		var resultFile : String = null;
+        var startNode : int = 0;
+        var stats : boolean = false;
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -47,13 +50,25 @@ public class Bfs {
                     printError("No output file specified.");
                     return;
                 }
+            } else if (argument.equals("-start") || argument.equals("-s")) {
+                if (args.region.contains(i+1)) {
+                    i++;
+                    try {
+                        startNode = Int.parse(args(i).trim());
+                    } catch (nfe : NumberFormatException) {
+                        printError("Starting node no valid integer"); 
+                        return;
+                    }
+                }
+            } else if (argument.equals("-stats")) {  
+               stats = true; 
             } else {
-				file = args(i);
+                file = args(i);
             }
             i++;
         }
 
-		// You always need at least '-alg', '<alg>' and the input file, thus, at least 3 arguments 
+        // You always need at least '-alg', '<alg>' and the input file, thus, at least 3 arguments 
         if (args.size < 3) {
             printError("Too few arguments.");
             return;
@@ -97,7 +112,8 @@ public class Bfs {
 		} else if (bfs == BFS_1D_LIST) {
 			algo = new Bfs1DList(); 
 		} else if (bfs == BFS_2D_MATRIX) {
-            algo = new Bfs2DMatrix();
+            // algo = new Bfs2DMatrix();
+            algo = null;
         } else {
 			printError("Unknown algorithm.");
 			return;
@@ -109,15 +125,24 @@ public class Bfs {
 		val p = parser;
 		finish async p.fillGraphInDataStructure(a, f);
 		
+
+        // Check whether startNode is within range
+        if (!a.checkStartNode(startNode)) {
+            printError("Starting node out of range");
+            return;
+        }
 		
 		//trigger garbage collection and run the algorithm
 		x10.lang.System.gc();
         x10.io.Console.OUT.println("Parsing complete, starting algorithm ");
         val startingTime : Long = System.currentTimeMillis();
-		val d : Array[Int](1) = algo.run(0);
+		val d : Array[Int](1) = algo.run(startNode);
         val duration = System.currentTimeMillis() - startingTime;
         x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
 		printOutput(d, resultFile);
+        if (stats) {
+            printStats(d,resultFile); 
+        }
 	}
 
     private static def bfsSerialMatrix() {
@@ -181,5 +206,39 @@ public class Bfs {
 			p.flush();
 			p.close();
 		}
+    }
+    private static def printStats(a:Array[Int](1), result : String) {
+        if (result != null) {
+            val counts = new ArrayList[Int]();
+            var INFs : int = 0;
+            for (i in a) {
+                val steps = a(i);
+                if (steps == INF) {
+                    INFs++;
+                } else {
+                    while (counts.size() < steps+1) {
+                        counts.add(0);
+                    }
+                    counts(steps) = counts(steps) + 1;
+                }
+            }
+            
+            val o = new File(result + ".stats");
+            val p = o.printer();
+            val nodeCount : Double = a.region.size() as Double;
+            var average : Double = 0.0;
+
+            for (var i : int = 0; i < counts.size(); i++) {
+                p.print(i + ":" + counts(i) + " (" + counts(i)/nodeCount  +"%)" + "\n");
+                average += (counts(i) * i)/nodeCount;
+            }
+            p.print("INF:" + INFs + "(" + INFs/nodeCount + "%)\n\n");
+            p.print("Average length (without INFs): " + average + "\n" );
+            
+
+            p.flush();
+            p.close();
+
+        }
     }
 }

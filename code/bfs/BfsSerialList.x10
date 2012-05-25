@@ -27,6 +27,9 @@ public class BfsSerialList extends BfsAlgorithm {
         }
     }
 
+    public def checkStartNode(numberToCheck : Int) : boolean {
+        return numberToCheck >=0 && numberToCheck < vertexCount;
+    }
 	public def finished() : void {
 		// nothing to do
 	}

@@ -22,46 +22,48 @@ public class BfsSerialList extends BfsAlgorithm {
 	}
 
     public def addEdge(from : Int, to : Array[Int]) {
-        for (i in to) {
-            addEdge(from, to(i));
+        async {
+            for (i in to) {
+                addEdge(from, to(i));
+            }
         }
     }
 
     public def checkStartNode(numberToCheck : Int) : boolean {
         return numberToCheck >=0 && numberToCheck < vertexCount;
     }
-	public def finished() : void {
-		// nothing to do
-	}
-	public def run(start : Int) : Array[Int](1) {
-		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
+    public def finished() : void {
+        // nothing to do
+    }
+    public def run(start : Int) : Array[Int](1) {
+        var d : Array[Int](1) = new Array[Int](vertexCount, INF);
         val dVisited  = new Array[Boolean](vertexCount, false);
-		d(start) = 0;
+        d(start) = 0;
         dVisited(start) = true;
 
-		var current : List[Int] = new ArrayList[Int]();
-		var nexts : List[Int] = new ArrayList[Int]();
+        var current : List[Int] = new ArrayList[Int]();
+        var nexts : List[Int] = new ArrayList[Int]();
 
-		current.add(start);
+        current.add(start);
 
-		var depth : Int = 1;
+        var depth : Int = 1;
 
-		while(!current.isEmpty()) {
-			for (vertex in current) {
-				for (to in adj(vertex)) {
-					if (!dVisited(to)) {
+        while(!current.isEmpty()) {
+            for (vertex in current) {
+                for (to in adj(vertex)) {
+                    if (!dVisited(to)) {
                         dVisited(to) = true;
-						nexts.add(to);
-						d(to) = depth;
-					}
-				}
-			}
-			depth++;
+                        nexts.add(to);
+                        d(to) = depth;
+                    }
+                }
+            }
+            depth++;
             current.clear();
             val tmp = current;
-			current = nexts;
-			nexts = tmp;
-		}
-		return d;
-	}
+            current = nexts;
+            nexts = tmp;
+        }
+        return d;
+    }
 }

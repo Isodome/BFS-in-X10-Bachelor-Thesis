@@ -17,6 +17,7 @@ public class Bfs {
     public static val BFS_1D_SPARSE     : Int = 5;
     public static val BFS_1D_LIST       : Int = 6;
     public static val BFS_2D_MATRIX     : Int = 7;
+    public static val BFS_2D_LIST       : Int = 8;
     
     /**
      * The main method for the Hello class
@@ -111,9 +112,10 @@ public class Bfs {
 			algo = new Bfs1DMatrix(); 
 		} else if (bfs == BFS_1D_LIST) {
 			algo = new Bfs1DList(); 
-		} else if (bfs == BFS_2D_MATRIX) {
-            // algo = new Bfs2DMatrix();
-            algo = null;
+        } else if (bfs == BFS_2D_MATRIX) {
+            algo = new Bfs2DMatrix();
+        } else if (bfs == BFS_2D_LIST) {
+            algo = new Bfs2DList();  
         } else {
 			printError("Unknown algorithm.");
 			return;
@@ -179,6 +181,8 @@ public class Bfs {
             return BFS_1D_LIST;
         } else if (trimmed.equals("2d_matrix")){
             return BFS_2D_MATRIX;
+        } else if (trimmed.equals("2d_list")) {
+            return BFS_2D_LIST;
         } else {
             return BFS_NONE;
         }
@@ -232,7 +236,9 @@ public class Bfs {
                 p.print(i + ":" + counts(i) + " (" + counts(i)/nodeCount  +"%)" + "\n");
                 average += (counts(i) * i)/nodeCount;
             }
+
             p.print("INF:" + INFs + "(" + INFs/nodeCount + "%)\n\n");
+            p.print("Number of nodes: " + a.region.size() + "\n");
             p.print("Average length (without INFs): " + average + "\n" );
             
 

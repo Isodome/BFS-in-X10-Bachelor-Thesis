@@ -63,91 +63,103 @@ public class Bfs2DMatrix extends BfsAlgorithm {
         // not required
     }
 
+    public def checkStartNode(numberToCheck : Int) : boolean {
+        return numberToCheck >= 0  && numberToCheck < vertexCount;
+    }
+
     public def run(start : Int) : Array[Int](1) {
 
         val d = DistArray.make[Array[Int]](Dist.makeUnique(), null as Array[Int]);
         val f = DistArray.make[Array[Boolean]](Dist.makeUnique(), null as Array[Boolean]);
         val t = DistArray.make[Array[Boolean]](Dist.makeUnique(), null as Array[Boolean]);
-        val initFunc = (i:Int) => DistArray.make[Int](Dist.makeUnique() , 0 );
-        val regio : Region = Region.make(0, vertexCount-1);
-        val t_tmp = new Array[DistArray[Boolean]](grid.cols, (i:Int)=>DistArray.make[Boolean](Dist.makeBlockCyclic( regio, 0, grid.rowSize, grid.getPlacesForColumn(i)) ));
+        val t_tmp = DistArray.make[Array[Boolean]](Dist.makeUnique(), null as Array[Boolean]); 
 
-        finish for (place in PlaceGroup.WORLD) async {
+        finish for (place in PlaceGroup.WORLD) async at (place) {
             val arrayFrom = this.arrayPartSize * place.id;
             val arrayTo   = x10.lang.Math.min(arrayFrom + this.arrayPartSize-1, vertexCount - 1);
             d(place.id) = new Array[Int]( arrayFrom..arrayTo, INF);
             f(place.id) = new Array[Boolean]( arrayFrom..arrayTo, false);
             t(place.id) = new Array[Boolean]( arrayFrom..arrayTo, false);
+            t_tmp(place.id) = new Array[Boolean](adj(here.id).region.minPoint()(0).. adj(here.id).region.maxPoint()(0) , false);
         }
 
         // Array to collect all results in Place 0 after calculation
         val result_local = new Array[Int]( vertexCount, INF);
         val resultRef = GlobalRef[Array[Int]](result_local);
 
+        val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
+        val team = new Team(isAt);
+
         finish {
-            val clock = Clock.make();
             for (place in d.dist.places()) at (place) {
-                async clocked(clock) {
+                async {
 
                     if (d.dist(start / this.arrayPartSize) == here) {
                         d(here.id)(start) = 0;
                         f(here.id)(start) = true;
                     }
-                    var depth = 0;
+                    var depth : Int = 0;
                     val myArrayRegion = f.dist.get(here);
                     val rowFrom = adj(here.id).region.minPoint()(0);
                     val rowTo   = adj(here.id).region.maxPoint()(0);
                     val colFrom = adj(here.id).region.minPoint()(1);
                     val colTo   = adj(here.id).region.maxPoint()(1);
-                    val fregion  = (rowFrom..rowTo) as Region; 
+                    val fregion  = (colFrom..colTo) as Region; 
                     val fTransposed = new Array[Boolean](fregion, false);
-                    val tLocal = new Array[Boolean](d(here.id).region, false);
-                    val done = false;
+                    var done :Boolean  = false;
 
-                    while (done) {
+                    while (!done) {
                         depth++;
                         // Phase 1: Transpose f  // Todo: Push instead of pull. make Distarray for Each gridrow
 
-                        finish for (var i:int = rowFrom; i <= rowTo; i++) {
+                        finish for (var i :Int = colFrom; i <= colTo; i++) {
                             val ii = i;
-                            val arrayPartNum = ii / this.arrayPartSize;
-                            fTransposed(i) = at (f.dist(arrayPartNum)) f(here.id)(ii);
+                            async {
+                                val arrayPartNum = ii / this.arrayPartSize;
+                                fTransposed(ii) = at (f.dist(arrayPartNum)) f(here.id)(ii);
+                            }
                         }
-
 
                         // phase 2: Local Matrix multiplication
-                        for (var i: int = rowFrom; i<= rowTo; i++) {
-                            for (var j: int = colFrom; j<= colTo; j++) {
-                               if( adj(here.id)(i,j) && fTransposed(i) ) {
-                                    t_tmp(grid.getColumnForPlace(here))(i) = true;
-                                    break;
-                               }
+                        finish for (var j: int = rowFrom; j<= rowTo; j++) {
+                            val jj = j;
+                            async {
+                                for (var i :Int = colFrom; i <= colTo; i++) {
+                                    if(fTransposed(i) &&  adj(here.id)(jj, i)) {
+                                        t_tmp(here.id)(jj) = true;
+                                        break;
+                                    }
+                                }
                             }
                         }
-                        clock.advance();
-                        // Phase 3 
+                        team.barrier(here.id);
+                        // Phase 3: sync placelocal results of matrix multiplication 
                         val myRow = grid.getRowForPlace(here);
                         val t_region = t(here.id).region;
-                        t(here.id).map(t(here.id), (i:int) => false);
+                        t(here.id).fill(false); //  delete previous result (overwrite with false)
                         for (p in grid.getPlacesForRow(myRow)) {
-                            val t_there : Array = at(p) new Array[Boolean](t_region, (i:Int)=> t_tmp(grid.getColumnForPlace(here))(i));
-                            for (i in t(here.id) {
-                               t(here.id)(i) = t(here.id)(i) || t_there(i);
+                            val t_there : Array[Boolean] = at(p) t_tmp(here.id);
+                            for (i in t(here.id)) {
+                                t(here.id)(i) = t(here.id)(i) || t_there(i);
                             }
                         }
-                        
+
                         //Phase 4: update d locally
+                        done = true;
                         for (i in d(here.id)) {
                             if (t(here.id)(i) && d(here.id)(i) == INF) {
                                 d(here.id)(i) = depth;
                                 f(here.id)(i) = true;
+                                done = false;
                             } else {
                                 f(here.id)(i) = false;
                             }   
                         }
+                        val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
+                        done = (res == 1);
 
                     }
-                    // Copy local conten of d in result array at place 0
+                    // Copy local content of d in result array at place 0
                     val localPortion = d(here.id);
                     at(resultRef) async {
                         val r  = resultRef();
@@ -156,6 +168,7 @@ public class Bfs2DMatrix extends BfsAlgorithm {
                         }
                     }
                 }}}
+
         return result_local;
     }
 
@@ -166,9 +179,5 @@ public class Bfs2DMatrix extends BfsAlgorithm {
             rows--;
         }
         return Math.max(1, rows);
-    }
-
-    private def transposef() {
-
     }
 }

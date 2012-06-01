@@ -71,7 +71,7 @@ public class Grid {
 
     public static def make (pg: PlaceGroup, n: int) {
         val rows = findRowCount(pg.size());
-        Console.OUT.println(rows + "x"+ pg.size()/rows + " chosen");
+        Console.OUT.println(rows + "x"+ pg.size()/rows + " chosen (" + rows + " rows, " + pg.size()/rows + " columns)");
         return make(rows, pg.size()/rows, pg, n);
     }
 
@@ -102,22 +102,14 @@ public class Grid {
         return pg;
     }
     public def getMyPosition() : Point {
-        if (myPoint == null) {
-            for (var i: int = 0; i< rows; i++) {
-                for (var j : int = 0; j < cols; j++) {
-                    if (this(i,j)==here) {
-                        myPoint = Point.make(i,j);
-                    }
-                }
-            }
-        }
-        return myPoint;
+        val idx = pg.indexOf(here);
+         
+        return Point.make(getRowForGroupIndex(idx), getColumnForGroupIndex(idx));
     }
 
     public def getPlacesForRow(val i:int) : PlaceGroup {
         return this.placesByRow(i);
     }
-
 
     public def getPlacesForColumn(val i:int) : PlaceGroup {
         return this.placesByCol(i);
@@ -127,5 +119,12 @@ public class Grid {
     }
     public def getRowForPlace(val p:Place) : Int {
         return p.id / cols;
+    }
+
+    private def getColumnForGroupIndex(i:Int) :Int {
+        return i % cols;
+    }
+    private def getRowForGroupIndex(i:Int) :Int {
+        return i / cols;
     }
 }

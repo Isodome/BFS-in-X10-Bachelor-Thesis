@@ -111,9 +111,9 @@ public class Bfs1DMatrix extends BfsAlgorithm {
 
 
             // Copy local conten of d in result array at place 0
-            val localPortion = d.getLocalPortion();
+            val localPortion  = d.getLocalPortion();
             at(resultRef) async {
-                val r  = resultRef();
+                val r : Array[Int]  = resultRef();
                 for (i : Point(1) in localPortion) {
                     r(i) = localPortion(i);
                 }

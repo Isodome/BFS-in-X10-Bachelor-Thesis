@@ -22,8 +22,15 @@ public class Bfs1DMatrix extends BfsAlgorithm {
 
     public def addEdge(from : Int, to : Int) {
         assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
-            async at (adj.dist(from, to)) {
-                adj( [from, to] ) = true;
+            async {
+                val p = adj.dist(from, to);
+                if (p == here) {
+                    adj(from, to) = true;
+                } else {
+                    at (adj.dist(from, to)) {
+                        adj( from, to ) = true;
+                    }
+                }
             }
     }
 
@@ -43,85 +50,100 @@ public class Bfs1DMatrix extends BfsAlgorithm {
         // not required
     }
 
-    public def run(start : Int) : Array[Int](1) {
-        x10.io.Console.OUT.println("bin in 1dmatrix mit "+ Place.places().size());
-        // distributed array to save locally 
-        val dist = Dist.makeBlock( (0..(vertexCount-1)), 0, PlaceGroup.WORLD);
-        val d = DistArray.make[Int](dist, INF);
+    public def run(start : Int) : Array[Int](1) { 
 
+        val d = DistArray.make[Int](Dist.makeBlock( 0..(vertexCount-1)), INF);
 
-        val nexts : DistArray[ArrayList[Int]](1) = DistArray.make[ArrayList[Int]](Dist.makeUnique(), (i:Point) => new ArrayList[Int]());
-        val hasJobs : DistArray[Boolean](1) = DistArray.make[Boolean](Dist.makeUnique(), true);
+        val recBuffers : DistArray[Array[ArrayList[Int]]](1) = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](Place.places().size(), new ArrayList[Int]()));
         val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
 
-        // Array to collect all results in Place 0 after calculation
+
         val result_local = new Array[Int]( vertexCount, INF);
         val resultRef = GlobalRef[Array[Int]](result_local);
 
-        val clock = Clock.make();
-        finish for (place in d.dist.places()) at (place) async clocked(clock) {
 
-            var depth : Int = 1;
-            var current : ArrayList[Int] = new ArrayList[Int]();
-            if (dist(start) == here) {
-                d(start) = 0;
-                current.add(start);
-            }
+        /*delete the following when clocks are finally working */
+        val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
+        val team = new Team(isAt);
 
 
-            while(hasJobs(here.id)) {
-                for (vertex in current) {
-                    for (var to : Int = 0; to < vertexCount; to++)  {
-                        if (adj([vertex, to])) {
-                            sendBuffer(dist(to).id).add(to);
-                        }
+        finish {
+            for (place in d.dist.places())  at (place)  {
+                async  {
+
+                    var depth : Int = 1;
+                    var done : Boolean = false;
+                    val dTemp = new Array[Boolean](vertexCount, false);
+                    var current : ArrayList[Int] = new ArrayList[Int]();
+                    if (d.dist(start) == here) {
+                        d(start) = 0;
+                        current.add(start);
                     }
-                }
 
-                current.clear();
-                Clock.resumeAll();
-                finish for( buf in sendBuffer) {
-                    val buffer : ArrayList[Int] = sendBuffer(buf);
-                    async at(new Place(buf(0))) {
-                        atomic {
-                            for (i in buffer) {
-                                nexts(here.id).add(i);
+
+                    while(!done) {
+                        // Sort reachable vertices by owning place
+                        for (from in current) {
+                            for (var to: Int = 0; to < vertexCount; to++) {
+                                if (!dTemp(to) && adj(from, to)) {
+                                    sendBuffer(d.dist(to).id).add(to);
+                                    dTemp(to) = true;
+                                }
                             }
                         }
+                        current.clear();
+
+                        finish for( targetPlace in d.dist.places()) async {
+                            val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
+                            val sourcePlace = here.id;
+                            if (!buffer.isEmpty()) {
+                                if (targetPlace == here) {
+                                    recBuffers(here.id)(here.id) = buffer;
+                                    sendBuffer(here.id) = new ArrayList[Int]();
+                                } else {
+                                    at(targetPlace) {
+                                        recBuffers(here.id)(sourcePlace) = buffer;
+                                    }
+                                    buffer.clear(); // only clean the local copy, even if targetPlace and sourcePlace are even!
+                                }
+                            }
+                        }
+                        team.barrier(here.id);
+
+                        val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
+                        for (iBuf in receiveBuffers) {
+                            for (vertex in receiveBuffers(iBuf)) {
+                                if (d(vertex) == INF) {
+                                    d(vertex) = depth;
+                                    current.add(vertex);
+                                }
+                            }
+                            receiveBuffers(iBuf).clear();
+                        }
+                        val jobsLeft = team.allreduce(here.id, current.size(), Team.ADD);
+                        done = (jobsLeft==0);
+
+                        depth++;
                     }
-                }
 
-                Clock.resumeAll();
-
-                // Todo: Loop parallelism possible here
-                for (vertex in nexts(here.id)) {
-                    if (d(vertex) == INF) {
-                        d(vertex) = depth;
-                        current.add(vertex);
+                    // Copy place-local content of d in result array at place 0
+                    val localPortion = d.getLocalPortion();
+                    finish at(resultRef) async {
+                        val r :Array[Int] = resultRef();
+                        for (i : Point(1) in localPortion) {
+                            r(i) = localPortion(i);
+                        }
                     }
-                }
-                hasJobs(here.id) = !current.isEmpty();
-                Clock.resumeAll();
 
-                hasJobs(here.id) = hasJobs.reduce( (a:Boolean, b: Boolean)=> a || b ,false);
-
-                depth++;
-              
-            }
-
-
-            // Copy local conten of d in result array at place 0
-            val localPortion  = d.getLocalPortion();
-            at(resultRef) async {
-                val r : Array[Int]  = resultRef();
-                for (i : Point(1) in localPortion) {
-                    r(i) = localPortion(i);
-                }
-            }
-
-        }
+                }}}
 
         return result_local;
     }
 
+
+    static public def say(s:String) {
+        atomic{
+            x10.io.Console.OUT.println(s);
+        }
+    }
 }

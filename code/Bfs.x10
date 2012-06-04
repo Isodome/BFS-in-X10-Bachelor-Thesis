@@ -18,6 +18,7 @@ public class Bfs {
     public static val BFS_1D_LIST       : Int = 6;
     public static val BFS_2D_MATRIX     : Int = 7;
     public static val BFS_2D_LIST       : Int = 8;
+    public static val BFS_2D_LIST_ALT   : Int = 9;
     
     /**
      * The main method for the Hello class
@@ -116,6 +117,8 @@ public class Bfs {
             algo = new Bfs2DMatrix();
         } else if (bfs == BFS_2D_LIST) {
             algo = new Bfs2DList();  
+        } else if (bfs == BFS_2D_LIST_ALT) {
+            algo = new Bfs2DListAlt();
         } else {
 			printError("Unknown algorithm.");
 			return;
@@ -183,6 +186,8 @@ public class Bfs {
             return BFS_2D_MATRIX;
         } else if (trimmed.equals("2d_list")) {
             return BFS_2D_LIST;
+        } else if (trimmed.equals("2d_list_alt")) {
+            return BFS_2D_LIST_ALT;  
         } else {
             return BFS_NONE;
         }

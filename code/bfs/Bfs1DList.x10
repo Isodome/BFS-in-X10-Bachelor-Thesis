@@ -47,7 +47,6 @@ public class Bfs1DList extends BfsAlgorithm {
     }
 
     public def run(start : Int) : Array[Int](1) { 
-        say("Using 1d_list mode with " + Place.places().size() + " places");
 
         val d = DistArray.make[Int](adjacency.dist, INF);
 

@@ -52,6 +52,7 @@ public class Bfs1DMatrix extends BfsAlgorithm {
 
     public def run(start : Int) : Array[Int](1) { 
 
+
         val d = DistArray.make[Int](Dist.makeBlock( 0..(vertexCount-1)), INF);
 
         val recBuffers : DistArray[Array[ArrayList[Int]]](1) = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](Place.places().size(), new ArrayList[Int]()));

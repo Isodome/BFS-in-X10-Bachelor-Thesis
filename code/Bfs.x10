@@ -124,6 +124,16 @@ public class Bfs {
 			return;
 		}
 
+		val d : Array[Int](1) = execute(file, algo, parser, startNode);
+		printOutput(d, resultFile);
+        if (stats) {
+            printStats(d,resultFile); 
+        }
+
+        val asdfi = new InvasiveBlockDist(null);
+	}
+
+    public static def execute(file: String, algo: BfsAlgorithm, parser: Parser, startNode : int): Array[Int](1) {
 		/* Parse the graph file into to chosen algorithm */
 		val f = file;
 		val a = algo;
@@ -134,7 +144,7 @@ public class Bfs {
         // Check whether startNode is within range
         if (!a.checkStartNode(startNode)) {
             printError("Starting node out of range");
-            return;
+            return null;
         }
 		
 		//trigger garbage collection and run the algorithm
@@ -144,11 +154,9 @@ public class Bfs {
 		val d : Array[Int](1) = algo.run(startNode);
         val duration = System.currentTimeMillis() - startingTime;
         x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
-		printOutput(d, resultFile);
-        if (stats) {
-            printStats(d,resultFile); 
-        }
-	}
+
+       return d; 
+    }
 
     private static def bfsSerialMatrix() {
         //  val a : Array[Boolean](2) = Graph.makeMatrixFromTGF(file, graph);

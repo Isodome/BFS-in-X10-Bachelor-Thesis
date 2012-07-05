@@ -1,0 +1,419 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"MPI_com",
+				"MPI_COMM_WORLD"
+			],
+			[
+				"MPI",
+				"MPI_INT"
+			],
+			[
+				"MP",
+				"MPI_COMM_WORLD"
+			],
+			[
+				"first",
+				"firstChar"
+			],
+			[
+				"accept",
+				"accepting"
+			],
+			[
+				"ins",
+				"insertSortAcc"
+			],
+			[
+				"inser",
+				"insert"
+			],
+			[
+				"insert",
+				"insertSort"
+			],
+			[
+				"pow",
+				"pow3acc"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "thesis.tex",
+			"settings":
+			{
+				"buffer_size": 3662,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+			"settings":
+			{
+				"buffer_size": 29349,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 13149,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "conclusion.tex",
+			"settings":
+			{
+				"buffer_size": 116,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Latex",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"",
+				"Build: Build"
+			],
+			[
+				"reinde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reinden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"snipp",
+				"Snippet: Itemize"
+			],
+			[
+				"bui",
+				"Build: Build"
+			],
+			[
+				"prolo",
+				"Set Syntax: Prolog"
+			],
+			[
+				"set syntax h",
+				"Set Syntax: Haskell"
+			],
+			[
+				"hask",
+				"Set Syntax: Haskell"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.fdb_latexmk",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Makefile",
+		"/Users/dominic/Desktop/test.c",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-workspace",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/Thesis.sublime-project",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.sublime-project",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Haskell/Case.sublime-snippet",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Haskell/Comments.tmPreferences",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/C++/do...while-loop-(do).sublime-snippet",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/C++/C.tmLanguage",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Plain text.sublime-settings",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS/Makefile",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS/graph/Graph.x10",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS/test.tgf",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS/Hello.x10",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS/bfs/BfsSerial.x10",
+		"/Users/dominic/Documents/Uni/Semester06/Fortgeschrittene Objektorientierung/Übung/Blatt1/IntegerEquals.java",
+		"/Users/dominic/Desktop/heute.hs",
+		"/Users/dominic/Desktop/primepowers.hs",
+		"/Users/dominic/Documents/Uni/Semester03/PSE2/Pflichtenheft/Pflichtenheft.tex",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/x10/Driver.x10",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/x10/PiSequential.x10",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/x10/Driver.x1-",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/RomanNumberAcceptor.scala",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/9. Blatt/blatt9.pl",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/Scala/RomanNumberAcceptor.scala",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/Scala/RomanNumberAcceptorSkeleton.scala",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/0. Blatt/max3.hs",
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/1. Blatt/blatt2.hs",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\": ",
+			"\":",
+			"[\"\"]",
+			"Conclusion",
+			"itemize",
+			"j",
+			"i",
+			"Mon",
+			"itemize",
+			"Conclusion",
+			"itemize",
+			"dots",
+			"Conclusion",
+			"chapter",
+			"Conclusion",
+			"wildcard",
+			"all",
+			"\",\n",
+			"example",
+			"public",
+			"[[",
+			"Buddi",
+			"		",
+			"static",
+			";",
+			"vim"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "thesis.tex",
+					"settings":
+					{
+						"buffer_size": 3662,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1766.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+					"settings":
+					{
+						"buffer_size": 29349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1179.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+					"settings":
+					{
+						"buffer_size": 13149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11626,
+								11626
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2594.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "conclusion.tex",
+					"settings":
+					{
+						"buffer_size": 116,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 219.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 237.0,
+	"status_bar_visible": true
+}

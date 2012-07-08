@@ -44,44 +44,116 @@
 	"buffers":
 	[
 		{
-			"file": "thesis.tex",
+			"file": "basics.tex",
 			"settings":
 			{
-				"buffer_size": 3662,
+				"buffer_size": 80,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+			"file": "invasive.tex",
 			"settings":
 			{
-				"buffer_size": 29349,
+				"buffer_size": 175,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+			"file": "parallel.tex",
 			"settings":
 			{
-				"buffer_size": 13149,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "conclusion.tex",
+			"file": "content.tex",
 			"settings":
 			{
-				"buffer_size": 116,
+				"buffer_size": 83,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "sequential.tex",
+			"settings":
+			{
+				"buffer_size": 125,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "thesis.bib",
+			"settings":
+			{
+				"buffer_size": 1277,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "introduction.tex",
+			"settings":
+			{
+				"buffer_size": 2031,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "evaluation.tex",
+			"settings":
+			{
+				"buffer_size": 523,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 337,
+				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "Latex",
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 87.0,
 		"selected_items":
 		[
+			[
+				"show",
+				"Show TODOs: Project and open files"
+			],
+			[
+				"latex",
+				"LaTeXTools: View PDF"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"todo",
+				"Show TODOs: Open files only"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				":w",
 				":w - Save"
@@ -140,21 +212,26 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/.gitignore",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.fdb_latexmk",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Makefile",
 		"/Users/dominic/Desktop/test.c",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-workspace",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/Thesis.sublime-project",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.sublime-project",
@@ -192,6 +269,7 @@
 		"height": 0.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -199,6 +277,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"begin",
+			"bibtex",
+			"\\cite{v}",
+			"english",
+			"englisch",
+			"Evaluation",
+			"\n",
 			"\": ",
 			"\":",
 			"[\"\"]",
@@ -246,18 +331,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "thesis.tex",
+					"file": "basics.tex",
 					"settings":
 					{
-						"buffer_size": 3662,
+						"buffer_size": 80,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								456,
-								456
+								80,
+								80
 							]
 						],
 						"settings":
@@ -265,17 +350,43 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1766.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+					"file": "invasive.tex",
 					"settings":
 					{
-						"buffer_size": 29349,
+						"buffer_size": 175,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								125,
+								125
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "parallel.tex",
+					"settings":
+					{
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -288,62 +399,165 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1179.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-					"settings":
-					{
-						"buffer_size": 13149,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11626,
-								11626
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2594.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "conclusion.tex",
+					"file": "content.tex",
 					"settings":
 					{
-						"buffer_size": 116,
+						"buffer_size": 83,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								116
+								83,
+								83
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "sequential.tex",
+					"settings":
+					{
+						"buffer_size": 125,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34,
+								34
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "thesis.bib",
+					"settings":
+					{
+						"buffer_size": 1277,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								624,
+								613
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/Bibtex.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "introduction.tex",
+					"settings":
+					{
+						"buffer_size": 2031,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2031,
+								2031
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "evaluation.tex",
+					"settings":
+					{
+						"buffer_size": 523,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								81,
+								91
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 337,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								114,
+								114
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -389,6 +603,10 @@
 	{
 		"height": 219.0
 	},
+	"output.unsaved_changes":
+	{
+		"height": 112.0
+	},
 	"replace":
 	{
 		"height": 0.0
@@ -399,6 +617,26 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"intro",
+				"introduction.tex"
+			],
+			[
+				"",
+				"introduction.tex"
+			],
+			[
+				"makefil",
+				"Makefile"
+			],
+			[
+				"bib",
+				"thesis.bib"
+			],
+			[
+				"conten",
+				"content.tex"
+			]
 		],
 		"width": 0.0
 	},

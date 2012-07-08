@@ -3,7 +3,7 @@
 	[
 		{
 			"path": "/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis",
-			"file_exclude_patterns": ["*.log", "*.aux", "*.out", "*.toc"]
+			"file_exclude_patterns": ["*.log", "*.aux", "*.out", "*.toc", "*.bbl", "*.blg", "thesis", "*.synctex.gz", "*fdb_latexmk" ]
 		}
 	],
 	"settings":
@@ -15,7 +15,7 @@
 		{			
 
 			"cmd": ["make", "thesis.pdf"],
-			"name": "Latex",
+			"name": "Project_LaTex",
 			"working_dir": "$project_path",
 			"path": "/usr/textbin/:$PATH"
 		}

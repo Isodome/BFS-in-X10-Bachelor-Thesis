@@ -1,4 +1,52 @@
+%!TEX root = thesis.tex
 \chapter{Grundlagen} % (fold)
 \label{cha:grundlagen}
 
+\section{Die Programmiersprache X10} % (fold)
+\label{sec:die_programmiersprache_x10}
+Die Programmiersprache X10 wird seit 2004 am IBM T. J. Watson Research Center bei New York in Kooperation mit einigen Universitäten entwickelt und gepflegt. X10 ist eine stark typisierte, objektorientierte Progammiersprache ohne Mehrfachvererbung. Was sequentielles Programmieren angeht, entspricht die Featuresliste weitgehend denen, die von anderen modernen objektorientierten Sprache bekannt sind. Nach Aussage der Entwickler ist X10 im Moment vor allem noch ein Forschungsobjekt und noch nicht für den Produktiveinsatz geeignet. Das Forschungs- und Entwicklungsziel von X10 ist es, eine Abstraktion von parallelen Programmierung zu finden, die es dem Entwickler erlaubt produktiver zu sein, als es mit traditionelleren Sprachen wie Java möglich wäre. Dazu wurden der Programmiersprache Konstrukte hinzugefügy, die einen impliziteren Umgang mit Parallelismus erlauben. Das Programiermodell entspricht am ehesten PGAS. Die 3 wichtigesten Aspekte sollen hier kurz beschrieben werden.\cite{x10FAQ:2012:Online}
+
+\subsection{Aktivitäten und das Keyword \textit{async}}  % (fold)
+\label{sub:aktivitaeten_und_das_keyword_async}
+Das Konzept der Aktiviäten in X10 ist dem der Threads sehr ähnlich. Beim Programmstart wird automatisch eine Aktivität gestartet, die bei der main-Methode einsteigt. Eine Aktivität hat einen Programmzähler und einen eigenen Stack und läuft potentiell nebenläufig zu allen anderen Aktivitäten ab. Tatsächlich werden alle Aktivitäten aus einem Threadpool versorgt, der aber für den Programmierer vollkommen transparent ist. Eine neue Aktivität wird mit dem Keyword \textit{async} gestartet. \textit{ x = async calculateX();} führt nebenläufig \textit{calculateX()} aus und weist \textit{x} dann das Ergebnis zu. Um auf die Fertigstellung zu warten, gibt es das Keyword \textit{finish\{...\}}. Bevor ein finish-Block verlassen wird, wird gewartet, bis alle (auch transitiv) gestarteten Aktivitäten beendet wurden.\cite{x10Spec:2012:Online}
+% subsection das_keyword_textit_async (end)
+
+\subsection{Places und das Keyword \textit{at}} % (fold)
+\label{sub:places_und_das_keyword_at}
+Ein Place ist in X10 die Abstraktion eines Prozessors oder eines Prozessorkerns, auf dem gerechnet werden kann. Zwei unterschiedliche Places haben keinen gemeinsamen Speicher. Um zwischen Places zu wechseln erfolgt kein explizites Message Passing. Stattdessen verwendet man das Keyword \textit{at(place) \{ /* code */ \}}. Mit \textit{at} wechselt die aktuelle Aktivität den Place. Dazu werden bei jedem \textit{at} alle Objekte, die innerhalb des Blockes verwendet werden, auf den Ziel-Place kopiert. Der Kontrollfluss kehrt erst nach vollständiger Ausführung des Blockes wieder zu dem initialen Place zurück. Ein \textit{at} ist also ein vollkommen synchrones Konstrukt. Änderungen an Daten innerhalb eines \textit{at}-Blockes werden nicht auf den initialen Place übernommen. Bei jedem \textit{at}, das von Place p nach k wechselt, werden alle benötigten Daten erneut von p nach k kopiert. Um Daten dauerhaft an einem Place zu halten, gibt es das Konzept der DistArrays.\cite{x10Spec:2012:Online}
+% subsection das_keyword_at (end)
+
+\subsection{Distributions und distributed Arrays} % (fold)
+\label{sub:distributions_und_distributed_arrays}
+Distributions und DistArrays sind das Konzept von X10 um Daten auf Places aufzuteilen. Im X10 Jargon nenn man den Index eins Arrays \textit{Point}. Eine Distribution ist ein Objekt, dass zu jedem Point eines Arrays einen Place ausrechnet. Ein DistArray (DistributedArray) ist nun ein Array, dessen Werte verteilt auf verschiedenen Places liegen und von dem jeweiligen Place aus erreichbar sind. Wo ein Wert liegt, definiert die Wahl der Distribution, die schon bei Arrayerstellung bekannt sein muss. Es kann beispielsweise auf jedem Place ein möglichst gleichgroßer, zusammenhängender Block liegen (Block Distribution) oder jeweils eine Sequenz von k Werten auf einem Place, die nächsten k auf dem nächsten Place liegen, wobei nach dem letzten wieder der erste Place kommen (Cyclic Distribution).\cite{x10Spec:2012:Online}
+% subsection distributions_und_distributed_arrays (end)
+
+% section die_programmiersprache_x10 (end)
+
+\section{Breitensuche} % (fold)
+\label{sec:breitensuche}
+
+Breitensuche (oft BFS vom englischen Breadth-First-Search) ist einer der fundamentalen Graphtraversierungsalgorithmen der Informatik. Die Breitensuche startet bei einem Knoten, dem Wurzelknoten. Die Ausgabe der Breitensuche ist zu jedem Knoten eine Zahl, die BFS Distanz. Die BFS Distanz des Knoten i ist die Länge des kürzesten Pfades von der Wurzel zu i, gemessen in Anzahl der traversierten Kanten. Außerdem gibt die Breitensuche zu jedem Knoten i den Vorgängerknoten j aus, sodass der vorletzte Knoten auf einem kürzesten Pfad von der Wurzel zu i der Knoten j ist. Damit gibt die Breitensuche also für einen gegebneen Startknoten den kürzesten Weg zu jedem erreichbaren Knoten sowie dessen Länge aus.
+
+\subsection{Funktionsweise} % (fold)
+\label{sub:funktionsweise}
+Es wird jedem Knoten vor Beginn die BFS Distanz $ \infty $ zugewiesen, einzig der Startknoten bekommt die Distanz 0, außerdem wird er einer Liste von aktiven Knoten hinzugefügt. In einer Breitensuchiteration wird nun jeder Knoten, der von einem der aktiven Knoten aus erreichbar ist angeschaut. Ist seine BFS Distanz $ \infty $, wird die Distanz auf die um eins erhöhte Distanz des Vorgängerknotens gesetzt. Ist die Distanz kleiner als unendlich, wird der Knoten ignoriert. Die Vereinigung aller Knoten, deren BFS Distanz wärend einer Iteration reduziert wird, ist die Menge der aktiven Knoten für die nächste Iteration. Sobald am Ende einer Ieration kein Knoten füt die nächste Iteration als aktiv markiert ist, ist der Algorithmus fertig. 
+
+Der Algorithmus berechnet für jeden Knoten k also folgendes Minimum:
+$$
+bfsDistanz(k) =  \min_{v \in Vorg\ddot{a}nger \; von \; k} (level(v))+1
+$$
+% subsection funktionsweise (end)
+
+\subsection{Sequentieller BFS Pseudocode} % (fold)
+\label{sub:sequentieller_bfs_pseudocode}
+p
+% subsection sequentieller_bfs_pseudocode (end)
+
+\subsection{Analyse} % (fold)
+\label{sub:analyse}
+
+% subsection analyse (end)
+
+% section breitensuche (end)
 % chapter grundlagen (end)

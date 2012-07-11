@@ -3,7 +3,8 @@
 % ----------------------------------------------------------------
 % Thesis - Main document
 % ----------------------------------------------------------------
-
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 %% -------------------------------
 %% |  Information for PDF file   |
@@ -21,7 +22,7 @@
 %% ---------------------------------
 
 \newcommand{\myname}{Dominic Rausch}
-\newcommand{\mytitle}{Title of thesis\\ 
+\newcommand{\mytitle}{Parallele Breitensuche in X10\\ 
 											Second title line}
 \newcommand{\myinstitute}{Institute for Program Structures\\
 													and Data Organization (IPD)}
@@ -133,6 +134,7 @@ appendix
 %% |   Bibliography   |
 %% --------------------
 \cleardoublepage
+\nocite{*}
 \phantomsection
 \addcontentsline{toc}{chapter}{\bibname}
 

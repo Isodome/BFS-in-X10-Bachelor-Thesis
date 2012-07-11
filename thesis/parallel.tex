@@ -2,4 +2,20 @@
 \chapter{Paralleler Algorithmus} % (fold)
 \label{cha:paralleler_algorithmus}
 
+\section{Vorüberlegungen} % (fold)
+\label{sec:vor_berlegungen}
+Eine einzelne Instanz der Breitensuche ist relativ schwer und nur unter recht hohem Synchronisationsaufwand nebenläufig lösbar. Das liegt daran, dass keine unabhängigen Ausführungsstränge definierbar sind. Überlegungen, etwa jedem Prozess eine starke Zusammenhangskomponente zur Berechnung zu geben, scheitern daran, dass allein die Laufzeit der Graphpartitionierung schon mindestens so lang wie die der Breitensuche ist.
+
+Weiterhin muss zu jedem Knoten die aktuelle BFS-Distanz gespeichert werden, was O(n) Speicheraufwand bedeutet. Um bei sehr großen Graphen nicht extern arbeiten zu müssen, wird deswegen gefordert, bei p Prozessen mit O(n/p) Speicherbedarf je Prozess auszukommen. Für eine bessere Anschaulichkeit werden in den folgenden theoretischen Überlegungen zunächst Adjazenzmatrizen als Graphrepräsentation verwendet, auch wenn reale Graphen meist dünn besetzt sind und Adjazenzmatrizen deswegen eher ungeeignet sind. Dabei sei $A(i,j) = true$, wenn eine gerichtete Kante von i nach j existiert. Im folgenden werden die zwei grundlegenden Konzepte der Breitensuche wie vorgeschlagen von \cite{Buluc:2011} vorgestellt.
+% section vor_berlegungen (end)
+
+\section{1D Partitionierung} % (fold)
+\label{sec:1d_partitionierung}
+Bei der 1D Paritionierung wird die Adjazenzmatrix entlang einer Achse aufgeteilt. Die Aufteilung erfolgt derart, dass jeder Knoten genau einem Prozess gehört und jeder Prozess möglichst gleichviele Knoten hat. Es ist wichtig, dass sehr schnell herausgefunden werden kann, welchem Prozess ein bestimmter Knoten gehört. Außerdem wird definiert, dass alle Kanten, die von Knoten k ausgehen, demselben Prozess gehören, wie Knoten k. Diese Partitionierung entspricht genau einer horizontalen Zerschneidung der Matrix.
+% section 1d_partitionierung (end)
+
+\section{2D Partitionierung} % (fold)
+\label{sec:2d_partitionierung}
+
+% section 2d_partitionierung (end)
 % chapter paralleler_algorithmus (end)

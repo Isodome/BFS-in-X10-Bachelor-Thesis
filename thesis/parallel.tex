@@ -1,0 +1,102 @@
+%!TEX root = thesis.tex
+\chapter{Paralleler Algorithmus} % (fold)
+\label{cha:paralleler_algorithmus}
+
+\section{Vorüberlegungen} % (fold)
+\label{sec:vor_berlegungen}
+Eine einzelne Instanz der Breitensuche ist relativ schwer und nur unter recht hohem Synchronisationsaufwand nebenläufig lösbar. Das liegt daran, dass keine unabhängigen Ausführungsstränge definierbar sind. Überlegungen, etwa jedem Prozess eine starke Zusammenhangskomponente des Graphen zur Berechnung zu geben, scheitern daran, dass allein die Laufzeit der Graphpartitionierung schon mindestens so lang wie die der Breitensuche ist.
+
+Weiterhin muss zu jedem Knoten die aktuelle BFS-Distanz gespeichert werden, was O(n) Speicheraufwand bedeutet. Um bei sehr großen Graphen nicht extern arbeiten zu müssen, wird deswegen gefordert, bei p Prozessen mit O(n/p) Speicherbedarf je Prozess auszukommen. Für eine bessere Anschaulichkeit werden in den folgenden theoretischen Überlegungen zunächst Adjazenzmatrizen als Graphrepräsentation verwendet, auch wenn reale Graphen meist dünn besetzt sind und Adjazenzmatrizen deswegen eher ungeeignet sind. Dabei sei $A(i,j) = true$, wenn eine gerichtete Kante von i nach j existiert. Im folgenden werden die zwei grundlegenden Konzepte der Breitensuche wie vorgeschlagen von \cite{Buluc:2011} vorgestellt. Der Name 1D bzw. 2D Partitionierung bezieht sich dabei auf die Aufteilung der Daten auf Prozesse.
+% section vor_berlegungen (end)
+
+
+\section{1D Partitionierung} % (fold)
+\label{sec:1d_partitionierung}
+Bei der 1D Paritionierung wird die Adjazenzmatrix entlang einer Achse aufgeteilt. Die Aufteilung erfolgt derart, dass jeder Knoten genau einem Prozess gehört und jeder Prozess möglichst gleichviele Knoten hat. Es ist wichtig, dass sehr schnell herausgefunden werden kann, welchem Prozess ein bestimmter Knoten gehört. Außerdem wird definiert, dass alle Kanten, die von Knoten k ausgehen, demselben Prozess gehören, wie Knoten k. Diese Partitionierung entspricht einer horizontalen Zerschneidung der Matrix.
+
+\begin{center}
+$\left( \begin{array}{c}
+	\dots \\ Daten\;von\;Prozess\;1 \\	\hline
+	\dots \\ Daten\;von\;Prozess\;2 \\	\hline
+	\dots \\	\hline
+	\dots \\ Daten\;von\;Prozess\;p \\
+\end{array} \right)$
+\end{center}
+
+Diesem Muster folgend wird auch das BFS-Distanz Array partitioniert. Der Prozess, dem ein Knoten gehört, ist dem entsprechend der einzige, der die aktuelle BFS-Distanz kennt. Damit weiß auch nur dieser Prozess, ob der Knoten bereits erreicht wurde oder nicht. Sehr abstrakt kann der verwendete Algorithmus wie in \ref{alg:1d_bfs_abstract} beschrieben werden. Dabei ist zu beachten, dass der Pseudocode an X10 angelehnt. Die erste Zeile wird nur auf dem ersten Place ausgeführt. Die anderen Places werden erst ab Zeile 2 aktiviert. Entsprechend der X10 Nomenklatur wird mit $dist(k)$ der Place gemeint, dem der Knoten k gehört.
+
+\begin{algorithm}
+	\caption{1D-partitionierte Breitensuche}
+	\label{alg:1d_bfs_abstract}
+	\begin{algorithmic}[1]
+		\State {Startknoten: s, Kantenanzahl n, Anzahl Places: p}
+		\State bfsDistance : DistArray of size n \Comment{Mit $\infty$ initialisiert, 0 an Stelle s}
+		\For{each place, do async on place}
+			\State{current : List<Nodes>}(s) \Comment{Lokale Liste pro Place}
+			\While{$\sum\limits_{i=0}^{p-1} \#current_i > 0$}
+				\State{//Phase 1:}
+				\For{$ u \in current$}
+					\For{each neighbor v of u}
+						\State{put u in the sendbuffer for place dist(u)}
+					\EndFor
+				\EndFor
+				\State{//Phase 2:}
+
+				\State{Send sendbuffer to corresponding place}
+				\State{$barriere$}
+				\State{//Phase 3:}
+				\For{u in receivebuffer}
+					\If{$bfsDistance(u) == \infty$}
+						\State{Update bfsDistance(u)}
+						\State{Put u in current}
+					\EndIf
+				\EndFor
+			\EndWhile
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+
+Zur Initialisierung erstellt jeder Prozess lokal eine Liste aus aktiven Knoten (Zeile 4). Die Liste wird auf allen Places leer initialisiert, außer auf dem Place, dem der Startknoten gehört. Dort wird der Startknoten in die Liste eingefügt. Der Algorithmus kann in 3 Phasen aufgeteilt werden, die jeweils lokale in einem Prozess ablaufen. Es wird solange über die 3 Phasen iteriert, bis auf allen Places die Liste der aktiven Knoten leer ist.
+
+\subsection{Phase 1: Adjazente Knoten sortieren} % (fold)
+\label{sub:phase_1}
+In Phase 1 iteriert jeder Prozess für sich über seine Liste an aktiven Knoten. Nach Vorraussetztung stehen in der Liste nur Knoten, die dem jeweiligen Prozess selbst gehören, deswegen kennt der Prozess auch alle ausgehenden Kanten. Zu jeder Kante muss der Prozess nun herausfinden, welchem Prozess der Zielknoten gehört und den Knoten in einen entpsrechenden Sendepuffer einordnen. Am Ende dieser Phase ist die Liste der aktiven Knoten leer.
+% subsection phase_1 (end)
+
+\subsection{Phase 2: Kommunikation} % (fold)
+\label{sub:phase_2}
+Phase 2 ist die Kommunikationsphase. Jeder Prozess verschickt seine Sendepuffer an die jeweiligen Empfänger. Hier ist zu bemerken, dass jeder Prozess einen Empfangspuffer für jeden anderen Prozess bereithalten muss. Wenn es nur einen geteilten Empfangspuffer für pro Prozess gäbe, wäre hier weitere Synchronisation notwendig. Der Speicheraufwand von p Puffern ist meistens vernachlässigbar klein. Nach dieser benötigt man eine globale Barriere, da im nächsten Schritt die Empfangspuffer ausgewertet werden.
+% subsection phase_2 (end)
+
+\subsection{Phase 3: BFS-Distanz aktualisieren} % (fold)
+\label{sub:phase_3}
+Jeder Prozess hat eine Menge von Empfangspuffern. Alle Knoten, die in den Puffern stehen, gehören dem Prozess selbst. Außerdem gilt für alle Knoten, dass sie von den Knoten der letzten Iteration aus erreichbar sind. Phase 3 entpsricht dem Aktualisieren der klassischen Breitensuche. Es wird über alle Knoten in allen Empfangspuffern iteriert. Wenn die BFS-Distanz noch auf $\infty$ steht, wird sie auf die Nummer der aktuellen Iteration gesetzt und der Knoten der Liste der aktiven Knoten hinzugefügt, wenn die BFS-Distanz nicht $\infty$ ist, wird der Knoten ignoriert und verworfen. 
+Um die BFS-Distanz auf die Nummer der aktuellen Iteration zu setzen, muss die Anzahl der Iterationen mitgezählt werden. Durch die Synchronisation kann das lokal auf jedem Place passieren. Ein einfacher Schleifenzähler reicht aus.
+% subsection phase_3 (end)
+
+\subsection{Allreduce} % (fold)
+\label{sub:allreduce}
+
+% subsection allreduce (end)
+
+\subsection{Place-lokale Parallelität} % (fold)
+\label{sub:place_lokale_parallelit_t}
+
+% subsection place_lokale_parallelit_t (end)
+
+\subsection{Optimierungen} % (fold)
+\label{sub:optimierungen}
+
+% subsection optimierungen (end)
+
+% section 1d_partitionierung (end)
+
+\section{2D Partitionierung} % (fold)
+\label{sec:2d_partitionierung}
+$\left( \begin{array}{c|c|c}
+	Daten\;von\;P_1  & Daten\;von\;P_2 & Daten\;von\;P_3 \\	\hline
+	\dots & \dots & \dots \\ \hline
+	Daten\;von\;P_{p-2}  & Daten\;von\;P_{p-1} & Daten\;von\;P_p \\
+\end{array} \right)$
+% section 2d_partitionierung (end)
+% chapter paralleler_algorithmus (end)

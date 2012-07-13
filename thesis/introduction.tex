@@ -1,0 +1,20 @@
+%!TEX root = thesis.tex
+%% ==============================
+\chapter{Einleitung}
+\label{ch:einleitung}
+%% ==============================
+
+% Kurze BFS Vorstellung
+Die Breitensuche (engl: Breadth first search, kurz BFS) ist einer der Standardalgorithmen zur Graphtraversierung. Ausgehend von einem Knoten, dem Wurzelknoten, werden alle transitiv erreichbaren Knoten gesucht Zu jedem der erreichbaren Knoten kann außerdem die Distanz, gemessen in Kantenanzahl, oder der Vorgängerknoten ausgegeben werden. Die Breitensuche findet Anwendung, wenn der kürzeste Weg von einem Knoten zu allen anderen berechnet werden soll. Der von der Breitensuche erzeugte Schichtengraph wird zum Beispiel in Dinic's Algorithmus zur Lösung des Max-Flow Problems wie in \cite{Dinitz:2006} verwendet. 
+
+% Geschwindigkeit durch Parallelität
+Lange Zeit wurden Geschwindigkeitssteigerungen der Computer vor allem durch erhöhte Taktraten erreicht. Der Intel 4004 Chip von 1971 taktete mit 108kHz, der 2002 eingeführte Pentium M schon mit 1.7 GHz. 2005 führte Intel den ersten echten Mehrkernprozessor ein(\cite{Intel:2006:Online}), der zwei vollständige Kerne auf einem Chip vereinte. Über 30 Jahre lang optimierte man Prozessoren darauf, einen einzelnen, sequentiellen Befehlsstrang möglichst schnell ausführen zu können. Da aber kein Wechsel des Paradigmas stattfand, skalierten vorhandene Anwendungen sehr gut mit der Geschwindigkeit der Prozessoren. Seit einigen Jahren ist aber klar, dass weitere Geschwindigkeitssteigerungen nur durch (massive) Parallelität geschehen können.  
+
+% Keine unabhängigen Fäden möglich
+Die Breitensuche ist ein einfacher Algorithmus, dessen sequentielle Version in ein paar Zeilen Code ausgedrückt werden kann. Das Problem bei der Anpassung an parallele Programmierparadigmen ist, dass keine voneinander unabhängigen Aufgaben für einzelne Bearbeitungsfäden definiert werden können. Sowohl Daten- als auch Kontrollfluss müssen teuer synchronisiert werden.
+
+% Überblick über die Arbeit
+% TODO: Überblick über die Arbeit schreiben
+
+Ziel:
+Das Paper von \cite{Buluc:2011} beschreibt Ansätze zur Parallelisierung der Breitensuche. Dabei werden zur Kommunikation vor allem MPI Operationen eingesetzt. Wie die Autoren des Papers bereits bemerken, bleibt die Frage offen, ob die vorgeschlagenen Konzepte auch mit modernen, implizit parallelen, Programmiersprachen funktionieren und performant sein können, da eine abstraktere Beschreibungssprache meistens weniger flexibel ist und etwas mehr Overhead benötigt. Weiter soll erforscht werden, wie die Breitensuche mit den Besonderheiten des Inasiven Rechnens zurecht kommt. Dabei sei vor allem die Asymmetrie der Rechenleistung erwähnt, das heißt, einzelne Prozesse haben zum Teil bedeutend mehr Rechenleistung als andere.

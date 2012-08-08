@@ -70,8 +70,8 @@ public class Bfs {
             i++;
         }
 
-        // You always need at least '-alg', '<alg>' and the input file, thus, at least 3 arguments 
-        if (args.size < 3) {
+        // You always need at least '-alg', '<alg>' and the input file, thus, at least 2 arguments 
+        if (args.size < 2) {
             printError("Too few arguments.");
             return;
         }

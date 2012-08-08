@@ -1,7 +1,7 @@
 use strict;
 use Term::ANSIColor qw(:constants);
 use File::Basename;
-my @modes = qw(serial_list 1d_list 1d_matrix 2d_list 2d_list_alt);
+my @modes = qw(1d_list 1d_matrix 2d_list 2d_list_alt);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "simresults";
@@ -33,7 +33,9 @@ my @resultFiles;
 for (@modes) { # current value in $_
 	my $outputfile = $resultFolder."/".$basename."_".$_.".txt";	
 	print GREEN, "Running simulation in $_ mode...\n", RESET;
-	if (system($bfs, "-alg", $_, "-o", $outputfile, $file) != 0){
+    my $answer = system($bfs, "-alg", $_, "-o", $outputfile, $file);
+	if ($answer != 0){
+        print $answer;
 		print RED, "Simulation with graph $file and mode $_ failed\n", RESET;
 		exit -1;
 	}

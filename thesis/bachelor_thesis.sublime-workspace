@@ -71,7 +71,7 @@
 			"file": "thesis.bib",
 			"settings":
 			{
-				"buffer_size": 2974,
+				"buffer_size": 3435,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,7 +111,7 @@
 			"file": "thesis.tex",
 			"settings":
 			{
-				"buffer_size": 3756,
+				"buffer_size": 3818,
 				"line_ending": "Unix"
 			}
 		},
@@ -127,7 +127,7 @@
 			"file": "basics.tex",
 			"settings":
 			{
-				"buffer_size": 8313,
+				"buffer_size": 11972,
 				"line_ending": "Unix"
 			}
 		}
@@ -135,7 +135,7 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 67.0,
+		"height": 307.0,
 		"selected_items":
 		[
 			[
@@ -260,6 +260,7 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/dominic/Downloads/x10/x10dt/plugins/x10.dist.macosx.x86.fragment_2.2.1.201203131452/stdlib/include/x10/util/Team.h",
 		"/Users/dominic/Library/Preferences/info.stichling.myTracks.plist",
 		"/Users/dominic/Downloads/demo04/Liesmich04.txt",
@@ -275,7 +276,6 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.fdb_latexmk",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Makefile",
 		"/Users/dominic/Desktop/test.c",
@@ -329,6 +329,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"shift+enter",
+			"super+a",
 			"wurde",
 			"x10rt_allreduce",
 			"allreduce",
@@ -418,7 +420,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -506,15 +508,15 @@
 					"file": "thesis.bib",
 					"settings":
 					{
-						"buffer_size": 2974,
+						"buffer_size": 3435,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2443,
-								2456
+								2994,
+								2981
 							]
 						],
 						"settings":
@@ -522,7 +524,7 @@
 							"syntax": "Packages/LaTeX/Bibtex.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 865.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -637,15 +639,15 @@
 					"file": "thesis.tex",
 					"settings":
 					{
-						"buffer_size": 3756,
+						"buffer_size": 3818,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								306,
-								306
+								367,
+								367
 							]
 						],
 						"settings":
@@ -691,15 +693,15 @@
 					"file": "basics.tex",
 					"settings":
 					{
-						"buffer_size": 8313,
+						"buffer_size": 11972,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6786,
-								6786
+								11875,
+								11875
 							]
 						],
 						"settings":
@@ -708,7 +710,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1170.0,
+						"translation.y": 1936.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -766,12 +768,12 @@
 		"selected_items":
 		[
 			[
-				"paral",
-				"parallel.tex"
-			],
-			[
 				"bib",
 				"thesis.bib"
+			],
+			[
+				"paral",
+				"parallel.tex"
 			],
 			[
 				"basic",

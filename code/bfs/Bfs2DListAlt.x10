@@ -140,6 +140,8 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             sendBuf(rowNum).add(activeNode);
                         }
                         f.clear();
+
+                        // Phase 2: communication
                         val sender = here.id;
                         finish for (rowNum in sendBuf) {
                             val buffer = sendBuf(rowNum);
@@ -160,25 +162,27 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                         }
 
                         team.barrier(here.id);
-                        // phase 2: Local Matrix multiplication
+                        // phase 3 and 4: Local Matrix multiplication
                         finish {
                             val fTransLocal : Array[ArrayList[Int]] = fTransposed(here.id);
                             for (j in fTransLocal) {
                                 val curList : ArrayList[Int] = fTransLocal(j);
                                 for (i in curList) {
                                     t_tmp(here.id).addAll(adj(here.id)(i));
+                                    async adj(here.id)(i).clear();
                                 }
                                 async curList.clear();
                             }
                         }
 
-                        // Phase 3: sync placelocal results of matrix multiplication 
 
+                        //Phase 5: merge information per row
                         for (item in t_tmp(here.id)) {
                             val ownerId = item / this.arrayPartSize;
                             sendBufGlobal(ownerId).add(item);
                         }
                         t_tmp(here.id).clear();
+
                         finish for (p in grid.places()) async {
                             val senderId = here.id; 
                             if (!sendBufGlobal(p.id).isEmpty()) {

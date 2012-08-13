@@ -120,23 +120,23 @@ Es ist sehr wahrscheinlich, dass ein Knoten in einer Iteration der Zielknoten me
 
 Die zwei Dimensionen der Partitionierung beziehen sich auf die zwei Dimensionen, in denen im Modell mit der Adjazenzmatrix diese unterteilt wird. Die Aufteilung auf Prozesse geschieht dann wie in Abbildung \ref{img:2d-decomposition} illustriert.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centering
 	\label{img:2d-decomposition}
-	\caption{Der hier gezeigte quadratische Fall ist ein Spezialfall. n ist die Anzahl der Knoten, p die Anzahl der Places. In diesem Beispiel gibt es 9 Places. Dadurch, dass die Anzahl der Places eine Quadratzahl ist, ergibt sich horizontal und vertikal die selbe Zerlegung. Der Place mit der Nummer 0 speichert $A_{0,0}$ und $x_0$. Die blauen Pfeile zeigen, in welcher Reihenfolge die Daten auf die Nachfolgenden Places aufgeteilt werden.}
 	\includegraphics{pics/2d-decomposition.pdf}
+	\caption{Der hier gezeigte quadratische Fall ist ein Spezialfall. n ist die Anzahl der Knoten, p die Anzahl der Places. In diesem Beispiel gibt es 9 Places. Dadurch, dass die Anzahl der Places eine Quadratzahl ist, ergibt sich horizontal und vertikal die selbe Zerlegung. Der Place mit der Nummer 0 speichert $A_{0,0}$ und $x_0$. Die blauen Pfeile zeigen, in welcher Reihenfolge die Daten auf die Nachfolgenden Places aufgeteilt werden.}
 \end{figure}
 
 Auch bei der 2D Partitionierung müssen Vektoren auf die einzelnen Prozesse aufgeteilt werden. Angenommen die Adjazenzmatrix sei horizontal in h und vertikal in v Abschnitte unterteilt, außerdem sei n restlos durch p teilbar. Es gitl $n*v=p$. Dann gehöhrt der ersten Zeile der Abschnitt $ \left[1,n\right] * \left[1,\frac{n}{h}\right]$ der Adjazenzmatrix. Dann ist jedes Teilstück eines Vektors $l = \frac{1}{v} * \frac{n}{h} = \frac{n}{p}$ groß. Dadurch ist sichergestellt, dass das Teilstück eines Vektors, das der ersten Reihe gemeinsam gehört($\left[1,\frac{n}{p}\right] \cup \left[\frac{n}{p}+1,\frac{2n}{p}\right] \cup \dots \cup \left[\frac{(v-1)n}{p}+1,\frac{vn}{p}=\frac{n}{h}\right] $), dem horizontalen Teilstück $\left[1,\frac{n}{h}\right]$ des Matrixabschnittes entspricht, das genau dieser Reihe gehört.
 
 
-Bei der zweidimensionalen Unterteilung wird der Breitensuch-Algorithmus als folge von Matrix-Vektor-Operationen betrachet, die dann einzeln parallelisiert werden. Wenn der Algorithmus auf nur einem Prozessor läuft, kann die Kommunikation und die Synchronisation eingespart werden. Algorithmus \ref{alg:2d_serial} zeigt, welche Schritte nötig sind. Der Algorithmus führt folgenden Iterationsschritt aus, bis $x_k$ nurnoch 0er enthält: 
+Bei der zweidimensionalen Unterteilung wird der Breitensuch-Algorithmus als Folge von Matrix-Vektor-Operationen betrachet, die dann einzeln parallelisiert werden. Wenn der Algorithmus auf nur einem Prozessor läuft, kann die Kommunikation und die Synchronisation eingespart werden. Algorithmus \ref{alg:2d_serial} zeigt, welche Schritte nötig sind. Der Algorithmus führt folgenden Iterationsschritt aus, bis $x_k$ nurnoch 0er enthält: 
 $$
 x_{k+1} = \underbrace{ (A^T * x_k) }_{ \begin{tabular}{c} =1 an Stelle p \\ wenn Knoten p \\ von einem Knoten aus \\ $x_k$ erreichbar ist \end{tabular}} * \underbrace{\neg\sum_{i=1}^k x_i}_{\begin{tabular}{c} =1 an Stelle p, wenn \\ p noch unerreicht\end{tabular}}
 $$ 
 Das Produkt aus den beiden Vektoren entspricht der komponentenweisen Konjunktion der boolschen Werte. Die Matrixmultiplikation alleine reicht nicht aus, da Knoten sonst doppelt als erreicht markiert würden und somit eine falsche, zu große Distanz ausgegeben werden könnte. Es ist zu beachten, dass im Pseudocode die BFS-Distanz nicht gespeichert wird. Die BFS-Distanz kann aber leicht über die Nummer der Iteration herausgefunden und gesetzt werden. 
 
-\begin{algorithm}[h]
+\begin{algorithm}[ht]
 	\caption{BFS auf einem Place}
 	\label{alg:2d_serial}
 	\begin{algorithmic}[1]

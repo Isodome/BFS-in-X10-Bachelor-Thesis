@@ -1,23 +1,37 @@
 {
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"make",
+				"thesis.pdf"
+			],
+			"name": "Project_LaTex",
+			"path": "/usr/textbin/:$PATH",
+			"working_dir": "$project_path"
+		}
+	],
 	"folders":
 	[
 		{
-			"path": "/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis",
-			"file_exclude_patterns": ["*.log", "*.aux", "*.out", "*.toc", "*.bbl", "*.blg", "thesis", "*.synctex.gz", "*fdb_latexmk" ]
+			"file_exclude_patterns":
+			[
+				"*.log",
+				"*.aux",
+				"*.out",
+				"*.toc",
+				"*.bbl",
+				"*.blg",
+				"thesis",
+				"*.synctex.gz",
+				"*fdb_latexmk"
+			],
+			"path": "/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis"
 		}
 	],
 	"settings":
-    {
-        "tab_size": 4
-    },
-	"build_systems":
-    [
-		{			
-
-			"cmd": ["make", "thesis.pdf"],
-			"name": "Project_LaTex",
-			"working_dir": "$project_path",
-			"path": "/usr/textbin/:$PATH"
-		}
-	]
+	{
+		"tab_size": 4
+	}
 }

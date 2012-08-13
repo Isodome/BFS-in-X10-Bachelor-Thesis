@@ -47,7 +47,7 @@
 			"file": "invasive.tex",
 			"settings":
 			{
-				"buffer_size": 175,
+				"buffer_size": 12946,
 				"line_ending": "Unix"
 			}
 		},
@@ -55,7 +55,7 @@
 			"file": "content.tex",
 			"settings":
 			{
-				"buffer_size": 60,
+				"buffer_size": 84,
 				"line_ending": "Windows"
 			}
 		},
@@ -63,7 +63,7 @@
 			"file": "parallel.tex",
 			"settings":
 			{
-				"buffer_size": 24192,
+				"buffer_size": 24194,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,7 +111,7 @@
 			"file": "thesis.tex",
 			"settings":
 			{
-				"buffer_size": 3818,
+				"buffer_size": 3800,
 				"line_ending": "Unix"
 			}
 		},
@@ -141,6 +141,14 @@
 			[
 				":w",
 				":w - Save"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"todo",
+				"Show TODOs: Open files only"
 			],
 			[
 				"package",
@@ -195,16 +203,8 @@
 				"Git: Status"
 			],
 			[
-				"todo",
-				"Show TODOs: Open files only"
-			],
-			[
 				"packa",
 				"Package Control: Remove Package"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"",
@@ -260,6 +260,9 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Desktop/KIT HTML.pdf",
+		"/Users/dominic/Desktop/Kontrollansicht.pdf",
+		"/Users/dominic/Desktop/remove.sh",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/dominic/Downloads/x10/x10dt/plugins/x10.dist.macosx.x86.fragment_2.2.1.201203131452/stdlib/include/x10/util/Team.h",
 		"/Users/dominic/Library/Preferences/info.stichling.myTracks.plist",
@@ -329,6 +332,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"1d_bfs_abstract",
+			"2d",
+			"graphic",
+			"itemize",
+			"pseudocode",
+			"figure",
+			"[h]",
 			"shift+enter",
 			"super+a",
 			"wurde",
@@ -420,7 +430,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -428,23 +438,24 @@
 					"file": "invasive.tex",
 					"settings":
 					{
-						"buffer_size": 175,
+						"buffer_size": 12946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								175,
-								175
+								12686,
+								12686
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1926.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -454,15 +465,15 @@
 					"file": "content.tex",
 					"settings":
 					{
-						"buffer_size": 60,
+						"buffer_size": 84,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								19,
-								19
+								24,
+								24
 							]
 						],
 						"settings":
@@ -480,15 +491,15 @@
 					"file": "parallel.tex",
 					"settings":
 					{
-						"buffer_size": 24192,
+						"buffer_size": 24194,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23943,
-								23943
+								6744,
+								5817
 							]
 						],
 						"settings":
@@ -498,7 +509,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1105.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -639,15 +650,15 @@
 					"file": "thesis.tex",
 					"settings":
 					{
-						"buffer_size": 3818,
+						"buffer_size": 3800,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								367,
-								367
+								351,
+								351
 							]
 						],
 						"settings":
@@ -655,7 +666,7 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1875.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -710,7 +721,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1936.0,
+						"translation.y": 1824.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -768,6 +779,14 @@
 		"selected_items":
 		[
 			[
+				"pe",
+				"parallel.tex"
+			],
+			[
+				"para",
+				"parallel.tex"
+			],
+			[
 				"bib",
 				"thesis.bib"
 			],
@@ -806,10 +825,6 @@
 			[
 				"make",
 				"Makefile"
-			],
-			[
-				"para",
-				"parallel.tex"
 			],
 			[
 				"con",

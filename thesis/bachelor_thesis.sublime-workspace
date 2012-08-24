@@ -47,7 +47,7 @@
 			"file": "invasive.tex",
 			"settings":
 			{
-				"buffer_size": 12946,
+				"buffer_size": 16504,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +63,7 @@
 			"file": "parallel.tex",
 			"settings":
 			{
-				"buffer_size": 24194,
+				"buffer_size": 24491,
 				"line_ending": "Unix"
 			}
 		},
@@ -127,7 +127,15 @@
 			"file": "basics.tex",
 			"settings":
 			{
-				"buffer_size": 11972,
+				"buffer_size": 11978,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bachelor_thesis.sublime-project",
+			"settings":
+			{
+				"buffer_size": 591,
 				"line_ending": "Unix"
 			}
 		}
@@ -135,7 +143,7 @@
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 307.0,
+		"height": 187.0,
 		"selected_items":
 		[
 			[
@@ -260,6 +268,9 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/dominic/Desktop/KIT HTML.pdf",
 		"/Users/dominic/Desktop/Kontrollansicht.pdf",
 		"/Users/dominic/Desktop/remove.sh",
@@ -270,8 +281,6 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Terminal/Terminal.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
@@ -312,8 +321,7 @@
 		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/Scala/RomanNumberAcceptor.scala",
 		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/12. Blatt/Scala/RomanNumberAcceptorSkeleton.scala",
 		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/0. Blatt/max3.hs",
-		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/1. Blatt/blatt2.hs",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap"
+		"/Users/dominic/Documents/Uni/Semester05/Programmierparadigmen/Übungsblätter/1. Blatt/blatt2.hs"
 	],
 	"find":
 	{
@@ -332,6 +340,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"wird",
+			"id",
+			"liegt",
+			"Acit",
+			"sich",
+			"somit",
+			"vor",
+			"genau",
 			"1d_bfs_abstract",
 			"2d",
 			"graphic",
@@ -430,7 +446,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -438,24 +454,25 @@
 					"file": "invasive.tex",
 					"settings":
 					{
-						"buffer_size": 12946,
+						"buffer_size": 16504,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12686,
-								12686
+								15621,
+								15621
 							]
 						],
 						"settings":
 						{
+							"spell_check": true,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1926.0,
+						"translation.y": 3065.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -491,25 +508,26 @@
 					"file": "parallel.tex",
 					"settings":
 					{
-						"buffer_size": 24194,
+						"buffer_size": 24491,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6744,
-								5817
+								16932,
+								16932
 							]
 						],
 						"settings":
 						{
 							"auto_name": "",
+							"spell_check": true,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1105.0,
+						"translation.y": 5820.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -552,8 +570,8 @@
 						"selection":
 						[
 							[
-								2788,
-								2788
+								2380,
+								2380
 							]
 						],
 						"settings":
@@ -666,7 +684,7 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1875.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -704,24 +722,52 @@
 					"file": "basics.tex",
 					"settings":
 					{
-						"buffer_size": 11972,
+						"buffer_size": 11978,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11875,
-								11875
+								995,
+								995
 							]
 						],
 						"settings":
 						{
+							"spell_check": true,
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1824.0,
+						"translation.y": 2286.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "bachelor_thesis.sublime-project",
+					"settings":
+					{
+						"buffer_size": 591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -1,4 +1,6 @@
 {
+	"spell_check": true,
+	"dictionary": "Packages/User/de_DE_igerman98.dic",
 	"build_systems":
 	[
 		{

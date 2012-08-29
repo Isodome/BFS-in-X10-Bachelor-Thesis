@@ -2,7 +2,7 @@
 
 \chapter{Breitensuche im invasiven Kontext} % (fold)
 \label{cha:breitensuche_im_invasiven_kontext}
-In diesem Kapitel wird beschrieben, wie die Breitensuche unter Verwendung des Frameworks InvasIC implementiert wurde. Aus Zeitgründen konnte in dieser Arbeit nur ein Ansatz herausgearbeitet werden, der noch nicht alle Möglichkeiten des invasiven Rechnens nutzt. Deswegen ist womöglich an einigen Stellen im Algorithmus nicht sofort ersichtlich, weswegen bestimmte Lösungsansätze gewählt wurden. Das liegt daran, dass die Struktur der Implementierungen so gewählt wurde, dass zukünftige Ideen leicht umsetzbar sind.
+In diesem Kapitel wird beschrieben, wie die Breitensuche unter Verwendung des Frameworks invadeX10 implementiert wurde. Aus Zeitgründen konnte in dieser Arbeit nur ein Ansatz herausgearbeitet werden, der noch nicht alle Möglichkeiten des invasiven Rechnens nutzt. Deswegen ist womöglich an einigen Stellen im Algorithmus nicht sofort ersichtlich, weswegen bestimmte Lösungsansätze gewählt wurden. Das liegt daran, dass die Struktur der Implementierungen so gewählt wurde, dass zukünftige Ideen leicht umsetzbar sind.
 
 \section{Der Algorithmus} % (fold)
 \label{sec:der_algorithmus}
@@ -13,7 +13,7 @@ Zunächst seien in diesem Kapitel einige Unterschiede in den Anforderungen und d
 
 \subsubsection{Asymmetrie der Rechenleistung} % (fold)
 \label{ssub:asymmetrie_der_rechenleistung}
-Im invasiven Rechnen gibt es das Konzept des Processing Elements (abgekürzt PE). Ein PE ist die abstrakte Repräsentation eines Rechenkerns, auf dem ein Thread ausgeführt werden kann. Jedes PE repräsentiert genau eine Recheneinheit in der Hardware die in einem bestimmten Bereich mit gemeinsamen Speicher liegt. Dieser Bereich mit gemeinsamen Speicher wird durch X10 mittels Places abstrahiert. Es kann zum Beispiel ein Prozessor mit 8 Cores vorliegen. Im InvasIC-System existieren dann 8 PEs, die alle auf dem selben Place liegen. Synchronisation und Kommunikation zwischen zwei Activities auf dem selben Place geht wesentlich schneller, was sowohl Bandbreite als auch einmalige Startzeit der Kommunikation betrifft, als wenn die Activities auf unterschiedlichen Places liegen. 
+Im invasiven Rechnen gibt es das Konzept des Processing Elements (abgekürzt PE). Ein PE ist die abstrakte Repräsentation eines Rechenkerns, auf dem ein Thread ausgeführt werden kann. Jedes PE repräsentiert genau eine Recheneinheit in der Hardware die in einem bestimmten Bereich mit gemeinsamen Speicher liegt. Dieser Bereich mit gemeinsamen Speicher wird durch X10 mittels Places abstrahiert. Es kann zum Beispiel ein Prozessor mit 8 Cores vorliegen. Im invadeX10-System existieren dann 8 PEs, die alle auf dem selben Place liegen. Synchronisation und Kommunikation zwischen zwei Activities auf dem selben Place geht wesentlich schneller, was sowohl Bandbreite als auch einmalige Startzeit der Kommunikation betrifft, als wenn die Activities auf unterschiedlichen Places liegen. 
 
 Die Breitensuche wie in Kapitel \ref{sec:1d_partitionierung} behandelt das Problem, indem er auf jedem Place gleich viele Daten und damit gleichviel Rechenarbeit legt. Es wird auf jedem Place zunächst genau eine Activity gestartet, die dann zum Beispiel auf Schleifenebene Nebenläufigkeit erzeugt. Es gibt quasi zwei klare Hierarchiestufen der Parallelität. Dieser Ansatz geht davon aus, dass alle Places gleich schnell rechnen.
 
@@ -44,7 +44,7 @@ Zusammenfassend kann man sagen, dass ein Algorithmus, der auf partitionierten Da
 \label{ssub:nicht_fortlaufende_indizes}
 Trotz Verwendung des InvaIC Frameworks, soll die X10 API weiter genutzt werden können. Die X10-Funktionalitäten rund um Distributions, und DistArrays arbeitet auf der Basis von Places und deren Nummerierung. Aus diesem Grund kann man im invasiven Fall nicht komplett von der Vorstellung von Places weggehen, sondern muss im Auge behalten, auf welchem Place welche Daten liegen. Im reinen X10 sind die Places immer von 0 bis p-1 (bei p Places) durchnummeriert. Das macht die Nummer eines Places zu einem sehr praktischen Ausgangspunkt, um mit Indizes zu rechnen. Es kann zum Beispiel ein DistArray der Größe p erstellt werden, wenn auf jedem Place genau ein Datum liegen soll und jeder Place kann mit seinem eigenen Index auf seine eigenen Daten zugreifen.
 
-Im invasiven Fall werden vom Agent zunächst nur ProcessingElements bereitgestellt. Auf welchem Place diese liegen, ist für den Klienten völlig unvorhersehbar und unbeeinflussbar. Dadurch ist keine natürliche Nummerierung der Places vorhanden. Es lässt sich nicht vermeiden, etwas Speicherplatz und Rechenleistung zu benutzen, um dieses Problem zu lösen. Der unten stehende Vergleich des Codes zum Feststellen, welcher der besitzende Place von Knoten k ist, verdeutlicht das Problem. $p$ ist die Anzahl an Places, \textit{placesList} eine Liste aller Places und \textit{mapNodeToPlaceIndex} ein Funktion. Damit diese Funktion funktioniert, muss vorher schon eine Datenstruktur mit dem vollständigen wissen über alle PEs initialisiert worden sein.
+Im invasiven Fall werden vom Agent zunächst nur ProcessingElements bereitgestellt. Auf welchem Place diese liegen, ist für den Klienten nur bedingt beeinflussbar, sofern er nicht bereit ist auf Rechenleistung zu verzichten. Dadurch ist keine natürliche Nummerierung der Places mehr vorhanden. Es lässt sich nicht vermeiden, etwas Speicherplatz und Rechenleistung zu benutzen, um dieses Problem zu lösen. Der unten stehende Vergleich des Codes zum Feststellen, welcher der besitzende Place von Knoten k ist, verdeutlicht das Problem. $p$ ist die Anzahl an Places, \textit{placesList} eine Liste aller Places und \textit{mapNodeToPlaceIndex} ein Funktion. Damit diese Funktion funktioniert, muss vorher schon eine Datenstruktur mit dem vollständigen wissen über alle PEs initialisiert worden sein.
 \begin{algorithm}
 	\caption{Durchnummerierter Fall, wie in Kapitel \ref{sec:1d_partitionierung}}
 	\label{alg:owner_consecutive}
@@ -62,6 +62,8 @@ Im invasiven Fall werden vom Agent zunächst nur ProcessingElements bereitgestel
 	\end{algorithmic}
 \end{algorithm}
 % subsubsection nicht_fortlaufende_indizes (end)
+
+Das Problem wurde gelöst, indem mit eine Art virtuelle Placesverwaltung eingeführt wurde. Direkt nachdem bekannt ist, welche PEs zur Verfügung stehen, werden alle Places in einer Liste sortiert. Ab diesem Zeitpunkt wird ausschließlich mit dem Rang des Places in der sortierten Liste gerechnet. Die Ränge sind durchnummeriert von 0 bis p-1, womit die gewünscht Situation hergestellt ist. Die einzige Stelle, an der wieder das ursprüngliche Placeobjekt verwendet werden muss, ist beim Argument eines at{}-Blocks. Der Zugriff geht  über den Index in konstanter Zeit.
 
 % subsection unterschiede_zum_nicht_invasiven_fall (end)
 \subsection{Ablauf des Algorithmus} % (fold)

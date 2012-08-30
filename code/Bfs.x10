@@ -163,7 +163,7 @@ public class Bfs {
         for (var i:Int = 0; i < nodeCount; i++) {
             results(i) = (executeAndTime(algo, i) as Double) / (results.size as Double);
             if (i %100 == 0) {
-                x10.io.Console.OUT.print(".");
+                async x10.io.Console.OUT.print(".");
             }
         }
         val average = results.reduce( (x:Double, y:Double)=> x+y, 0.0);

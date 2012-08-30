@@ -68,7 +68,7 @@ public class BfsSerialSparse extends BfsAlgorithm {
 		// assert adj is square
 
 		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
-		d([start]) = 0;
+		d(start) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();
 		var next : List[Int] = new ArrayList[Int]();
@@ -83,9 +83,9 @@ public class BfsSerialSparse extends BfsAlgorithm {
 			for (vertex in current) {
 				for (var idx : Int = adj_idx(vertex); idx < adj_idx(vertex + 1); idx++) {
 					val to : Int = adj_val(idx);
-					if (d([to]) == INF) {
+					if (d(to) == INF) {
 						next.add(to);
-						d([to]) = depth;
+						d(to) = depth;
 					}
 				}
 			}

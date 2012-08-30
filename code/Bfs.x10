@@ -158,16 +158,16 @@ public class Bfs {
     }
 
     private static def runBenchmark(algo: BfsAlgorithm) : void {
-        val nodeCount = algo.getNodeCount();
-        val results = new Array[Double](nodeCount);
+        val nodeCount : Double = algo.getNodeCount() as Double;
+        var results : Double = 0.0;
         for (var i:Int = 0; i < nodeCount; i++) {
-            results(i) = (executeAndTime(algo, i) as Double) / (results.size as Double);
-            if (i %100 == 0) {
-                async x10.io.Console.OUT.print(".");
+            results += (executeAndTime(algo, i) as Double) / nodeCount;
+            if (i %1000 == 0) {
+                 x10.io.Console.OUT.print(".");
+                 x10.io.Console.OUT.flush();
             }
         }
-        val average = results.reduce( (x:Double, y:Double)=> x+y, 0.0);
-        print("Average speed: " + average);
+        print("Average speed: " + results);
     }
     private static def executeAndTime(algo: BfsAlgorithm, startNode: int) : Long {
         val startingTime : Long = System.currentTimeMillis();

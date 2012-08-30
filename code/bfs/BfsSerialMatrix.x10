@@ -44,7 +44,7 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 		// assert adj is square
 
 		var d : Array[Int](1) = new Array[Int](vertexCount, INF);
-		d([start]) = 0;
+		d(start) = 0;
 
 		var current : List[Int] = new ArrayList[Int]();
 		var next : List[Int] = new ArrayList[Int]();

@@ -56,9 +56,9 @@ public class BfsSerialMatrix extends BfsAlgorithm {
 		while(!current.isEmpty()) {
 			for (vertex in current) {
 				for (var to : Int = 0; to < vertexCount; to++) {
-					if (adj([vertex, to]) && d([to]) == INF) {
+					if (adj(vertex, to) && d(to) == INF) {
 						next.add(to);
-						d([to]) = depth;
+						d(to) = depth;
 					}
 				}
 			}

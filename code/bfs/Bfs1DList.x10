@@ -70,8 +70,8 @@ public class Bfs1DList extends BfsAlgorithm {
             for (place in d.dist.places())  at (place)  {
                 async  {
 
-                    var depth : Int = 1;
                     var done : Boolean = false;
+                    var depth : Int = 1;
                     val dTemp = new Array[Boolean](vertexCount, false);
                     var current : ArrayList[Int] = new ArrayList[Int]();
                     val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
@@ -104,7 +104,7 @@ public class Bfs1DList extends BfsAlgorithm {
                                     at(targetPlace) {
                                         recBuffers(here.id)(sourcePlace) = buffer;
                                     }
-                                    buffer.clear(); // only clean the local copy, even if targetPlace and sourcePlace are even!
+                                    buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
                                 }
                             }
                         }
@@ -119,7 +119,7 @@ public class Bfs1DList extends BfsAlgorithm {
                                 }
                             }
                         }
-                        val done = current.size() == 0;
+                        done = current.size() == 0;
                         val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
                         done = (res == 1);
 

@@ -1,20 +1,24 @@
 use strict;
 use Term::ANSIColor qw(:constants);
 use File::Basename;
-my @modes = qw(1d_list 1d_matrix 2d_list 2d_list_alt);
+my @modes = qw(serial_list serial_matrix 1d_list 1d_matrix 2d_matrix 2d_list_alt);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "simresults";
 
 my $num_args = $#ARGV + 1;
-if ($num_args != 1) {
-	die "Usage: sim.pl <file>";
+if ($num_args < 1) {
+	die "Usage: sim.pl <file> (startnode)";
 }
 my $file = @ARGV[0];
 if (not (-e $file)) {
 	die "Error! File '$file' does not exist";
 }
 my $basename = basename($file);
+my $startnode = 0;
+if ($num_args > 1) {
+	$startnode = @ARGV[1];
+}
 # start magic
 
 print GREEN, "creating folder 'sim_results':\n", RESET;
@@ -32,8 +36,8 @@ if (system("make", "cpp") != -0) {
 my @resultFiles;
 for (@modes) { # current value in $_
 	my $outputfile = $resultFolder."/".$basename."_".$_.".txt";	
-	print GREEN, "Running simulation in $_ mode...\n", RESET;
-    my $answer = system($bfs, "-alg", $_, "-o", $outputfile, $file);
+	print GREEN, "Running simulation in $_ mode, starting from node $startnode \n", RESET;
+    my $answer = system($bfs, "-alg", $_, "-o", $outputfile, "-start", $startnode, $file);
 	if ($answer != 0){
         print $answer;
 		print RED, "Simulation with graph $file and mode $_ failed\n", RESET;

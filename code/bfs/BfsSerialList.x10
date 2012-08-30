@@ -52,7 +52,7 @@ public class BfsSerialList extends BfsAlgorithm {
         while(!current.isEmpty()) {
             for (vertex in current) {
                 for (to in adj(vertex)) {
-                    if (d(to) < INF) {
+                    if (d(to) == INF) {
                         nexts.add(to);
                         d(to) = depth;
                     }

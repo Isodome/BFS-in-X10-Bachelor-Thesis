@@ -58,7 +58,9 @@ public class Bfs2DMatrix extends BfsAlgorithm {
             addEdge(from, to(i));
         }
     }
-
+    public def getNodeCount() : Int {
+        return vertexCount; 
+    }
     public def finished() : void {
         // not required
     }

@@ -71,7 +71,9 @@ public class Bfs2DListAlt extends BfsAlgorithm {
             }
         }
     }
-
+    public def getNodeCount() : Int {
+        return vertexCount; 
+    }
     public def finished() : void {
         finish for (place in grid.places()) async at (place) {
             val lists : Array[List[Int]] = adj(here.id);

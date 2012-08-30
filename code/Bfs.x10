@@ -30,6 +30,7 @@ public class Bfs {
 		var resultFile : String = null;
         var startNode : int = 0;
         var stats : boolean = false;
+        var benchmark : boolean = false;
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -64,6 +65,8 @@ public class Bfs {
                 }
             } else if (argument.equals("-stats")) {  
                stats = true; 
+            } else if (argument.equals("-benchmark")) {
+                benchmark = true;  
             } else {
                 file = args(i);
             }
@@ -136,19 +139,39 @@ public class Bfs {
             printError("Starting node out of range");
             return;
         }
-		
-		//trigger garbage collection and run the algorithm
-		x10.lang.System.gc();
-        x10.io.Console.OUT.println("Parsing complete, starting algorithm ");
-        val startingTime : Long = System.currentTimeMillis();
-		val d : Array[Int](1) = algo.run(startNode);
-        val duration = System.currentTimeMillis() - startingTime;
-        x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
-		printOutput(d, resultFile);
-        if (stats) {
-            printStats(d,resultFile); 
+	    
+        if(benchmark) {
+            runBenchmark(algo);
+        } else {
+            //trigger garbage collection and run the algorithm
+            x10.lang.System.gc();
+            x10.io.Console.OUT.println("Parsing complete, starting algorithm ");
+            val startingTime : Long = System.currentTimeMillis();
+            val d : Array[Int](1) = algo.run(startNode);
+            val duration = System.currentTimeMillis() - startingTime;
+            x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
+            printOutput(d, resultFile);
+            if (stats) {
+                printStats(d,resultFile); 
+            }
         }
-	}
+    }
+
+    private static def runBenchmark(algo: BfsAlgorithm) : void {
+        val nodeCount = algo.getNodeCount();
+        val results = new Array[Double](nodeCount);
+        for (var i:Int = 0; i < nodeCount; i++) {
+            results(i) = executeAndTime(algo, i) as Double;
+        }
+        val average = results.reduce( (x:Double, y:Double)=> x+y, 0.0) / (results.size as Double);
+        print("Average speed: " + average);
+    }
+    private static def executeAndTime(algo: BfsAlgorithm, startNode: int) : Long {
+        val startingTime : Long = System.currentTimeMillis();
+        val d : Array[Int](1) = algo.run(startNode);
+        val duration = System.currentTimeMillis() - startingTime;
+        return duration;
+    }
 
     private static def bfsSerialMatrix() {
         //  val a : Array[Boolean](2) = Graph.makeMatrixFromTGF(file, graph);
@@ -165,7 +188,7 @@ public class Bfs {
     private static def printError(s : String) {
         x10.io.Console.OUT.println("ERROR! " + s + "\n");
         printHelp();
-		x10.lang.System.setExitCode(1);
+        x10.lang.System.setExitCode(1);
     }
 
 
@@ -199,22 +222,22 @@ public class Bfs {
 
 
     private static def printOutput( a: Array[Int](1), result : String ) {
-		if ( result == null) {
-			for (i in a) {
+        if ( result == null) {
+            for (i in a) {
                 val value : String = (a(i) == INF) ? "INF" : a(i).toString();
-				print (i(0).toString() + ":" + value);
+                print (i(0).toString() + ":" + value);
             }
-			
-		} else {
-			val o = new File(result);
-			val p = o.printer();
-			for (i in a) {
-				val value : String = a(i) == INF ? "INF" : a(i).toString();
-				p.print(i(0).toString() + ":" + value + "\n");
-			}
-			p.flush();
-			p.close();
-		}
+
+        } else {
+            val o = new File(result);
+            val p = o.printer();
+            for (i in a) {
+                val value : String = a(i) == INF ? "INF" : a(i).toString();
+                p.print(i(0).toString() + ":" + value + "\n");
+            }
+            p.flush();
+            p.close();
+        }
     }
     private static def printStats(a:Array[Int](1), result : String) {
         if (result != null) {
@@ -231,7 +254,7 @@ public class Bfs {
                     counts(steps) = counts(steps) + 1;
                 }
             }
-            
+
             val o = new File(result + ".stats");
             val p = o.printer();
             val nodeCount : Double = a.region.size() as Double;
@@ -245,7 +268,7 @@ public class Bfs {
             p.print("INF:" + INFs + "(" + INFs/nodeCount + "%)\n\n");
             p.print("Number of nodes: " + a.region.size() + "\n");
             p.print("Average length (without INFs): " + average + "\n" );
-            
+
 
             p.flush();
             p.close();

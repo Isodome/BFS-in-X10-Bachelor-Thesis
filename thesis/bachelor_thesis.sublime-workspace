@@ -43,6 +43,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "introduction.tex",
+			"settings":
+			{
+				"buffer_size": 3143,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "parallel.tex",
+			"settings":
+			{
+				"buffer_size": 24922,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
@@ -172,8 +188,11 @@
 	},
 	"file_history":
 	[
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
+		"/Users/dominic/Documents/workspace/WikiProcessing/wiki_first_backwards.sgraph",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
@@ -190,7 +209,6 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/dominic/Desktop/KIT HTML.pdf",
 		"/Users/dominic/Desktop/Kontrollansicht.pdf",
@@ -248,6 +266,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"man",
+			"benötigt",
+			"Prozess",
+			"vor",
+			"möglich",
+			"fertig",
+			"dürfen",
+			"der",
 			"invasic",
 			"InvasIC",
 			"gewartet",
@@ -359,6 +385,61 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "introduction.tex",
+					"settings":
+					{
+						"buffer_size": 3143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1446,
+								1446
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 111.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "parallel.tex",
+					"settings":
+					{
+						"buffer_size": 24922,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13851,
+								13851
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3642.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -412,15 +493,23 @@
 		"selected_items":
 		[
 			[
+				"parall",
+				"parallel.tex"
+			],
+			[
+				"basi",
+				"basics.tex"
+			],
+			[
+				"introdu",
+				"introduction.tex"
+			],
+			[
 				"inva",
 				"invasive.tex"
 			],
 			[
 				"asic",
-				"basics.tex"
-			],
-			[
-				"basi",
 				"basics.tex"
 			],
 			[

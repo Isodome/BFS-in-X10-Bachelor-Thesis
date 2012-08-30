@@ -32,4 +32,5 @@ public interface GraphStructure {
 	public def finished() : void;
 
     public def checkStartNode(numberToCheck : Int) : boolean;
+    public def getNodeCount() : Int;
 }

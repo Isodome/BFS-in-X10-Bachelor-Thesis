@@ -54,7 +54,6 @@ public class Bfs1DList extends BfsAlgorithm {
         val d = DistArray.make[Int](adjacency.dist, INF);
 
         val recBuffers : DistArray[Array[ArrayList[Int]]](1) = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](Place.places().size(), new ArrayList[Int]()));
-        val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
 
 
         val result_local = new Array[Int]( vertexCount, INF);
@@ -75,6 +74,8 @@ public class Bfs1DList extends BfsAlgorithm {
                     var done : Boolean = false;
                     val dTemp = new Array[Boolean](vertexCount, false);
                     var current : ArrayList[Int] = new ArrayList[Int]();
+                    val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
+                    val sourcePlace = here.id;
                     if (d.dist(start) == here) {
                         d(start) = 0;
                         current.add(start);
@@ -91,11 +92,10 @@ public class Bfs1DList extends BfsAlgorithm {
                                 }
                             }
                         }
-                        current.clear();
 
+                        current.clear();
                         finish for( targetPlace in d.dist.places()) async {
                             val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
-                            val sourcePlace = here.id;
                             if (!buffer.isEmpty()) {
                                 if (targetPlace == here) {
                                     recBuffers(here.id)(here.id) = buffer;
@@ -118,10 +118,10 @@ public class Bfs1DList extends BfsAlgorithm {
                                     current.add(vertex);
                                 }
                             }
-                            receiveBuffers(iBuf).clear();
                         }
-                        val jobsLeft = team.allreduce(here.id, current.size(), Team.ADD);
-                        done = (jobsLeft==0);
+                        val done = current.size() == 0;
+                        val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
+                        done = (res == 1);
 
                         depth++;
                     }

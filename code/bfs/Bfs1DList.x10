@@ -67,75 +67,74 @@ public class Bfs1DList extends BfsAlgorithm {
 
 
         finish {
-            for (place in d.dist.places())  at (place)  {
-                async  {
+            for (place in d.dist.places()) async  at (place)  {
 
-                    var done : Boolean = false;
-                    var depth : Int = 1;
-                    val dTemp = new Array[Boolean](vertexCount, false);
-                    var current : ArrayList[Int] = new ArrayList[Int]();
-                    val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
-                    val sourcePlace = here.id;
-                    if (d.dist(start) == here) {
-                        d(start) = 0;
-                        current.add(start);
-                    }
+                var done : Boolean = false;
+                var depth : Int = 1;
+                val dTemp = new Array[Boolean](vertexCount, false);
+                var current : ArrayList[Int] = new ArrayList[Int]();
+                val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
+                val sourcePlace = here.id;
+                if (d.dist(start) == here) {
+                    d(start) = 0;
+                    current.add(start);
+                }
 
 
-                    while(!done) {
-                        // Sort reachable vertices by owning place
-                        for (from in current) {
-                            for (to in adj(from)) {
-                                if (!dTemp(to)) {
-                                    sendBuffer(d.dist(to).id).add(to);
-                                    dTemp(to) = true;
-                                }
+                while(!done) {
+                    // Sort reachable vertices by owning place
+                    for (from in current) {
+                        for (to in adj(from)) {
+                            if (!dTemp(to)) {
+                                sendBuffer(d.dist(to).id).add(to);
+                                dTemp(to) = true;
                             }
-                        }
-
-                        current.clear();
-                        finish for( targetPlace in d.dist.places()) async {
-                            val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
-                            if (!buffer.isEmpty()) {
-                                if (targetPlace == here) {
-                                    recBuffers(here.id)(here.id) = buffer;
-                                    sendBuffer(here.id) = new ArrayList[Int]();
-                                } else {
-                                    at(targetPlace) {
-                                        recBuffers(here.id)(sourcePlace) = buffer;
-                                    }
-                                    buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
-                                }
-                            }
-                        }
-                        team.barrier(here.id);
-
-                        val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
-                        for (iBuf in receiveBuffers) {
-                            for (vertex in receiveBuffers(iBuf)) {
-                                if (d(vertex) == INF) {
-                                    d(vertex) = depth;
-                                    current.add(vertex);
-                                }
-                            }
-                        }
-                        done = current.size() == 0;
-                        val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
-                        done = (res == 1);
-
-                        depth++;
-                    }
-
-                    // Copy place-local content of d in result array at place 0
-                    val localPortion = d.getLocalPortion();
-                    finish at(resultRef) async {
-                        val r :Array[Int] = resultRef();
-                        for (i : Point(1) in localPortion) {
-                            r(i) = localPortion(i);
                         }
                     }
 
-                }}}
+                    current.clear();
+                    finish for( targetPlace in d.dist.places()) async {
+                        val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
+                        if (!buffer.isEmpty()) {
+                            if (targetPlace == here) {
+                                recBuffers(here.id)(here.id) = buffer;
+                                sendBuffer(here.id) = new ArrayList[Int]();
+                            } else {
+                                at(targetPlace) {
+                                    recBuffers(here.id)(sourcePlace) = buffer;
+                                }
+                                buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
+                            }
+                        }
+                    }
+                    team.barrier(here.id);
+
+                    val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
+                    for (iBuf in receiveBuffers) {
+                        for (vertex in receiveBuffers(iBuf)) {
+                            if (d(vertex) == INF) {
+                                d(vertex) = depth;
+                                current.add(vertex);
+                            }
+                        }
+                    }
+                    done = current.size() == 0;
+                    val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
+                    done = (res == 1);
+
+                    depth++;
+                }
+
+                // Copy place-local content of d in result array at place 0
+                val localPortion = d.getLocalPortion();
+                finish at(resultRef) async {
+                    val r :Array[Int] = resultRef();
+                    for (i : Point(1) in localPortion) {
+                        r(i) = localPortion(i);
+                    }
+                }
+
+            }}
 
         return result_local;
     }

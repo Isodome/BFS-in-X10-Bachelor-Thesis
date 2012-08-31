@@ -161,6 +161,7 @@ public class Bfs {
         val nodeCount : Double = algo.getNodeCount() as Double;
         var results : Double = 0.0;
         for (var i:Int = 0; i < nodeCount; i++) {
+            x10.lang.System.gc();
             results += (executeAndTime(algo, i) as Double) / nodeCount;
             if (i %1000 == 0) {
                  x10.io.Console.OUT.print(".");

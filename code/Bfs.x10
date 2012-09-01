@@ -150,7 +150,7 @@ public class Bfs {
         }
 	    
         if(benchmark > 0 ) {
-            val list = new ArrayList[Integer]();
+            val list = new ArrayList[Double]();
             for (var run:int = 0; run < benchmark; run++) {
                 list.add(runBenchmark(algo));
             }

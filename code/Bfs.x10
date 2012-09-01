@@ -30,7 +30,7 @@ public class Bfs {
 		var resultFile : String = null;
         var startNode : int = 0;
         var stats : boolean = false;
-        var benchmark : boolean = false;
+        var benchmark : int = 0;
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -66,7 +66,16 @@ public class Bfs {
             } else if (argument.equals("-stats")) {  
                stats = true; 
             } else if (argument.equals("-benchmark")) {
-                benchmark = true;  
+              if (args.region.contains(i+1)) {
+                    i++;
+                    try {
+                        benchmark = Int.parse(args(i).trim());
+                    } catch (nfe : NumberFormatException) {
+                        printError("Benchmark must be at least 1"); 
+                        return;
+                    }
+                }
+
             } else {
                 file = args(i);
             }
@@ -140,8 +149,12 @@ public class Bfs {
             return;
         }
 	    
-        if(benchmark) {
-            runBenchmark(algo);
+        if(benchmark > 0 ) {
+            val list = new ArrayList[Integer]();
+            for (var run:int = 0; run < benchmark; run++) {
+                list.add(runBenchmark(algo));
+            }
+            print("Results: " + list.toString());
         } else {
             //trigger garbage collection and run the algorithm
             x10.lang.System.gc();
@@ -157,7 +170,7 @@ public class Bfs {
         }
     }
 
-    private static def runBenchmark(algo: BfsAlgorithm) : void {
+    private static def runBenchmark(algo: BfsAlgorithm) : Double{
         val nodeCount : Double = algo.getNodeCount() as Double;
         var results : Double = 0.0;
         for (var i:Int = 0; i < nodeCount; i++) {
@@ -168,7 +181,7 @@ public class Bfs {
                  x10.io.Console.OUT.flush();
             }
         }
-        print("Average speed: " + results);
+        return results;
     }
     private static def executeAndTime(algo: BfsAlgorithm, startNode: int) : Long {
         val startingTime : Long = System.currentTimeMillis();

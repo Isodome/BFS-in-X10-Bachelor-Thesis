@@ -51,7 +51,10 @@ public class BfsSerialList extends BfsAlgorithm {
 
         while(!current.isEmpty()) {
             for (vertex in current) {
-                for (to in adj(vertex)) {
+            	val currentList = adj(vertex);
+            	val currentSize = currentList.size();
+            	for (var i:Int = 0; i< currentSize; i++) {
+                	val to = currentList(i);
                     if (d(to) == INF) {
                         nexts.add(to);
                         d(to) = depth;

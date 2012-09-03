@@ -1,9 +1,9 @@
-CCDIR = ../../x10-2.2.2.2/bin/
+CCDIR = ../../x10-2.2.3/bin/
 CC=$(CCDIR)x10c++
 JCC=$(CCDIR)x10c 
 JSIM=$(CCDIR)x10
 BINARY=bfs_start
-TAGS= -O
+TAGS= -O -VERBOSE_CHECKS
 
 # FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
 FILES = $(wildcard *.x10) $(wildcard parser/*.x10) $(wildcard bfs/*.x10)

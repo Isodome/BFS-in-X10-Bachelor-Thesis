@@ -11,31 +11,61 @@ public class Bfs1DList extends BfsAlgorithm {
 
     private static val INF : Int = Bfs.INF;
     private var vertexCount: Int = 0;
-    private var adjacency : DistArray[ArrayList[Int]](1);
-
+    private var adjacency : DistArray[Array[ArrayList[Int]]](1);
+	private var arrayPartSize : Int;
 
 
     public def setVertexCount(n: Int) {
         this.vertexCount = n;
-        val dist : Dist(1) = Dist.makeBlock( (0..(n-1)), 0 /*0 -> only split along 0th axis */, PlaceGroup.WORLD);
-        adjacency = DistArray.make[ArrayList[Int]](dist, (i:Point) => new ArrayList[Int]());
+		var partSize : int = vertexCount / PlaceGroup.WORLD.size();
+        if (partSize * PlaceGroup.WORLD.size() < vertexCount) {
+            partSize++;
+        }
+        this.arrayPartSize = partSize;
+        
+        val a = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), null as Array[ArrayList[Int]]);
+
+		val constPartSize = partSize;
+        finish for (place in PlaceGroup.WORLD) async at (place) {
+			val minRowCoord = place.id * constPartSize;	
+			val maxRowCoord = x10.lang.Math.min(minRowCoord + constPartSize-1, n-1);
+
+			a(here.id) = new Array[ArrayList[Int]]( (minRowCoord..maxRowCoord), (p:Point) => new ArrayList[Int]());
+        }
+
+		adjacency = a;
+        
     }
 
     public def addEdge(from : Int, to : Int) {
         assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
-            async at (adjacency.dist(from)) {
-                atomic adjacency(from).add(to);
+        val targetPlace = PlaceGroup.WORLD(from/arrayPartSize);
+        if (targetPlace == here) {
+        	atomic adjacency(here.id)(from).add(to);
+        } else {
+            async at (targetPlace) {
+                atomic adjacency(here.id)(from).add(to);
             }
+        }
     }
 
     public def addEdge(from : Int, to : Array[Int]) {
-        at(adjacency.dist(from)) async {
-            atomic {
+     val targetPlace = PlaceGroup.WORLD(from/arrayPartSize);
+        if (targetPlace == here) {
+        	 atomic {
                 for (i in to) {
-                    adjacency(from).add(to(i));
+                    adjacency(here.id)(from).add(to(i));
                 }
             }
-        }
+        } else {
+			async at(targetPlace) {
+				atomic {
+					for (i in to) {
+						adjacency(here.id)(from).add(to(i));
+					}
+				}
+			}
+		}
     }
 
     public def checkStartNode(numberToCheck : Int) : boolean {
@@ -51,10 +81,14 @@ public class Bfs1DList extends BfsAlgorithm {
 
     public def run(start : Int) : Array[Int](1) { 
 
-        val d = DistArray.make[Int](adjacency.dist, INF);
+        val d = DistArray.make[Array[Int]](Dist.makeUnique(), null as Array[Int]);
+        finish for (place in PlaceGroup.WORLD) async at (place) {
+            val arrayFrom = this.arrayPartSize * place.id;
+            val arrayTo   = x10.lang.Math.min(arrayFrom + this.arrayPartSize-1, vertexCount - 1);
+            d(place.id) = new Array[Int]( arrayFrom..arrayTo, INF);
+        }
 
         val recBuffers : DistArray[Array[ArrayList[Int]]](1) = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](Place.places().size(), new ArrayList[Int]()));
-
 
         val result_local = new Array[Int]( vertexCount, INF);
         val resultRef = GlobalRef[Array[Int]](result_local);
@@ -65,9 +99,8 @@ public class Bfs1DList extends BfsAlgorithm {
         val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
         val team = new Team(isAt);
 
-
         finish {
-            for (place in d.dist.places()) async  at (place)  {
+            for (place in PlaceGroup.WORLD) async  at (place)  {
 
                 var done : Boolean = false;
                 var depth : Int = 1;
@@ -75,35 +108,37 @@ public class Bfs1DList extends BfsAlgorithm {
                 var current : ArrayList[Int] = new ArrayList[Int]();
                 val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
                 val sourcePlace = here.id;
-                if (d.dist(start) == here) {
-                    d(start) = 0;
+                if (start / arrayPartSize == here.id) {
+                    d(here.id)(start) = 0;
                     current.add(start);
                 }
-
 
                 while(!done) {
                     // Sort reachable vertices by owning place
                     for (from in current) {
-                        for (to in adj(from)) {
+            			val currentList = adj(here.id)(from);
+            			val currentSize = currentList.size();
+            			for (var i:Int = 0; i< currentSize; i++) {
+                			val to = currentList(i);
                             if (!dTemp(to)) {
-                                sendBuffer(d.dist(to).id).add(to);
+                                sendBuffer(to / arrayPartSize).add(to);
                                 dTemp(to) = true;
                             }
                         }
                     }
 
                     current.clear();
-                    finish for( targetPlace in d.dist.places()) async {
+                    finish for( targetPlace in PlaceGroup.WORLD) {
                         val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
                         if (!buffer.isEmpty()) {
                             if (targetPlace == here) {
                                 recBuffers(here.id)(here.id) = buffer;
                                 sendBuffer(here.id) = new ArrayList[Int]();
                             } else {
-                                at(targetPlace) {
-                                    recBuffers(here.id)(sourcePlace) = buffer;
-                                }
-                                buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
+								async at(targetPlace) {
+									recBuffers(here.id)(sourcePlace) = buffer;
+								}
+								buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
                             }
                         }
                     }
@@ -111,9 +146,12 @@ public class Bfs1DList extends BfsAlgorithm {
 
                     val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
                     for (iBuf in receiveBuffers) {
-                        for (vertex in receiveBuffers(iBuf)) {
-                            if (d(vertex) == INF) {
-                                d(vertex) = depth;
+                    	val curBuffer = receiveBuffers(iBuf);
+                    	val curBufSize = curBuffer.size();
+                    	for (var i:int = 0; i< curBufSize; i++) {
+                    		val vertex = curBuffer(i);
+                            if (d(here.id)(vertex) == INF) {
+                                d(here.id)(vertex) = depth;
                                 current.add(vertex);
                             }
                         }
@@ -126,10 +164,10 @@ public class Bfs1DList extends BfsAlgorithm {
                 }
 
                 // Copy place-local content of d in result array at place 0
-                val localPortion = d.getLocalPortion();
+                val localPortion = d(here.id);
                 finish at(resultRef) async {
                     val r :Array[Int] = resultRef();
-                    for (i : Point(1) in localPortion) {
+                    for (i in localPortion) {
                         r(i) = localPortion(i);
                     }
                 }

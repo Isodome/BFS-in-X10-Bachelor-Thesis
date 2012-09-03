@@ -1,6 +1,6 @@
 #!/bin/bash
-GRAPH="../../graphs/10ksparse.sgraph"
-RESULT="10ksparse.results"
+GRAPH="../../graphs/1ksparse.sgraph"
+RESULT="1ksparse.results"
 PLACES="1"
 
 rm $RESULT

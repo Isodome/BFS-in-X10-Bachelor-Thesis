@@ -31,6 +31,7 @@ public class Bfs {
         var startNode : int = 0;
         var stats : boolean = false;
         var benchmark : int = 0;
+        var runsList : ArrayList[Int] = null as ArrayList[Int];
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -74,6 +75,19 @@ public class Bfs {
                         printError("Benchmark must be at least 1"); 
                         return;
                     }
+                }
+
+            } else if (argument.equals("-runs")) {
+            	runsList = new ArrayList[Int]();
+            	while (args.region.contains(i+1)) {
+                    i++;
+                    try {
+                        val thisNode = Int.parse(args(i).trim());
+                        runsList.add(thisNode);
+                    } catch (nfe : NumberFormatException) {
+						i--; // reduce i for following arguments
+                    }
+                    
                 }
 
             } else {
@@ -155,6 +169,17 @@ public class Bfs {
                 list.add(runBenchmark(algo));
             }
             print("Results: " + list.toString());
+        } else if (runsList != null) {
+        	var average: Double =0;
+        	var min : Double = Double.MAX_VALUE;
+        	var max : Double = -Double.MAX_VALUE;
+        	for (initNode in runsList) {
+        		val time = executeAndTime(algo, initNode) as Double;
+				min = (time < min) ? time : min;        		
+				max = (time > max) ? time : max;
+				average += time / (runsList.size() as Double);
+        	}
+        	print("Average: " + average + " min: " + min + " max: " + max);
         } else {
             //trigger garbage collection and run the algorithm
             x10.lang.System.gc();

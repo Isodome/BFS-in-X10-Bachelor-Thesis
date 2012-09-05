@@ -115,11 +115,8 @@ public class Bfs2DListAlt extends BfsAlgorithm {
         finish {
             for (place in d.dist.places()) at (place) {
                 async {
-                    val f = new ArrayList[Int]();
-                    if (d.dist(start / this.arrayPartSize) == here) {
-                        d(here.id)(start) = 0;
-                        f.add(start);
-                    }
+					val dTemp = new Array[Boolean](vertexCount, false);
+                    
                     val sendBuf = new Array[ArrayList[Int]](grid.rows, (i:Int) => new ArrayList[Int]());
                     val sendBufGlobal =  new Array[ArrayList[Int]](grid.places().size(), (i:Int) => new ArrayList[int]());
                     var depth : Int = 0;
@@ -132,16 +129,18 @@ public class Bfs2DListAlt extends BfsAlgorithm {
 
                     //fTransposed(here.id) = new Array[Boolean]((colFrom..colTo), false);
                     var done :Boolean  = false;
+                    
+                    if (d.dist(start / this.arrayPartSize) == here) {
+                        d(here.id)(start) = 0;
+                        dTemp(start) = true;
+                        val rowNum = start / grid.rowSize;
+                        sendBuf(rowNum).add(start);
+                    }
                     team.barrier(here.id);
                     while (!done) {
                         depth++;
                         // Phase 1: Transpose f
 
-                        for (activeNode in f) {
-                            val rowNum = activeNode / grid.rowSize;
-                            sendBuf(rowNum).add(activeNode);
-                        }
-                        f.clear();
 
                         // Phase 2: communication
                         val sender = here.id;
@@ -170,7 +169,13 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             for (j in fTransLocal) {
                                 val curList : ArrayList[Int] = fTransLocal(j);
                                 for (i in curList) {
-                                    t_tmp(here.id).addAll(adj(here.id)(i));
+                                	for (to in adj(here.id)(i)) {
+                                		if (dTemp(to) == false) {
+                                			t_tmp(here.id).add(to);
+                                			dTemp(to) = true;
+                                		}
+                                	}
+                                    //t_tmp(here.id).addAll(adj(here.id)(i));
                                     async adj(here.id)(i).clear();
                                 }
                                 async curList.clear();
@@ -208,7 +213,8 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             for (item in t(here.id)(senderPlace)) {
                                 if(d(here.id)(item) == INF) {
                                     d(here.id)(item) = depth;
-                                    f.add(item);
+                                    val rowNum = item / grid.rowSize;
+                            		sendBuf(rowNum).add(item);;
                                     done = false;
                                 }
                             }

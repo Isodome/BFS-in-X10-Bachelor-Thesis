@@ -16,7 +16,7 @@ public class SGraphParser implements Parser {
 				val vertexCount = Int.parse(line.trim());
 				gs.setVertexCount(vertexCount);
 			} catch (nfe : NumberFormatException) {
-				throw new IOException();
+				throw new IOException("Set Vertex Count failed");
 			}
 			vertexCountRead = true;
 
@@ -47,7 +47,7 @@ public class SGraphParser implements Parser {
            
         } finally {
             if (!vertexCountRead) {
-				throw new IOException();
+				throw new IOException("Seems like vertex count hasn't been read");
 			}
 		}
 	}

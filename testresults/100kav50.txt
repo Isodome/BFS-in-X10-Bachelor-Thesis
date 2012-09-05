@@ -1,0 +1,66 @@
+Total Node Number: 100000
+Average Degree: 50.0
+Min Degree: 1
+Max Degree:481
+
+serious-mac:code domi$ ./run.sh ../../graphs/100kav50.sgraph 0
+
+1 Place
+Running simulation in serial_list mode, starting from node 0
+Calculation took 66 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 92 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x1 chosen (1 rows, 1 columns)
+Parsing complete, starting algorithm 
+Calculation took 219 ms
+
+2 Places
+Running simulation in serial_list mode, starting from node 0
+Calculation took 64 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 105 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x2 chosen (1 rows, 2 columns)
+Parsing complete, starting algorithm 
+Calculation took 231 ms
+
+4 Places
+Running simulation in serial_list mode, starting from node 0
+Calculation took 82 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 152 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x2 chosen (2 rows, 2 columns)
+Parsing complete, starting algorithm 
+Calculation took 255 ms
+
+6 Places
+Running simulation in serial_list mode, starting from node 0
+Calculation took 117 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 148 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x3 chosen (2 rows, 3 columns)
+Parsing complete, starting algorithm 
+Calculation took 314 ms
+
+8 Places
+Running simulation in serial_list mode, starting from node 0
+Calculation took 118 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 238 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x4 chosen (2 rows, 4 columns)
+Parsing complete, starting algorithm 
+Calculation took 502 ms
+
+9 Places
+Running simulation in serial_list mode, starting from node 0
+Calculation took 122 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 343 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+3x3 chosen (3 rows, 3 columns)
+Parsing complete, starting algorithm 
+Calculation took 589 ms

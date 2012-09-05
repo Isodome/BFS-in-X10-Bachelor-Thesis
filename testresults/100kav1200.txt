@@ -1,0 +1,67 @@
+Total Node Number: 100000
+Average Degree: 1161.95743
+Min Degree: 0
+Max Degree:1973
+
+1 Place
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 843 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 605 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x1 chosen (1 rows, 1 columns)
+Calculation took 1956 ms
+
+2 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 808 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 369 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x2 chosen (1 rows, 2 columns)
+Calculation took 1273 ms
+
+4 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 1025 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 269 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x2 chosen (2 rows, 2 columns)
+Calculation took 1033 ms
+
+6 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 1506 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 284 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x3 chosen (2 rows, 3 columns)
+Calculation took 1042 ms
+
+8 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 1650 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 359 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x4 chosen (2 rows, 4 columns)
+Calculation took 1159 ms
+
+9 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/100kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 1657 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 445 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+3x3 chosen (3 rows, 3 columns)
+Calculation took 1137 ms
+
+
+

@@ -1,0 +1,4 @@
+Total Node Number: 1000000
+Average Degree: 5.0
+Min Degree: 1
+Max Degree:999

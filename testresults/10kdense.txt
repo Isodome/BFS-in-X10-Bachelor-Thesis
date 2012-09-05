@@ -1,0 +1,64 @@
+Total Node Number: 10000
+Average Degree: 1125.5358
+Min Degree: 1000
+Max Degree:2835
+
+1 Place
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 65 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 57 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x1 chosen (1 rows, 1 columns)
+Calculation took 194 ms
+
+2 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 65 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 38 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x2 chosen (1 rows, 2 columns)
+Calculation took 115 ms
+
+4 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 71 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 36 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x2 chosen (2 rows, 2 columns)
+Calculation took 99 ms
+
+6 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 92 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 46 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x3 chosen (2 rows, 3 columns)
+Calculation took 110 ms
+
+8 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 112 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 75 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x4 chosen (2 rows, 4 columns)
+Calculation took 150 ms
+
+9 Places
+domi-pc:code domi$ perl sim.pl ../../graphs/10kdense.sgraph 0
+Running simulation in serial_list mode, starting from node 0 
+Calculation took 116 ms
+Running simulation in 1d_list mode, starting from node 0 
+Calculation took 126 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+3x3 chosen (3 rows, 3 columns)
+Calculation took 196 ms

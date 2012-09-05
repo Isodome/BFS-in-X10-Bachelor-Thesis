@@ -1,0 +1,43 @@
+
+ 1 Place 
+serial_list mode
+.Results: [0.11]
+serial_sparse mode
+.Results: [0.089]
+1d_list mode
+.Results: [0.647]
+2d_list_alt mode
+1x1 chosen (1 rows, 1 columns)
+.Results: [0.472]
+
+
+2 Place 
+1d_list mode
+.Results: [4.090999999999996]
+2d_list_alt mode
+1x2 chosen (1 rows, 2 columns)
+.Results: [1.499999999999985]
+
+
+4 Place 
+1d_list mode
+.Results: [17.452999999999975]
+2d_list_alt mode
+2x2 chosen (2 rows, 2 columns)
+.Results: [4.499999999999941]
+
+
+6 Place 
+1d_list mode
+.Results: [40.066999999999858]
+2d_list_alt mode
+2x3 chosen (2 rows, 3 columns)
+.Results: [8.965000000000053]
+
+
+8 Place 
+1d_list mode
+.Results: [120.305999999999756]
+2d_list_alt mode
+2x4 chosen (2 rows, 4 columns)
+.Results: [30.949999999999807]

@@ -85,8 +85,9 @@ Sobald der Algorithmus nach dem Start den Graph vollständig eingelesen hat und 
 	\item Die Menge an Knoten wird so unterteilt, dass jede PE ein gleichgroßen Teil bekommt. Wichtig ist, dass alle PEs, die auf dem selben Place liegen, benachbarte Intervalle der Knotenliste bekommen. Es wird entsprechend Platz für die Adjazenzlisten auf den Places reserviert. Alle Knoten, die zu einem Place gehören, gehören allen dortigen PEs gemeinsam. Um aufzulösen, welchem Place ein Knoten gehört, wird ein Array berechnet, dass für jede PE (in der Reihenfolge der Liste aus dem ersten Punkt) enthält auf welchem Place sie liegt. Um den Besitzer von Knoten k zu finden, muss so zur Laufzeit nur noch k durch die Anzahl an PEs geteilt werden. Das Ergebnis ist die Stelle der Placeliste, an der der besitzende Place steht.
 	\item Das Selbe muss für das DistArray passieren, dass die BFS-Distanzen halten soll.
 	\item Es wird pro Place für jeden anderen Place ein Empfangspuffer erstellt. Diese Empfangspuffer befinden sich in einem DistArray mit einer UniqueDist, das bedeutet, dass auf jedem Place genau ein Datum(=Array aus Puffern) liegt.
-	\item Es wird pro Place eine Liste für aktive Knoten erstellt.
+	\item Es werden pro Place genau soviele Listen für aktive Knoten erstellt, wie es aktive PEs auf diesem Place gibt.
 \end{itemize}
+
 
 % subsubsection dekomposition_und_datenhaltung (end)
 \subsubsection{Zweistufiges Infect und Indizierung} % (fold)
@@ -102,7 +103,39 @@ Wie die Kollaboration zwischen den einzelnen Places aussieht wurde bereits in Ka
 
 \subsection{Phase 1: Adjazente Knoten sortieren} % (fold)
 \label{sub:phase_1_invasive}
-Die Liste der aktiven Knoten ist einmal pro Place vorhanden. Sie ist als Arrayliste implementiert und ermöglicht somit schnellen Zugriff auf beliebige Elemente. In Phase 1 wird die Liste in gleichgroße Stücke aufgeteilt, so dass jede Activity auf dem Place ein Stück bekommt. Es steht pro Zielplace aber nur ein Sendpuffer zur Verfügung, in welchen alle ACtivities konkurrierend schreiben. Deswegen muss sichergestellt werden, dass der Zugriff auf jeden Buffer atomar passiert. Nach dieser Phase ist lediglich eine lokale Barriere nötig um sicherzustellen, dass alle Sendepuffer korrekt und vollständig geschrieben wurden. 
+Die Liste der aktiven Knoten für jede PE einmal vorhanden. Es handelt sich dabei um ein Array von Arraylisten, so dass der Zugriff auf ein beliebiges Element einer beliebigen Liste sehr schnell in konstanter Zeit geschehen kann. Zunächst zählt jedes PE zusammen, viewiele Elemente insgesamt in allen Listen liegen, also wieviele aktive Knoten es auf diesem Place gibt. Jedes PE rechnet sich nun aus, welcher Teil der aktiven Knoten, ihr zustehen. Zum Beispiel berechnet PE 0: 5 Elemente ab Index 0 und PE1 3 Elemente ab Index 5. Aus welchen Listen diese Elemente stammen ist zu diesem Zeitpunkt nicht bekannt. Es könnten zum Beispiel alle Elemente in der zweiten Liste liegen. Der Algorithmus, um über alle Elemente zu iterieren, ist in \ref{alg:iterate_active_nodes} beschrieben.
+
+\begin{algorithm}
+	\caption{Über mehrere Listen iterieren}
+	\label{alg:iterate_active_nodes}
+	\begin{algorithmic}[1]
+		\State var min : Int // Start Index of Region
+		\State var listIndex : Int = 0
+		\For{counter $\in$ length-1..0}
+
+			// Skip to the list containing the first element
+			\While{min $\le$ activeNodes(listIndex).size}
+				\State min -= activeNodes(listIndex).size
+				\State listIndex++;
+			\EndWhile
+
+			// calculate how many elements to take from current list
+			\State val upperBoundForThisList = min(current(listIndex).size(), min + counter);
+            \State val elementsTakenFromThisList = upperBoundForThisList - min;
+            \State counter -= elementsTakenFromThisList; // if counter < 0, the outer loop ends
+
+            \For{idx=min; idx < upperBoundForThisList; idx++}
+            	\State element = activeNodes(listIndex)(idx)
+            	\State // Do Stuff
+            \EndFor
+            \State min = activeNodes(listIndex).size() // The next element is from the next list
+
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+Es wird zu jeder Zeit durch den \textit{listIndex} die aktuell akive Liste gespeichert. Die erste while-Schleife springt solange zur nächsten Liste, bis der Index innerhalb der aktuellen Liste ist. Dazu wird in jeder Iteration die Größe der aktuellen Liste von Startindex abgezogen. Wenn der Startindex innerhalb der aktuellen Liste ist, wird while-Schleife verlassen. Danach wird ausgerechnet, wie lange Elemente aus der aktuellen Liste genommen werden. Wenn noch mehr Elemente gebraucht werden, als die Liste lang ist, dann ist die Obergrenze die Listengröße, ansonsten der Startindex + Anzahl an Elementen.
+
+Es steht pro Zielplace aber nur ein Sendpuffer zur Verfügung, in welchen alle Activities konkurrierend schreiben. Deswegen muss sichergestellt werden, dass der Zugriff auf jeden Buffer atomar passiert. Nach dieser Phase ist lediglich eine lokale Barriere nötig um sicherzustellen, dass alle Sendepuffer korrekt und vollständig geschrieben wurden. 
 % subsection phase_1 (end)
 
 \subsection{Phase 2: Kommunikation} % (fold)

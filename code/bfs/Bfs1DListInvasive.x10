@@ -22,7 +22,7 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
     private var sortedPlacesList : PlaceGroup;
 
     private var receiveBuffer : DistArray[Array[ArrayList[Int]]](1);
-    private var sendBuffer : DistArray[Array[ArrayList[Int]]];
+    private var sendBuffer : DistArray[Array[Array[ArrayList[Int]]]];
     private var current : DistArray[Array[ArrayList[Int]]];
     private var dTemp :DistArray[Array[Boolean]];
 
@@ -92,16 +92,19 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
 
     public def run(start : Int) : Array[Int](1) {
 
+        val numberOfPlaces = sortedPlacesList.size();
         //say("Bfs1DListInvasive::Run()");
         receiveBuffer = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](sortedPlacesList.size(), (i:Int)=> new ArrayList[Int]()));
-        sendBuffer    = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](sortedPlacesList.size(), (i:Int)=> new ArrayList[Int]()));
+        //sendBuffer    = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](sortedPlacesList.size(), (i:Int)=> new ArrayList[Int]()));
+        sendBuffer    = DistArray.make[Array[Array[ArrayList[Int]]]](Dist.makeUnique(), null as Array[Array[ArrayList[Int]]]);
         dTemp         = DistArray.make[Array[Boolean]](Dist.makeUnique(), (i:Point) =>  new Array[Boolean](vertexCount, false) );
 
         current       = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), null as Array[ArrayList[Int]] );
         //say("1");
         finish for(place in placeToPe.keySet()) {
             val pesOnThatPlace = placeToPe.getOrThrow(place).size();
-            async at(place) {        
+            async at(place) {
+                sendBuffer(here.id) = new Array[Array[ArrayList[Int]]](pesOnThatPlace, (i:Int) => new Array[ArrayList[Int]](numberOfPlaces, (i:Int)=> new ArrayList[Int]()) );
                 dTemp(here.id)(start) = true;
                 current(here.id) = new Array[ArrayList[Int]](pesOnThatPlace, (i:Int)=> new ArrayList[Int]());
                 if(bfsDistance.dist(start) == here) {
@@ -205,6 +208,7 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
     	val current = this.current(here.id);
     	val dTemp = this.dTemp(here.id);
     	val sendBuffer = this.sendBuffer(here.id);
+        val mySendBuffer = sendBuffer(localId);
     	val receiveBuffer : Array[ArrayList[Int]] = receiveBuffer(here.id);
 
         val invasiveDist : InvasiveBlockDist = this.bfsDistance.dist as InvasiveBlockDist;
@@ -231,7 +235,7 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
                     //say("reachable:" + to + " localid" + localId);
                     if (!dTemp(to)) {
                         val targetPlaceId =  invasiveDist.getSortedPlaceindexOfPoint(to);
-                        atomic sendBuffer(targetPlaceId).add(to);
+                        mySendBuffer(targetPlaceId).add(to);
                         dTemp(to) = true;
                         //say("added to " + targetPlaceId + " what means " + sortedPlacesList(targetPlaceId));
                     }
@@ -250,14 +254,20 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
         val sourcePlaceId = bfsDistance.dist.places().indexOf(sourcePlace);
         //say("phase2 ");
         finish for (var targetPlaceId: Int = localId; targetPlaceId < sortedPlacesList.size(); targetPlaceId+=localSum) {
-
-            val buffer : ArrayList[Int] = sendBuffer(targetPlaceId);
+            val buffer = sendBuffer(0)(targetPlaceId);
+            for (var j:Int = 1; j < localSum; j++) {
+                val curBuf = sendBuffer(j)(targetPlaceId);
+                if (!curBuf.isEmpty()) {
+                    buffer.addAll(curBuf);
+                    curBuf.clear();
+                }
+            }
             //say("I'll push " + buffer + " to " + targetPlaceId);
 
             if (!buffer.isEmpty()) {
                 if (targetPlaceId == sourcePlaceId) {
                     receiveBuffer(sourcePlaceId) = buffer;
-                    sendBuffer(targetPlaceId) = new ArrayList[Int]();
+                    sendBuffer(0)(targetPlaceId) = new ArrayList[Int]();
                     //say("Pushed " + buffer + " from " + sourcePlaceId + " to " + targetPlaceId);
                 } else {
                     val recBuffer = this.receiveBuffer; // prevent from using this-pointer in at()

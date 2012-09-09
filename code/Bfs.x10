@@ -1,4 +1,5 @@
 //import parser.Parser;
+import invasic.*;
 import parser.*;
 import bfs.*;
 import x10.util.*;
@@ -19,6 +20,7 @@ public class Bfs {
     public static val BFS_2D_MATRIX     : Int = 7;
     public static val BFS_2D_LIST       : Int = 8;
     public static val BFS_2D_LIST_ALT   : Int = 9;
+    public static val BFS_INVASIVE      : Int = 10;
     
     /**
      * The main method for the Hello class
@@ -31,7 +33,10 @@ public class Bfs {
         var startNode : int = 0;
         var stats : boolean = false;
         var benchmark : int = 0;
+        var algoritmName : String = "";
+        var quietMode : Boolean = false;
         var runsList : ArrayList[Int] = null as ArrayList[Int];
+        var pes : List[ProcessingElement] = null as List[ProcessingElement];
 
         var i : Int = args.region.minPoint()(0);
         while(args.region.contains(i)) {
@@ -41,7 +46,8 @@ public class Bfs {
             } else if (argument.equals("-alg")) {
                 if ( args.region.contains(i+1)){
                     i++;
-                    bfs = selectBFS(args(i));
+                    algoritmName = args(i).trim();
+                    bfs = selectBFS(algoritmName);
                 } else {
                     printError("No BFS-algorithm specified.");
                     return;
@@ -66,7 +72,9 @@ public class Bfs {
                 }
             } else if (argument.equals("-stats")) {  
                stats = true; 
-            } else if (argument.equals("-benchmark")) {
+            } else if (argument.equals("-q")) {  
+               quietMode = true; 
+            }else if (argument.equals("-benchmark")) {
               if (args.region.contains(i+1)) {
                     i++;
                     try {
@@ -90,6 +98,22 @@ public class Bfs {
                     
                 }
 
+            } else if (argument.startsWith("-pes")) {
+                pes = new ArrayList[ProcessingElement]();
+                val pesAsString = argument.substring(4).split(",");
+                for(val s in pesAsString) {
+                    try {
+                        val placeNumber = Int.parse(pesAsString(s));
+                        if (placeNumber >= PlaceGroup.WORLD.size()) {
+                            printError("Place " + placeNumber + " doesn't exist. Use $X10_NPLACES");
+                            return;
+                        }
+                        pes.add(new ProcessingElement(placeNumber));
+                    } catch (nfe : NumberFormatException) {
+                        printError("Ilegal Place number: " + pesAsString(s)); 
+                        return;
+                    }
+                }
             } else {
                 file = args(i);
             }
@@ -113,7 +137,10 @@ public class Bfs {
             printError("You must specify a graph file.");
             return;
         }
-
+        if ( !(new File(file)).exists() ) {
+            printError(file + " doesn't exist!");
+            return;
+        }
         /* 
          * Parsing done, start algorithm
 		 */
@@ -145,6 +172,12 @@ public class Bfs {
             algo = new Bfs2DList();  
         } else if (bfs == BFS_2D_LIST_ALT) {
             algo = new Bfs2DListAlt();
+        } else if (bfs == BFS_INVASIVE) {
+            if (pes == null) {
+                printError("Invasive mode chosen, but no pes specified!");
+                return;
+            }
+            algo = new Bfs1DListInvasive(pes);
         } else {
 			printError("Unknown algorithm.");
 			return;
@@ -183,11 +216,19 @@ public class Bfs {
         } else {
             //trigger garbage collection and run the algorithm
             x10.lang.System.gc();
-            x10.io.Console.OUT.println("Parsing complete, starting algorithm ");
+            if (!quietMode) {
+                x10.io.Console.OUT.println("Parsing complete, starting algorithm in " + algoritmName);
+            }
+            val timingsList = new ArrayList[Pair[Long, String]]();
             val startingTime : Long = System.currentTimeMillis();
-            val d : Array[Int](1) = algo.run(startNode);
+            val d : Array[Int](1) = algo.run(startNode, timingsList);
             val duration = System.currentTimeMillis() - startingTime;
-            x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
+            if (quietMode) {
+                print(algoritmName + ": " + duration + "ms");
+            } else {
+                x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
+            }
+            //print(timingsList);
             printOutput(d, resultFile);
             if (stats) {
                 printStats(d,resultFile); 
@@ -221,8 +262,9 @@ public class Bfs {
     }
 
     private static def printHelp() {
-        var s : String = "usage: bfs_start -alg <alg> -o <result> input \n" + 
-            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix, serial_list, serial_sparse, 1d_matrix]\n";
+        var s : String = "usage: bfs_start -alg <alg> [-pesN,M,...] -o <result> input \n" + 
+            "<alg>\t\tChoose the algorithm to use. Available:  [serial_matrix, serial_list, serial_sparse, 1d_matrix]\n" +
+            "<pes>\t\tSelect where the PEs should be. -pes0,0,1 creates 2 pes on place 0 and 1 on place 1.\n";     
         x10.io.Console.OUT.println(s);
     }
 
@@ -253,6 +295,8 @@ public class Bfs {
             return BFS_2D_LIST;
         } else if (trimmed.equals("2d_list_alt")) {
             return BFS_2D_LIST_ALT;  
+        } else if (trimmed.equals("invasive")) {
+            return BFS_INVASIVE;
         } else {
             return BFS_NONE;
         }
@@ -260,6 +304,11 @@ public class Bfs {
 
     private static def print(s:String) {
         x10.io.Console.OUT.println(s);
+    }
+    private static def print(list :List[Pair[Long,String]]) {
+        for (elem in list) {
+            print(elem.first.toString() + "ms - " + elem.second.toString());
+        }
     }
 
 

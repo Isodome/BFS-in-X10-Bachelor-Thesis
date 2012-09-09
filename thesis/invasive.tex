@@ -82,7 +82,7 @@ Sobald der Algorithmus nach dem Start den Graph vollständig eingelesen hat und 
 	\item Die Menge an Knoten wird so unterteilt, dass jede PE ein gleichgroßen Teil bekommt. Wichtig ist, dass alle PEs, die auf dem selben Place liegen, benachbarte Intervalle der Knotenliste bekommen. Es wird entsprechend Platz für die Adjazenzlisten auf den Places reserviert. Alle Knoten, die zu einem Place gehören, gehören allen dortigen PEs gemeinsam. Um aufzulösen, welchem Place ein Knoten gehört, wird ein Array berechnet, dass für jede PE (in der Reihenfolge der Liste aus dem ersten Punkt) enthält auf welchem Place sie liegt. Um den Besitzer von Knoten k zu finden, muss so zur Laufzeit nur noch k durch die Anzahl an PEs geteilt werden und das Ergebnis als Index für den Arrayzugriff verwendet werden. Das Ergebnis ist wiederum die Stelle der Placeliste, an der der besitzende Place steht.
 	\item Die selbe Initialisierung muss für das DistArray passieren, dass die BFS-Distanzen halten soll.
 	\item Es wird pro Place für jeden anderen Place ein Empfangspuffer erstellt. Diese Empfangspuffer befinden sich in einem DistArray mit einer UniqueDist, das bedeutet, dass auf jedem Place genau ein Datum(=Array aus Puffern) liegt.
-	\item Es wird pro Place eine Liste für aktive Knoten erstellt.
+	\item Es werden pro Place genau soviele Listen für aktive Knoten erstellt, wie es aktive PEs auf diesem Place gibt.
 \end{itemize}
 
 % subsubsection dekomposition_und_datenhaltung (end)
@@ -95,30 +95,65 @@ Ein weiterer Vorteil des zweistufigen Infects ist es, dass sehr einfach jeder Ak
 
 \subsection{Lokale Parallelität} % (fold)
 \label{sub:lokale_parallelit_t}
-Wie die Kollaboration zwischen den einzelnen Places aussieht wurde bereits in Kapitel \ref{sec:1d_partitionierung} beschrieben. Ein Place als ganzes verhält sich im invasiven Fall exakt gleich. Allerdings gibt es keine \enquote{Masteraktivity} pro Place, die Jobs verteilen kann und für die Synchronisation sorgt. Stattdessen werden mehrere gleichberechtigte Activities gestartet, die trotzdem auf den selben Daten arbeiten sollen. In diesem Abschnitt wird beschrieben, wie diese Zusammenarbeit gelöst wurde. Dazu werden die Phasen aus Kapitel \ref{sec:1d_partitionierung} aufgegriffen. Eine genaue Beschreibung der einzelnen Phasen findet sich auch dort und wird hier nicht wiederholt. Wichtig ist, dass jede Activity die Information hat, die wievielte von wie vielen sie auf diesem Place ist.
+Wie die Kollaboration zwischen den einzelnen Places aussieht wurde bereits in Kapitel \ref{sec:1d_partitionierung} beschrieben. Ein Place als ganzes Verhält sich im invasiven Fall exakt gleich. Allerdings gibt es keine \enquote{Masteraktivity} pro Place, die Jobs verteilen kann und für die Synchronisation sorgt. Stattdessen werden mehrere gleichberechtigte Activities gestartet, die trotzdem auf den selben Daten arbeiten sollen. In diesem Abschnitt wird beschrieben, wie diese Zusammenarbeit gelöst wurde. Dazu werden die Phasen aus Kapitel \ref{sec:1d_partitionierung} aufgegriffen. Eine genaue Beschreibung der einzelnen Phasen findet sich auch dort und wird hier nicht wiederholt. Wichtig ist, dass jede Activity die Information hat, die wievielte von wie vielen sie auf diesem Place ist.
+
+\subsection{Getrennte Puffer für aktive Knoten} % (fold)
+\label{sub:getrennte_puffer_f_r_aktive_knoten}
+In der hier gewählten Implementierung hält jede PE eine eigene Liste für aktive Knoten. Dadurch hat jede PE exlkusives Schreibrecht in die eigene Liste, was Synchronisation in Phase 3 einspart. Aus dem exklusiven Schreibrecht folgt sofort, dass in Phase 3 mindestens PE nichts zu tun hat, falls es mehr PEs auf ihrem Place gibt, als es insgesamt Places gibt. In diesem Fall ist den PEs mit einer zu hohen Id kein Empfangspuffer zum lesen zugeordnet.
+% subsection getrennte_puffer_f_r_aktive_knoten (end)
 
 \subsection{Phase 1: Adjazente Knoten sortieren} % (fold)
 \label{sub:phase_1_invasive}
-Die Liste der aktiven Knoten ist einmal pro Place vorhanden. Sie ist als Arrayliste implementiert und ermöglicht somit schnellen Zugriff auf beliebige Elemente. In Phase 1 wird die Liste in gleichgroße Stücke aufgeteilt, so dass jede Activity auf dem Place ein Stück bekommt. Damit die Aktivitäten sich nicht \enquote{absprechen} müssen, kann jede Aktivität für sich aus ihrem lokalen Index ihr Intervall der Liste berechnen. Die Liste wird in der Vorstellung in gleichgroße Teilstücke zerteilt, für jeder Aktivität eines. Die erste Aktivität nimmt sich das erste Teilstück usw. Dadurch können alle Aktivities ohne jegliche Synchronisation die selbe Datenstruktur lesen. Die Berechnung des Intervalls ist zudem sehr schnell.
+Die Liste der aktiven Knoten für jede PE einmal vorhanden. Es handelt sich dabei um ein Array von Arraylisten, so dass der Zugriff auf ein beliebiges Element einer beliebigen Liste sehr schnell in konstanter Zeit geschehen kann. Zunächst zählt jedes PE zusammen, viewiele Elemente insgesamt in allen Listen liegen, also wieviele aktive Knoten es auf diesem Place gibt. Jedes PE rechnet sich nun aus, welcher Teil der aktiven Knoten, ihr zustehen. Zum Beispiel berechnet PE 0: 5 Elemente ab Index 0 und PE1 3 Elemente ab Index 5. Aus welchen Listen diese Elemente stammen ist zu diesem Zeitpunkt nicht bekannt. Es könnten zum Beispiel alle Elemente in der zweiten Liste liegen. Der Algorithmus, um über alle Elemente zu iterieren, ist in \ref{alg:iterate_active_nodes} beschrieben.
 
-Es steht pro Zielplace aber nur ein Sendpuffer zur Verfügung, in welchen alle Activities konkurrierend schreiben. Deswegen muss sichergestellt werden, dass der Zugriff auf jeden Buffer atomar passiert. Nach dieser Phase ist lediglich eine lokale Barriere nötig, um sicherzustellen, dass alle Sendepuffer korrekt und vollständig geschrieben wurden. 
+\begin{algorithm}
+	\caption{Über mehrere Listen iterieren}
+	\label{alg:iterate_active_nodes}
+	\begin{algorithmic}[1]
+		\State var min : Int // Start Index of Region
+		\State var listIndex : Int = 0
+		\For{counter $\in$ length-1..0}
+
+			// Skip to the list containing the first element
+			\While{min $\le$ activeNodes(listIndex).size}
+				\State min -= activeNodes(listIndex).size
+				\State listIndex++;
+			\EndWhile
+
+			// calculate how many elements to take from current list
+			\State val upperBoundForThisList = min(current(listIndex).size(), min + counter);
+            \State val elementsTakenFromThisList = upperBoundForThisList - min;
+            \State counter -= elementsTakenFromThisList; // if counter < 0, the outer loop ends
+
+            \For{idx=min; idx < upperBoundForThisList; idx++}
+            	\State element = activeNodes(listIndex)(idx)
+            	\State // Do Stuff
+            \EndFor
+            \State min = activeNodes(listIndex).size() // The next element is from the next list
+
+		\EndFor
+	\end{algorithmic}
+\end{algorithm}
+Es wird zu jeder Zeit durch den \textit{listIndex} die aktuell akive Liste gespeichert. Die erste while-Schleife springt solange zur nächsten Liste, bis der Index innerhalb der aktuellen Liste ist. Dazu wird in jeder Iteration die Größe der aktuellen Liste von Startindex abgezogen. Wenn der Startindex innerhalb der aktuellen Liste ist, wird while-Schleife verlassen. Danach wird ausgerechnet, wie lange Elemente aus der aktuellen Liste genommen werden. Wenn noch mehr Elemente gebraucht werden, als die Liste lang ist, dann ist die Obergrenze die Listengröße, ansonsten der Startindex + Anzahl an Elementen.
+
+Diese Implementierung gönnt sich pro PE ein Set von Sendepuffern. Ein Set von Sendepuffern besteht aus einem Sendepuffer pro beteiligtem Place. Es gibt also auf Place k $p * c_k$ Sendepuffer, wobei p die Anzahl der Places und $c_k$ die Anzahl an PEs auf Place k ist. Nach dieser Phase ist lediglich eine lokale Barriere nötig um sicherzustellen, dass alle Sendepuffer korrekt und vollständig geschrieben wurden. 
 % subsection phase_1 (end)
 
 \subsection{Phase 2: Kommunikation} % (fold)
 \label{sub:parallel_phase_2_invasive}
-In Phase 2 werden die Sendepuffer gesendet. Eine Aktivität ist für einen Sendepuffer genau dann zuständig, wenn die ID des Ziels modulo der Anzahl an Activities auf diesem Place der lokalen ID dieser Aktivität entspricht. Ansonsten ist hier nichts anzupassen. Nach dem Senden wird eine globale Barriere benötigt, damit alle Empfangspuffer korrekt geschrieben wurden, bevor diese ausgewertet werden.
+In Phase 2 werden die Sendepuffer gesendet. Eine Aktivität ist für das Senden zu einem anderen Place genau dann zuständig, wenn die ID des Ziels modulo der Anzahl an Activities auf diesem Place der lokalen ID dieser Aktivität entspricht. Ist eine Aktivität für das Senden zu einem Place verantworlich, kopiert sie den Inhalt der $c_k$ Sendepuffer aller PEs auf diesem Place in einen Puffer, den sie dann auf den Zielplace schiebt. Ansonsten ist in dieser Phase nichts anzupassen. Nach dem Senden wird eine globale Barriere benötigt, damit alle Empfangspuffer korrekt geschrieben wurden, bevor diese ausgewertet werden.
 % subsection phase_2 (end)
 
 \subsection{Phase 3: BFS-Distanz aktualisieren} % (fold)
 \label{sub:phase_3_invasive}
-Wie in Phase 2 liest eine Activity genau dann einen Empfangspuffer, wenn die ID des Senders modulo Anzahl an Activities auf diesem Place die lokale ID der Activity ergibt. Diese Aufteilung der Arbeit entspricht nicht gezwungenermaßen einer gleichmäßigen Aufteilung der Arbeit, da die Größe der Puffer nicht betrachtet werden. Der Vorteil ist aber, dass keine Synchronisation nötig ist. Einzig die Liste der aktiven Knoten für die nächste Iteration muss atomar geschrieben werden.
+Wie in Phase 2 liest eine Activity genau dann einen Empfangspuffer, wenn die ID des Senders modulo Anzahl an Activities auf diesem Place die lokale ID der Activity ergibt. Diese Aufteilung der Arbeit entspricht nicht unbedingt einer gleichmäßigen Aufteilung der Arbeit, geht aber fast ohne Synchronisation. Einzig die Liste der aktiven Knoten für die nächste Iteration muss atomar geschrieben werden.
 % subsection phase_3 (end)
 
-% subsubsection lokale_parallelit_t (end)
+% subsection lokale_parallelit_t (end)
 \subsection{Allreduce} % (fold)
-\label{ssub:allreduce_invasive}
+\label{sub:allreduce_invasive}
 Das Allreduce ist im invasiven Fall insofern nicht mehr nötig, als dass es keine All-to-All Operation mehr ist. Es wird ohnehin nach jeder BFS-Iteration zunächst die Berechnung gestoppt und nur falls eine weitere Iteration nötig ist erneut ein \textit{infect} aufgerufen. Das Ergebnis der aktuellen Iteration schreiben alle Activities in ein Array, das Anfangs erstellt wird und dass eine Zelle für jede Activity bereithält. Um das Array zu adressieren, wird jeder Activity eine GlobalRef übergeben. Die Master-Activity reduziert dieses Array dann lokal um festzustellen, ob der Algorithmus fertig ist. Falls nicht, wird eine weitere Iteration gestartet.
-% subsubsection allreduce (end)
+% subsection allreduce (end)
 % subsection ablauf_des_algorithmus (end)
 
 % chapter breitensuche_im_invasiven_kontext (end)

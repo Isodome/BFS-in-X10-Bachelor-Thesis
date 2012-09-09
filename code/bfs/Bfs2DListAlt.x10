@@ -43,33 +43,35 @@ public class Bfs2DListAlt extends BfsAlgorithm {
     }
 
     public def addEdge(from : Int, to : Int) {
-        async {
-            assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
-                assert (from >= 0 && to >=0) : "Vertex out of range";
-                    val p : Place = grid(from,to);
-                    if (p == here) {
-                        atomic adj(here.id)(from).add(to);
-                    } else {
-                        at(p) {
-                            atomic adj(p.id)(from).add(to);
-                        }
-                    }
-        }
+		assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
+		assert (from >= 0 && to >=0) : "Vertex out of range";
+		val p : Place = grid(from,to);
+		if (p == here) {
+			atomic adj(here.id)(from).add(to);
+		} else {
+			async at(p) {
+				atomic adj(p.id)(from).add(to);
+			}
+		}
+
     }
 
     public def addEdge(from : Int, to : Array[Int]) {
-        async {
-            val rows = grid.getPlacesForRow(from / grid.rowSize);
-            val buffer = new Array[ArrayList[Int]](rows.size(), (i:Int)=> new ArrayList[Int]());
-            for (i in to) {
-                buffer(to(i) / grid.colSize).add(to(i));
-            }
-            for (i in buffer) async at (rows(i(0))) {
-                for (j in buffer(i)) {
-                    addEdge(from, j);
-                }
-            }
-        }
+
+		val rows = grid.getPlacesForRow(from / grid.rowSize);
+		val buffer = new Array[ArrayList[Int]](rows.size(), (i:Int)=> new ArrayList[Int]());
+		for (i in to) {
+			buffer(to(i) / grid.colSize).add(to(i));
+		}
+		for (i in buffer) {
+			if (!buffer(i).isEmpty()) {
+				async at (rows(i(0))) {
+					for (j in buffer(i)) {
+						addEdge(from, j);
+					}
+				}
+			}
+		}
     }
     public def getNodeCount() : Int {
         return vertexCount; 
@@ -112,6 +114,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
 
         val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
         val team = new Team(isAt);
+        //addTiminig("Global init done");
         finish {
             for (place in d.dist.places()) at (place) {
                 async {
@@ -136,7 +139,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                         val rowNum = start / grid.rowSize;
                         sendBuf(rowNum).add(start);
                     }
-                    team.barrier(here.id);
+                    //addTiminig("Local init done");
                     while (!done) {
                         depth++;
                         // Phase 1: Transpose f
@@ -161,6 +164,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             }
                             buffer.clear();
                         }
+                        //addTiminig("Iteration " + depth + " Communication 1");
 
                         team.barrier(here.id);
                         // phase 3 and 4: Local Matrix multiplication
@@ -176,12 +180,13 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                                 		}
                                 	}
                                     //t_tmp(here.id).addAll(adj(here.id)(i));
-                                    async adj(here.id)(i).clear();
+                                    adj(here.id)(i).clear();
                                 }
-                                async curList.clear();
+                                curList.clear();
                             }
                         }
 
+                        //addTiminig("Iteration " + depth + " multiply");
 
                         //Phase 5: merge information per row
                         for (item in t_tmp(here.id)) {
@@ -206,6 +211,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             }
                         }
                         team.barrier(here.id);
+                        //addTiminig("Iteration " + depth + " Kommunikation2");
 
                         //Phase 4: update d locally
                         done = true;
@@ -220,8 +226,11 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             }
                             t(here.id)(senderPlace).clear();
                         }
+                        //addTiminig("Iteration " + depth + " Update");
+
                         val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
                         done = (res == 1);
+                        //addTiminig("Iteration " + depth + " allreduce");
                     }
 
                     // Copy local content of d in result array at place 0
@@ -232,7 +241,10 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             r(i) = localPortion(i);
                         }
                     }
+
+
                 }}}
+        //addTiminig("Copy back and finish");
 
         return result_local;
     }

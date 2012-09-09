@@ -3,14 +3,14 @@ CC=$(CCDIR)x10c++
 JCC=$(CCDIR)x10c 
 JSIM=$(CCDIR)x10
 BINARY=bfs_start
-TAGS= -O -VERBOSE_CHECKS
+FLAGS= -O -VERBOSE_CHECKS
 
 # FILES = Bfs.x10 parser/Graph.x10 parser/GraphStructure.x10 bfs/BfsSerial.x10 bfs/IBfs.x10
-FILES = $(wildcard *.x10) $(wildcard parser/*.x10) $(wildcard bfs/*.x10)
+FILES = $(wildcard *.x10) $(wildcard parser/*.x10) $(wildcard bfs/*.x10) $(wildcard invasic/*.x10) $(wildcard x10/array/*.x10)
 
 # c++ Regeln
 $(BINARY): $(FILES)
-	$(CC) $(TAGS) Bfs.x10 -o $(BINARY)
+	$(CC) $(FLAGS) Bfs.x10 -o $(BINARY)
 
 .PHONY: cpp 
 cpp: $(BINARY)

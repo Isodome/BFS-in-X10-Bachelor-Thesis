@@ -1,7 +1,7 @@
 use strict;
 use Term::ANSIColor qw(:constants);
 use File::Basename;
-my @modes = qw(serial_list 1d_list 2d_list_alt invasive);
+my @modes = qw(serial_list 1d_list 2d_list_alt);
 
 my $bfs = "./bfs_start";
 my $resultFolder = "simresults";

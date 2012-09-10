@@ -7,10 +7,11 @@ public class SGraphParser implements Parser {
 	public def fillGraphInDataStructure (gs : parser.GraphStructure, filename :String) : void {
 
 		var vertexCountRead : Boolean = false;
-
+		var reader : FileReader = null as FileReader;
 		try {
 			// read first line and take value as vertexcount
-			val reader = IOHelper.getFileReader(filename);
+			reader = IOHelper.getFileReader(filename);
+
 			var line : String = reader.readLine();
 			try{
 				val vertexCount = Int.parse(line.trim());
@@ -19,7 +20,6 @@ public class SGraphParser implements Parser {
 				throw new IOException("Set Vertex Count failed");
 			}
 			vertexCountRead = true;
-
 			// Read Edges
 
 			while(true) {
@@ -48,6 +48,9 @@ public class SGraphParser implements Parser {
         } finally {
             if (!vertexCountRead) {
 				throw new IOException("Seems like vertex count hasn't been read");
+			}
+			if (reader != null) {
+				reader.close();
 			}
 		}
 	}

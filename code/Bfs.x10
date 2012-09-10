@@ -22,6 +22,7 @@ public class Bfs {
     public static val BFS_2D_LIST_ALT   : Int = 9;
     public static val BFS_INVASIVE      : Int = 10;
     
+    private static val quietMode = new Cell[Boolean](false);
     /**
      * The main method for the Hello class
      */
@@ -34,7 +35,6 @@ public class Bfs {
         var stats : boolean = false;
         var benchmark : int = 0;
         var algoritmName : String = "";
-        var quietMode : Boolean = false;
         var runsList : ArrayList[Int] = null as ArrayList[Int];
         var pes : List[ProcessingElement] = null as List[ProcessingElement];
 
@@ -73,7 +73,7 @@ public class Bfs {
             } else if (argument.equals("-stats")) {  
                stats = true; 
             } else if (argument.equals("-q")) {  
-               quietMode = true; 
+               quietMode() = true; 
             }else if (argument.equals("-benchmark")) {
               if (args.region.contains(i+1)) {
                     i++;
@@ -216,18 +216,15 @@ public class Bfs {
         } else {
             //trigger garbage collection and run the algorithm
             x10.lang.System.gc();
-            if (!quietMode) {
-                x10.io.Console.OUT.println("Parsing complete, starting algorithm in " + algoritmName);
-            }
+            print("Parsing complete, starting algorithm in " + algoritmName);
             val timingsList = new ArrayList[Pair[Long, String]]();
             val startingTime : Long = System.currentTimeMillis();
             val d : Array[Int](1) = algo.run(startNode, timingsList);
             val duration = System.currentTimeMillis() - startingTime;
-            if (quietMode) {
-                print(algoritmName + ": " + duration + "ms");
-            } else {
-                x10.io.Console.OUT.println("Calculation took " + duration + " ms"); 
+            if (quietMode()) {
+                x10.io.Console.OUT.print(duration);
             }
+            print("Calculation took " + duration + " ms"); 
             //print(timingsList);
             printOutput(d, resultFile);
             if (stats) {
@@ -270,7 +267,7 @@ public class Bfs {
 
 
     private static def printError(s : String) {
-        x10.io.Console.OUT.println("ERROR! " + s + "\n");
+        print("ERROR! " + s + "\n");
         printHelp();
         x10.lang.System.setExitCode(1);
     }
@@ -303,7 +300,9 @@ public class Bfs {
     }
 
     private static def print(s:String) {
-        x10.io.Console.OUT.println(s);
+        if (!quietMode()) {
+            x10.io.Console.OUT.println(s);
+        }    
     }
     private static def print(list :List[Pair[Long,String]]) {
         for (elem in list) {

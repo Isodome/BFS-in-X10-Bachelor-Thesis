@@ -146,7 +146,7 @@ In Phase 2 werden die Sendepuffer gesendet. Eine Aktivität ist für das Senden 
 
 \subsection{Phase 3: BFS-Distanz aktualisieren} % (fold)
 \label{sub:phase_3_invasive}
-Wie in Phase 2 liest eine Activity genau dann einen Empfangspuffer, wenn die ID des Senders modulo Anzahl an Activities auf diesem Place die lokale ID der Activity ergibt. Diese Aufteilung der Arbeit entspricht nicht unbedingt einer gleichmäßigen Aufteilung der Arbeit, geht aber fast ohne Synchronisation. Einzig die Liste der aktiven Knoten für die nächste Iteration muss atomar geschrieben werden.
+Wie in Phase 2 liest eine Activity genau dann einen Empfangspuffer, wenn die ID des Senders modulo Anzahl an Activities auf diesem Place die lokale ID der Activity ergibt. Diese Aufteilung der Arbeit entspricht nicht unbedingt einer gleichmäßigen Aufteilung der Arbeit, dafür geht es aber ohne Synchronisation.
 % subsection phase_3 (end)
 
 % subsection lokale_parallelit_t (end)

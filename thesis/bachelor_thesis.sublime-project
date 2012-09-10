@@ -25,6 +25,7 @@
 				"*.toc",
 				"*.bbl",
 				"*.blg",
+				"*.fls",
 				"thesis",
 				"*.synctex.gz",
 				"*fdb_latexmk"

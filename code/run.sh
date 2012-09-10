@@ -1,25 +1,54 @@
 #!/bin/bash
 
-echo "1 Place"
+GRAPHFILE=$1
+
+echo  ",1 Place,2 Places,4 Places,8 Places,9 Places"
+echo -n "Seriell,"
+
+
 export X10_NPLACES=1
-perl sim.pl $1 $2 -q
+echo -n `./bfs_start -alg serial_list  -q $GRAPHFILE`
+echo  ",,,,"
 
-echo "2 Places"
+
+
+export X10_NPLACES=1
+echo -n "1D,"
+./bfs_start -alg 1d_list  -q $GRAPHFILE
+echo -n ","
+
 export X10_NPLACES=2
-perl sim.pl $1 $2 -q
+./bfs_start -alg 1d_list  -q $GRAPHFILE
+echo -n ","
 
-echo "4 Places"
 export X10_NPLACES=4
-perl sim.pl $1 $2 -q
+./bfs_start -alg 1d_list -q $GRAPHFILE
+echo -n ","
 
-echo "6 Places"
-export X10_NPLACES=6
-perl sim.pl $1 $2 -q
+# export X10_NPLACES=6
+# ./bfs_start -alg 1d_list  -q $GRAPHFILE
+# echo -n ","
 
-echo "8 Places"
 export X10_NPLACES=8
-perl sim.pl $1 $2 -q
+./bfs_start -alg 1d_list  -q $GRAPHFILE
 
-echo "9 Places"
-export X10_NPLACES=9
-perl sim.pl $1 $2 -q
+
+export X10_NPLACES=1
+echo -n -e "\n2D,"
+./bfs_start -alg 2d_list  -q $GRAPHFILE
+echo -n ","
+
+export X10_NPLACES=2
+./bfs_start -alg 2d_list  -q $GRAPHFILE
+echo -n ","
+
+export X10_NPLACES=4
+./bfs_start -alg 2d_list  -q $GRAPHFILE
+echo -n ","
+
+# export X10_NPLACES=6
+# ./bfs_start -alg 2d_list  -q $GRAPHFILE
+# echo -n ","
+
+export X10_NPLACES=8
+./bfs_start -alg 1d_list  -q $GRAPHFILE

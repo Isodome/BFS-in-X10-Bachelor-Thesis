@@ -71,7 +71,7 @@ public class Grid {
 
     public static def make (pg: PlaceGroup, n: int) {
         val rows = findRowCount(pg.size());
-        Console.OUT.println(rows + "x"+ pg.size()/rows + " chosen (" + rows + " rows, " + pg.size()/rows + " columns)");
+        //Console.OUT.println(rows + "x"+ pg.size()/rows + " chosen (" + rows + " rows, " + pg.size()/rows + " columns)");
         return make(rows, pg.size()/rows, pg, n);
     }
 

@@ -93,9 +93,8 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
     public def run(start : Int) : Array[Int](1) {
 
         val numberOfPlaces = sortedPlacesList.size();
-        //say("Bfs1DListInvasive::Run()");
+
         receiveBuffer = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](sortedPlacesList.size(), (i:Int)=> new ArrayList[Int]()));
-        //sendBuffer    = DistArray.make[Array[ArrayList[Int]]](Dist.makeUnique(), new Array[ArrayList[Int]](sortedPlacesList.size(), (i:Int)=> new ArrayList[Int]()));
         sendBuffer    = DistArray.make[Array[Array[ArrayList[Int]]]](Dist.makeUnique(), null as Array[Array[ArrayList[Int]]]);
         dTemp         = DistArray.make[Array[Boolean]](Dist.makeUnique(), (i:Point) =>  new Array[Boolean](vertexCount, false) );
 
@@ -123,10 +122,9 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
         while (!done) {
         	done = infect();
         	currentBfsDepth++;
-            //say("3," + currentBfsDepth + " done:" + done);
 
         }
-        //say("Algo done");
+
         // Copy place-local content of d in result array at place 0
         finish for (place in bfsDistance.dist.places()) async at(place) {
         	val localPortion = this.bfsDistance.getLocalPortion();

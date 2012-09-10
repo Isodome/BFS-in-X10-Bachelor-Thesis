@@ -43,34 +43,24 @@ public class Bfs2DList extends BfsAlgorithm {
     }
 
     public def addEdge(from : Int, to : Int) {
-        async {
-            assert (from < vertexCount && to < vertexCount) : "Vertex out of range";
-                assert (from >= 0 && to >=0) : "Vertex out of range";
-                    val p : Place = grid(to,from);
-                    if (p == here) {
-                        atomic adj(here.id)(to).add(from);
-                    } else {
-                        at(p) {
-                            atomic adj(p.id)(to).add(from);
-                        }
-                    }
+        val p : Place = grid(to,from);
+        if (p == here) {
+            atomic adj(here.id)(to).add(from);
+        } else {
+            at(p) {
+                atomic adj(p.id)(to).add(from);
+            }
         }
     }
 
     public def addEdge(from : Int, to : Array[Int]) {
         async {
-            val cols = grid.getPlacesForColumn(from / grid.colSize);
-            val buffer = new Array[ArrayList[Int]](cols.size(), (i:Int)=> new ArrayList[Int]());
-            for (i in to) {
-                buffer(to(i) / grid.colSize).add(to(i));
-            }
-            for (i in buffer) async at (cols(i(0))) {
-                for (j in buffer(i)) {
-                    addEdge(from, j);
-                }
-            }
+           for (i in to) {
+                addEdge(from, to(i));
+           }
         }
     }
+    
     public def getNodeCount() : Int {
         return vertexCount; 
     }

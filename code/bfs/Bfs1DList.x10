@@ -98,7 +98,7 @@ public class Bfs1DList extends BfsAlgorithm {
         /*delete the following when clocks are finally working */
         val isAt = new Array[Place](Place.places().size(), (i:Int) => new Place(i));
         val team = new Team(isAt);
-        addTiminig("Global init done");
+        //addTiminig("Global init done");
         finish {
             for (place in PlaceGroup.WORLD) async  at (place)  {
 
@@ -112,7 +112,7 @@ public class Bfs1DList extends BfsAlgorithm {
                     d(here.id)(start) = 0;
                     current.add(start);
                 }
-                addTiminig("Local init done");
+                //addTiminig("Local init done");
 
                 while(!done) {
                     // Sort reachable vertices by owning place
@@ -127,7 +127,7 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                         }
                     }
-                    addTiminig("Iteration " + depth + " Sorting");
+                    //addTiminig("Iteration " + depth + " Sorting");
                     current.clear();
                     finish for( targetPlace in PlaceGroup.WORLD) {
                         val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
@@ -145,7 +145,7 @@ public class Bfs1DList extends BfsAlgorithm {
                     }
 
                     team.barrier(here.id);
-                    addTiminig("Iteration " + depth + " Communication");
+                    //addTiminig("Iteration " + depth + " Communication");
                     val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
                     for (iBuf in receiveBuffers) {
                     	val curBuffer = receiveBuffers(iBuf);
@@ -158,12 +158,12 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                         }
                     }
-                    addTiminig("Iteration " + depth + " update");
+                    //addTiminig("Iteration " + depth + " update");
                     done = current.size() == 0;
                     val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
                     done = (res == 1);
 
-                    addTiminig("Iteration " + depth + " allreduce");
+                    //addTiminig("Iteration " + depth + " allreduce");
                     depth++;
                 }
 
@@ -178,7 +178,7 @@ public class Bfs1DList extends BfsAlgorithm {
                 
 
             }}
-        addTiminig("Copy back and finish");
+        //addTiminig("Copy back and finish");
         return result_local;
     }
 

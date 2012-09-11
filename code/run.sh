@@ -2,7 +2,7 @@
 
 GRAPHFILE=$1
 
-echo  ",1 Place,2 Places,4 Places,8 Places,9 Places"
+echo  ",1 Place,2 Places,4 Places,8 Places"
 echo -n "Seriell,"
 
 

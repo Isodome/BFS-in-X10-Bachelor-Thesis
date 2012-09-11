@@ -1,5 +1,7 @@
 CCDIR = ../../x10-2.2.3/bin/
 CC=$(CCDIR)x10c++
+CC_LEGACY_DIR=../../x10-2.2.2.2/bin/
+CC_LEGACY=$(CC_LEGACY_DIR)x10c++
 JCC=$(CCDIR)x10c 
 JSIM=$(CCDIR)x10
 BINARY=bfs_start
@@ -14,6 +16,10 @@ $(BINARY): $(FILES)
 
 .PHONY: cpp 
 cpp: $(BINARY)
+
+.PHONY: legacy
+legacy: $(FILES)
+	$(CC_LEGACY) $(FLAGS) Bfs.x10 -o $(BINARY)
 
 .PHONY: csim
 csim: $(BINARY)

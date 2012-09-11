@@ -52,3 +52,5 @@ echo -n ","
 
 export X10_NPLACES=8
 ./bfs_start -alg 1d_list  -q $GRAPHFILE
+
+echo -e "\n,,,,"

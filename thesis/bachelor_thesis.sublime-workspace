@@ -44,28 +44,32 @@
 	"buffers":
 	[
 		{
-			"file": "introduction.tex",
+			"file": "evaluation.tex",
 			"settings":
 			{
-				"buffer_size": 3143,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "parallel.tex",
-			"settings":
-			{
-				"buffer_size": 24922,
-				"line_ending": "Unix"
+				"buffer_size": 4608,
+				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 107.0,
+		"height": 47.0,
 		"selected_items":
 		[
+			[
+				"git statu",
+				"Git: Status"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"scala",
+				"Set Syntax: Scala"
+			],
 			[
 				"show",
 				"Show TODOs: Project and open files"
@@ -73,10 +77,6 @@
 			[
 				":w",
 				":w - Save"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"todo",
@@ -188,27 +188,30 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/dominic/Downloads/10.SEP.HQ MIXX and more elsee/10.SEP.HQ MIXX and more else.txt",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Volumes/SL/Users/domi/Documents/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/code/bfs/Bfs1DListInvasive.x10",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/workspace/WikiProcessing/wiki_first_backwards.sgraph",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Makefile",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-workspace",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
 		"/Users/dominic/Downloads/wodiejvmist.txt",
 		"/Users/dominic/.ssh/id_rsa.pub",
 		"/Users/dominic/Downloads/x10-2.2.2.2-src/TESTING",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.pdf",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/dominic/Desktop/KIT HTML.pdf",
 		"/Users/dominic/Desktop/Kontrollansicht.pdf",
@@ -263,9 +266,26 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"_",
+			"ausgestatt",
+			"taktet",
+			"evaluation",
+			"evaluation.tex",
+			"fast",
+			"Place",
+			"zu ",
+			"zu",
+			"liegt",
+			"mdit",
+			"ablauf_des",
+			"ssub:asymmetrie_der_rechenleistung",
+			"sub:unterschiede_zum_nicht_invasiven_fall",
+			"viele",
+			"läuft",
+			"menge frei",
 			"man",
 			"benötigt",
 			"Prozess",
@@ -383,22 +403,23 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "introduction.tex",
+					"file": "evaluation.tex",
 					"settings":
 					{
-						"buffer_size": 3143,
+						"buffer_size": 4608,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1446,
-								1446
+								4531,
+								4531
 							]
 						],
 						"settings":
@@ -407,35 +428,7 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 111.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "parallel.tex",
-					"settings":
-					{
-						"buffer_size": 24922,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								13851,
-								13851
-							]
-						],
-						"settings":
-						{
-							"spell_check": true,
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3642.0,
+						"translation.y": 498.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -493,6 +486,34 @@
 		"selected_items":
 		[
 			[
+				"eval",
+				"evaluation.tex"
+			],
+			[
+				"eva",
+				"evaluation.tex"
+			],
+			[
+				"conl",
+				"conclusion.tex"
+			],
+			[
+				"con",
+				"content.tex"
+			],
+			[
+				"para",
+				"parallel.tex"
+			],
+			[
+				"invasi",
+				"invasive.tex"
+			],
+			[
+				"inva",
+				"invasive.tex"
+			],
+			[
 				"parall",
 				"parallel.tex"
 			],
@@ -503,10 +524,6 @@
 			[
 				"introdu",
 				"introduction.tex"
-			],
-			[
-				"inva",
-				"invasive.tex"
 			],
 			[
 				"asic",
@@ -526,10 +543,6 @@
 			],
 			[
 				"pe",
-				"parallel.tex"
-			],
-			[
-				"para",
 				"parallel.tex"
 			],
 			[
@@ -559,10 +572,6 @@
 			[
 				"make",
 				"Makefile"
-			],
-			[
-				"con",
-				"content.tex"
 			],
 			[
 				"se",

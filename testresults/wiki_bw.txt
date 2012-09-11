@@ -1,0 +1,4 @@
+Total Node Number: 2293645
+Average Degree: 0.9797261564017099
+Min Degree: 0
+Max Degree:32631

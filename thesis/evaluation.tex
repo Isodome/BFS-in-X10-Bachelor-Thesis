@@ -1,39 +1,43 @@
+%!TEX root = thesis.tex
 
+\chapter{Methoden} % (fold)
+\label{cha:methoden}
 
+\section{Graphen} % (fold)
+\label{sec:graphen}
+Da die Breitensuche ein asymptotisch relativ schneller Algorithmus ist, sind relativ große Testgraphen nötig, um einigermaßen aussagekräftige Ergebnisse zu produzieren. Für diese Arbeit wurden Graphen in der Größenordnung von 100 000 Knoten gewählt. Diese wiederum relativ kleine Ausdehnung wurde gewählt, da der Testmodus beinhaltet, dass bei gleichbleibender Knotenanzahl die Dichte des Graphen variiert. Sehr dicht besiedelte Graphen mit 100 000 Knoten passen gerade noch in den Arbeitsspeicher. Würde noch größere Graphen verwendet, müsste entweder die Dichte des Graphen beschränkt werden oder das Betriebssysteme müsste Daten auslagern, was die Messergebnisse unbrauchbar machen würde. 
 
+Es wurde ein Tool namens graph-generator \cite{graph-generator:2009:Online} eingesetzt, um Graphen zu erstellen. Wie gesagt wurde als Knotenanzahl konstant 100 000 gewählt. Um einen Graph zu erstellen werden folgende Parameter gewählt:
+\begin{description}
+	\item[Minimaler Knotengrad min = 1] Der minimale Ausgangsgrad jedes Knotens.
+	\item[Maximaler Knotengrad $max = \infty$] Der maximale Ausgangsgrad jedes Knotens.
+	\item[Exponent exp = 5] Der Exponent der Exponentialverteiltung
+	\item[Mittlerer Knotengrad z variiert]
+\end{description}
+Der Ausgangsgrad der Knoten ist folgendermaßen verteilt:
+$$
+P(X=k) \propto (k + offset)^{-exp}
+$$
+Der Offset wird dabei automatisch von dem Tool so gewählt, dass sich ein durchschnittlicher Ausgangsgrad von z ergibt.
+% section graphen (end)
 
+\section{Testplattform} % (fold)
+\label{sec:testplattform}
+Als Testplattform kann ein Apple Notebook von 2011 zum Einsatz. Es hat einen Intel Core i7-2720QM \enquote{Sandy Bridge} Prozessor, der mit 2.2Ghz getaktet wird. Es stehen 4 physikalische Kerne zur Verfügung, die jeweils Intels Hyper Threading Technologie unterstützen. Dadurch sind physikalisch 8 parallel laufende Threads möglich. Für den Vergleich sequentieller Algorithmen mit parallelen ist zu beachten, dass der Prozessor einen Kern auf bis zu 3.3 GHz übertakten kann, falls die anderen Kerne momentan nicht verwendet werden. Der optimal erreichbare Speedup ist demnach nicht 8.0, sondern deutlich darunter. Das Testsystem ist außerdem mit 8GB Hauptspeicher ausgestattet, der mit 1333MHz, der bei einem Takt von 1333Mhz arbeitet. Auf dem Testsystem wird als Betriebssystem Mac OS X 10.6.8 \enquote{Snow Leopard} und der x10 Compiler in der Version 2.2.3 verwendet.
 
+Als zweiter Testrechner kam ein Desktop mit einem Intel Core i3-550 zum Einsatz. Die Takrate beträgt hier 3.2 GHz. Es stehen zwei Rechenkerne mit Hyper Threading, also 4 getrennte Ausführungsfäden zur Verfügung. Im System sind 2GB Hauptspeicher installiert. Als Betriebssystem wurde Ubuntu 12.04 verwendet. Der x10 Compiler wurde in der Version 2.2.3 verwendet. 
+% section testplattform (end)
 
-%% evaluation.tex
-%%
+\section{Modus} % (fold)
+\label{sec:modus}
+Um Ergebnisse aus einer Kombination Algorithmus - Graph zu erhalten, wird der gewählte Algorithmus 3 mal auf dem Graph ausgeführt und die Zeit gemessen, die die reine Berechnung benötigte. Die Zeit, um den Graph in den Speicher einzulesen und die Daten auf die Places aufzuteilen, wurde nicht gemessen, da sie wenig mit dem Algorithmus und x10 zu tun hat. Die Zeit, die benötigt wird, um das Ergebnis von den beteiligten Places zurück zum Ursprungsplace zu holen, wird allerdings mitgemessen.
 
-%% ==================
-\chapter{Evaluation}
-\label{ch:Evaluation}
-%% ==================
+Wird ein x10 Programm mit der Umgebungsvariablen X10\_NPLACES gesetzt ausgeführt, werden die einzelnen Places durch Prozesse (nicht Threads) simuliert. Der Aufbau entspricht zwar nicht ganz dem Optimalsetup, in dem jeder Place einen physikalisch getrennten Speicherbereich repräsentiert, doch auch der Kontextwechsel, der bei der Kommunikation zwischen Places auftritt, ist relativ langsam und somit eine Annäherung an realen Kommunikationsoverhead. Trotzdem sind diese Ergebnisse nicht eins zu eins auf einen Rechnerverbund zu übertragen. Zum einen liegt das daran, dass, wie gesagt, die Kommunikation nochmal erheblich teurer wird, zum anderen können mit einem Rechnerverbund wesentlich größere Graphen bearbeitet werden, die offensichtlich ein viel höheres Potential zur Parallelisierung bieten.
 
-\dots
+Um vollständige Ergebnisse zu bekommen, sollte eigentlich pro Graph die Breitensuche einmal von jedem Knoten gestartet werden. Dies ist aus Zeitgründen im Rahmen dieser Arbeit nicht möglich.       
+% section modus (end)
 
+\chapter{Ergebnisse und Diskussion} % (fold)
+\label{cha:ergebnisse_und_diskussion}
 
-%% ===============================
-\section{Section 1}
-\label{ch:Evaluation:sec:Section1}
-%% ===============================
-
-\dots
-
-
-%% ===============================
-\section{Section 2}
-\label{ch:Evaluation:sec:Section2}
-%% ===============================
-
-\dots
-
-
-%% ===============================
-\section{Section 3}
-\label{ch:Evaluation:sec:Section3}
-%% ===============================
-
-\dots
+% chapter ergebnisse_und_diskussion (end)

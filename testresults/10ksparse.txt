@@ -1,0 +1,71 @@
+Total Node Number: 10000
+Average Degree: 5.0
+Min Degree: 1
+Max Degree:479
+
+
+1 Place
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 2 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 7 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x1 chosen (1 rows, 1 columns)
+Parsing complete, starting algorithm 
+Calculation took 12 ms
+
+2 Places
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 1 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 11 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+1x2 chosen (1 rows, 2 columns)
+Parsing complete, starting algorithm 
+Calculation took 17 ms
+
+4 Places
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 1 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 22 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x2 chosen (2 rows, 2 columns)
+Parsing complete, starting algorithm 
+Calculation took 32 ms
+
+6 Places
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 2 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 42 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x3 chosen (2 rows, 3 columns)
+Parsing complete, starting algorithm 
+Calculation took 60 ms
+
+8 Places
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 2 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 107 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+2x4 chosen (2 rows, 4 columns)
+Parsing complete, starting algorithm 
+Calculation took 160 ms
+
+9 Places
+serious-mac:code domi$ perl sim.pl ../../graphs/10ksparse.sgraph 0
+Running simulation in serial_list mode, starting from node 0
+Calculation took 2 ms
+Running simulation in 1d_list mode, starting from node 0
+Calculation took 238 ms
+Running simulation in 2d_list_alt mode, starting from node 0 
+3x3 chosen (3 rows, 3 columns)
+Parsing complete, starting algorithm 
+Calculation took 277 ms

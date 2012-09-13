@@ -54,11 +54,9 @@ public class Bfs2DList extends BfsAlgorithm {
     }
 
     public def addEdge(from : Int, to : Array[Int]) {
-        async {
-           for (i in to) {
-                addEdge(from, to(i));
-           }
-        }
+       for (i in to) {
+            addEdge(from, to(i));
+       }
     }
     
     public def getNodeCount() : Int {

@@ -49,7 +49,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
 		if (p == here) {
 			atomic adj(here.id)(from).add(to);
 		} else {
-			async at(p) {
+			at(p) {
 				atomic adj(p.id)(from).add(to);
 			}
 		}
@@ -58,14 +58,14 @@ public class Bfs2DListAlt extends BfsAlgorithm {
 
     public def addEdge(from : Int, to : Array[Int]) {
 
-		val rows = grid.getPlacesForRow(from / grid.rowSize);
-		val buffer = new Array[ArrayList[Int]](rows.size(), (i:Int)=> new ArrayList[Int]());
+		val cols = grid.getPlacesForRow(from / grid.rowSize);
+		val buffer = new Array[ArrayList[Int]](cols.size(), (i:Int)=> new ArrayList[Int]());
 		for (i in to) {
 			buffer(to(i) / grid.colSize).add(to(i));
 		}
 		for (i in buffer) {
 			if (!buffer(i).isEmpty()) {
-				async at (rows(i(0))) {
+				at (cols(i(0))) {
 					for (j in buffer(i)) {
 						addEdge(from, j);
 					}
@@ -77,13 +77,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
         return vertexCount; 
     }
     public def finished() : void {
-        finish for (place in grid.places()) async at (place) {
-            val lists : Array[List[Int]] = adj(here.id);
-            for (i in lists) {
-                val list : List[Int] = lists(i);
-                async list.sort();
-            }
-        }
+
     }
 
     public def checkStartNode(numberToCheck : Int) : boolean {

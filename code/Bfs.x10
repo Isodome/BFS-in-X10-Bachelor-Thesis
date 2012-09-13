@@ -169,7 +169,8 @@ public class Bfs {
         } else if (bfs == BFS_2D_MATRIX) {
             algo = new Bfs2DMatrix();
         } else if (bfs == BFS_2D_LIST) {
-            algo = new Bfs2DList();  
+            algo = new Bfs2DList();
+            print("2d_list mode is a lot slower than 2d_list_alt mode. You might want to use the other one.");
         } else if (bfs == BFS_2D_LIST_ALT) {
             algo = new Bfs2DListAlt();
         } else if (bfs == BFS_INVASIVE) {

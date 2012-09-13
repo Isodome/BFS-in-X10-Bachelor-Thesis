@@ -7,7 +7,7 @@
 \label{sec:graphen}
 Da die Breitensuche ein asymptotisch relativ schneller Algorithmus ist, sind relativ große Testgraphen nötig, um einigermaßen aussagekräftige Ergebnisse zu produzieren. Für diese Arbeit wurden Graphen in der Größenordnung von 100 000 Knoten gewählt. Diese wiederum relativ kleine Ausdehnung wurde gewählt, da der Testmodus beinhaltet, dass bei gleichbleibender Knotenanzahl die Dichte des Graphen variiert. Sehr dicht besiedelte Graphen mit 100 000 Knoten passen gerade noch in den Arbeitsspeicher. Würde noch größere Graphen verwendet, müsste entweder die Dichte des Graphen beschränkt werden oder das Betriebssysteme müsste Daten auslagern, was die Messergebnisse unbrauchbar machen würde. 
 
-Es wurde ein Tool namens graph-generator \cite{graph-generator:2009:Online} eingesetzt, um Graphen zu erstellen. Wie gesagt wurde als Knotenanzahl konstant 100 000 gewählt. Um einen Graph zu erstellen werden folgende Parameter gewählt:
+Es wurde ein Tool namens graph-generator \cite{graph-generator:2009:Online} eingesetzt, um zufällige Graphen zu generieren. Wie gesagt wurde als Knotenanzahl konstant 100 000 gewählt. Um einen Graph zu erstellen werden folgende Parameter gewählt:
 \begin{description}
 	\item[Minimaler Knotengrad min = 1] Der minimale Ausgangsgrad jedes Knotens.
 	\item[Maximaler Knotengrad $max = \infty$] Der maximale Ausgangsgrad jedes Knotens.
@@ -39,5 +39,14 @@ Um vollständige Ergebnisse zu bekommen, sollte eigentlich pro Graph die Breiten
 
 \chapter{Ergebnisse und Diskussion} % (fold)
 \label{cha:ergebnisse_und_diskussion}
+
+
+% ****************************
+% Future Work
+% ****************************
+% Nicht ausgeschlossen, dass andere Freiheitsgrade auch eine rolle spielen (gleichverteile oder große und kleine knoten??)
+% Komplett autonome PEs
+% Knoten rumkopieren wenn PEs abgegeben
+% 
 
 % chapter ergebnisse_und_diskussion (end)

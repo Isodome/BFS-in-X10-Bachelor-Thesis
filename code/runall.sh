@@ -1,5 +1,34 @@
 #!/bin/bash
-./10kdense.sh $1
-./10ksparse.sh $1
-./100ksparse.sh $1
-./1msparse.sh $1
+
+EXPECTED_ARGS=2
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: 'runall.sh <folder with graph files> <fodler for result files>' "
+  exit 1
+fi
+
+if [ -z "$1" ]
+then
+	echo "No graph files specified"
+	exit
+else 
+	GRAPHFOLDER="$1"
+fi
+
+if [ -z "$2" ]; then
+	echo "No result dir specified"
+	exit
+else 
+	RESULTS_DIR="$2"
+fi
+
+
+mkdir $1
+FILES=`find $1 -name "*.sgraph"`
+echo "Found Files: $FILES" > /dev/stderr
+for f in $FILES
+do
+	echo "test"
+	./TripleRun.sh $f $RESULTS_DIR
+done
+

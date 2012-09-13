@@ -47,8 +47,16 @@
 			"file": "evaluation.tex",
 			"settings":
 			{
-				"buffer_size": 4608,
+				"buffer_size": 4887,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "future.tex",
+			"settings":
+			{
+				"buffer_size": 164,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -188,10 +196,10 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
-		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
@@ -411,15 +419,15 @@
 					"file": "evaluation.tex",
 					"settings":
 					{
-						"buffer_size": 4608,
+						"buffer_size": 4887,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4531,
-								4531
+								4546,
+								4546
 							]
 						],
 						"settings":
@@ -428,7 +436,33 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 498.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "future.tex",
+					"settings":
+					{
+						"buffer_size": 164,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

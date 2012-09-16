@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# This script takes all .sgraph files from the specified folder, runs
+# all tests on all files 3 times and writes the result as csv in the specified output folder
+
 EXPECTED_ARGS=2
 if [ $# -ne $EXPECTED_ARGS ]
 then
-  echo "Usage: 'runall.sh <folder with graph files> <fodler for result files>' "
+  echo "Usage: 'runall.sh <folder with graph files> <folder for result files>' "
   exit 1
 fi
 

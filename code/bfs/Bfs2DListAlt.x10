@@ -113,6 +113,7 @@ public class Bfs2DListAlt extends BfsAlgorithm {
             for (place in d.dist.places()) at (place) {
                 async {
 					val dTemp = new Array[Boolean](vertexCount, false);
+                    val emptyList = new ArrayList[Int]();
                     
                     val sendBuf = new Array[ArrayList[Int]](grid.rows, (i:Int) => new ArrayList[Int]());
                     val sendBufGlobal =  new Array[ArrayList[Int]](grid.places().size(), (i:Int) => new ArrayList[int]());
@@ -148,34 +149,34 @@ public class Bfs2DListAlt extends BfsAlgorithm {
                             }
                             for (p in grid.getPlacesForRow(rowNum(0))) {
                                 if (p.id == here.id) {
-                                    fTransposed(here.id)(here.id).addAll(buffer);
+                                    fTransposed(here.id)(here.id) = buffer;
                                 } else {
                                     val senderId = here.id;
                                     async at(p) {
-                                        fTransposed(here.id)(senderId).addAll(buffer);
+                                        fTransposed(here.id)(senderId) = buffer;
                                     }
                                 }
                             }
-                            buffer.clear();
+                            sendBuf(rowNum) = new ArrayList[Int]();
                         }
                         //addTiminig("Iteration " + depth + " Communication 1");
 
                         team.barrier(here.id);
                         // phase 3 and 4: Local Matrix multiplication
-                        finish {
-                            val fTransLocal : Array[ArrayList[Int]] = fTransposed(here.id);
-                            for (j in fTransLocal) {
-                                val curList : ArrayList[Int] = fTransLocal(j);
-                                for (i in curList) {
-                                	for (to in adj(here.id)(i)) {
-                                		if (dTemp(to) == false) {
-                                			t_tmp(here.id).add(to);
-                                			dTemp(to) = true;
-                                		}
-                                	}
-                                    //t_tmp(here.id).addAll(adj(here.id)(i));
-                                    adj(here.id)(i).clear();
-                                }
+                        val fTransLocal : Array[ArrayList[Int]] = fTransposed(here.id);
+                        for (j in fTransLocal) {
+                            val curList : ArrayList[Int] = fTransLocal(j);
+                            for (i in curList) {
+                            	for (to in adj(here.id)(i)) {
+                            		if (dTemp(to) == false) {
+                            			t_tmp(here.id).add(to);
+                            			dTemp(to) = true;
+                            		}
+                            	}
+                                //t_tmp(here.id).addAll(adj(here.id)(i));
+                                adj(here.id)(i) = emptyList;
+                            }
+                            if(!curList.isEmpty()) {
                                 curList.clear();
                             }
                         }

@@ -101,6 +101,7 @@ public class Bfs1DList extends BfsAlgorithm {
         //addTiminig("Global init done");
         finish {
             for (place in PlaceGroup.WORLD) async  at (place)  {
+                val emptyList = new ArrayList[Int]();
 
                 var done : Boolean = false;
                 var depth : Int = 1;
@@ -118,6 +119,7 @@ public class Bfs1DList extends BfsAlgorithm {
                     // Sort reachable vertices by owning place
                     for (from in current) {
             			val currentList = adj(here.id)(from);
+                        adj(here.id)(from) = emptyList;
             			val currentSize = currentList.size();
             			for (var i:Int = 0; i< currentSize; i++) {
                 			val to = currentList(i);

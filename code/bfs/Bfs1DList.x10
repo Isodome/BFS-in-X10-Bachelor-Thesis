@@ -106,17 +106,17 @@ public class Bfs1DList extends BfsAlgorithm {
                 var done : Boolean = false;
                 var depth : Int = 1;
                 val dTemp = new Array[Boolean](vertexCount, false);
-                var current : ArrayList[Int] = new ArrayList[Int]();
+                //var current : ArrayList[Int] = new ArrayList[Int]();
                 val sendBuffer = new Array[ArrayList[Int]](Place.places().size(), (i:Int) => new ArrayList[Int]());
                 val sourcePlace = here.id;
                 if (start / arrayPartSize == here.id) {
                     d(here.id)(start) = 0;
-                    current.add(start);
-                }
+					sendBuffer(start / arrayPartSize).add(start);                }
                 //addTiminig("Local init done");
 
                 while(!done) {
                     // Sort reachable vertices by owning place
+					/*
                     for (from in current) {
             			val currentList = adj(here.id)(from);
                         adj(here.id)(from) = emptyList;
@@ -129,6 +129,7 @@ public class Bfs1DList extends BfsAlgorithm {
                             }
                         }
                     }
+					*/
                     //addTiminig("Iteration " + depth + " Sorting");
                     current.clear();
                     finish for( targetPlace in PlaceGroup.WORLD) {
@@ -149,19 +150,29 @@ public class Bfs1DList extends BfsAlgorithm {
                     team.barrier(here.id);
                     //addTiminig("Iteration " + depth + " Communication");
                     val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
+					done = true;
                     for (iBuf in receiveBuffers) {
                     	val curBuffer = receiveBuffers(iBuf);
                     	val curBufSize = curBuffer.size();
                     	for (var i:int = 0; i< curBufSize; i++) {
                     		val vertex = curBuffer(i);
                             if (d(here.id)(vertex) == INF) {
+								done = false;
                                 d(here.id)(vertex) = depth;
-                                current.add(vertex);
+                                val currentList = adj(here.id)(vertex);
+		                        adj(here.id)(from) = emptyList;
+		            			val currentSize = currentList.size();
+		            			for (var i:Int = 0; i< currentSize; i++) {
+		                			val to = currentList(i);
+		                            if (!dTemp(to)) {
+		                                sendBuffer(to / arrayPartSize).add(to);
+		                                dTemp(to) = true;
+		                            }
+		                        }
                             }
                         }
                     }
                     //addTiminig("Iteration " + depth + " update");
-                    done = current.size() == 0;
                     val res = team.allreduce(here.id, done ? 1 : 0 , Team.MUL);
                     done = (res == 1);
 

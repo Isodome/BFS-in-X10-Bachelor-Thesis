@@ -111,6 +111,18 @@ Es ist sehr wahrscheinlich, dass ein Knoten in einer Iteration gleichzeitig übe
 \end{description}
 % subsection duplikate_in_sendepuffern (end)
 
+\subsubsection{Adjazenzlisten löschen} % (fold)
+\label{ssub:adjazenslisten_löschen}
+Eine weitere Optimierung ist nur verfügbar, wenn alle von einem Knoten aus erreichbaren Knoten innerhalb einer getrennten Datenstruktur liege, wie zum Beispiel bei den Adjazenzlisten. Man muss sich klar machen, die Optimierung \enquote{Knoten nur einmal versenden} nur dafür sorgt, dass eine Place A nicht mehrmals den selben Knoten k an Place B schickt. Place B kann aber weiterhin von jedem anderen Place einmal Knoten k geschickt bekommen. Damit nicht jedes mal, wenn Place B Knoten k empfängt, über alle adjazenten Knoten iteriert wird, kann Place B die Adjazenzliste von k nach dem ersten Auftreten von Knoten k auch löschen. Damit deswegen keine Sonderfallbehandlung eingebaut werden muss, existiert pro Place eine globale leere Liste für diesen Zweck. Jedes Mal, wenn Place B Knoten k empfängt, wird über die Adjazenzliste iteriert und danach die Liste auf die leere Dummyliste gesetzt. So passiert nur beim ersten Auftreten des Knotens wirklich eine Iteration. 
+
+Das Ergebnis ist trotzdem immer korrekt, da eine BFS-Distanz nur einmal während des gesamten Algorithmus gesetzt wird. Es ist sicher, dass nach der Iteration, in der Knoten k das erstmal auftrat, alle von k erreichbaren Knoten in der Liste der aktiven Knoten sind. Somit kann die Adjazenzliste verworfen werden.
+
+Ein Problem dieser Optimierung ist, dass der Algorithmus nur einmal ausgeführt werden kann. Eine Unsicherheitsfaktor ist außerdem die Garbage Collection, die so relativ viel zu tun bekommt. Man könnte die Adjazenzliste auch in einen Pool von toten Listen hängen, um die GC zu umgehen.
+% subsubsection adjazenzlisten_löschen (end)
+\subsubsection{Zusammenlegung der ersten und letzten Phase} % (fold)
+\label{ssub:zusammenlegung_der_ersten_und_letzten_phase}
+Es ist möglich, in der letzten Phase die aktiven Knoten nicht in eine Liste zu schreiben, sondern sofort in die Sendepuffer einzuordnen. Damit spart man sich eine Iteration.
+% subsubsection zusammenlegung_der_ersten_und_letzten_phase (end)
 % subsection optimierungen (end)
 
 % section 1d_partitionierung (end)

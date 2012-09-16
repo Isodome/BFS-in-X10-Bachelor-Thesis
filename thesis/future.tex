@@ -1,5 +1,19 @@
 %!TEX root = thesis.tex
-\chapter{Ausblick und zukünftige Arbeit} % (fold)
-\label{cha:ausblick_und_zuk_nftige_arbeit}
+\chapter{Fazit und zukünftige Arbeit} % (fold)
+\label{cha:fazit_und_zuk_nftige_arbeit}
 
-% chapter ausblick_und_zuk_nftige_arbeit (end)
+Im Rahmen dieser Arbeit konnten einige Ideen und Ansätze nicht umgesetzt werden, die womöglich in zukünftiger Arbeit anzugehen sind.
+
+Um die bestehende Arbeit besser zu testen und um die Vor- und Nachteile besser zu verstehen, sollte der existierende Code auf einem echten Rechnercluster getestet werden. Die Bedingungen unterscheiden sich stark von der parallelen Ausführung auf nur einem Prozessor. Zum einen können mit einem Rechencluster, das echten verteilten Speicher hat, wesentlich größere Graphen getestet werden. Größere Graphen bedeuten immer auch größeres Prallelisierungspotential. Zum anderen ist X10 laut den Entwicklern dafür gemacht, effiziente Programme für große verteilte Rechensysteme zu programmieren. Aus diesen zwei Gründen ist zu erwarten, dass der in dieser Arbeit erreichte Speedup weit unter dem Potential der Breitensuche geblieben ist. 
+
+Auch implementierungstechnisch gibt weitere Variationsmöglichkeiten, deren Auswirkung auf Geschwindigkeit und Beschleunigung getestet werden kann. Die einzelnen Processing Elements können auch autonomer Implementiert werden, als sie es im Moment sind. Wenn jede PE einen eigenens Intervall des Graphen bekommt und darauf autonom Rechner, würde die Synchronisation zwischen den einzelnen PEs komplett wegfallen. In der aktuellen Codebasis wäre das eine Barriere weniger. Außerdem sparte man sich die Funktionsaufrufe und die Arithmetik, um die Liste der aktiven Knoten aufzuteilen. Der Nachteil dieser Implementierung wäre, dass von einem Place zu einem anderen pro Iteration mehrere Kommunikationen stattfinden, falls mehrere PEs zum gleichen Place senden müssen. 
+
+In der invasiven Implementierung werden im Moment keine Processing Elements abgegeben oder neu beantragt, sobald der Algorithmus gestartet ist. Die Masteractivity weiß aber nach jeder Iteration, wie lang die Liste der aktiven Knoten auf jedem Place ist. Mit dieser Information könnte sie Rechenleistung freigeben oder neu beantragen. Eine entsprechende Implementierung würde die Möglichkeit des Framework nutzen, eine einmal abgegebene PE wieder zurück zu verlangen. Diese Funktion würde das in Kapitel \ref{sub:dynamische_ressourcenverwaltung} beschriebenen Problem lösen, dass anzunehmender Weise zu einem späteren Zeitpunkt genau die abgegene Rechenleistung wieder gebraucht wird. Diese Funktionalität ist aber noch nicht vorhanden und konnte somit nicht getestet werden. 
+
+Auch nicht getestet wurde, wie es sich ein Programm verhält, wenn die Datenhaltung auf eine veränderte Situation der Rechenleitung reagiert. Dieser Ansatz geht im Gegensatz zu dem gerade genannten davon aus, dass Rechenleistung genutzt werden soll, egal auf welchem Place sie liegt. Wenn also Rechenleistung abgegen wurde oder neue hinzukam, müssen die Graphdaten dynamisch entsprechend an den richtigen Ort kopiert werden. Womöglich können die Daten so verteilt werden, dass ab einem gewissen Zeitpunkt sich mindestens zwei Places um jeden Knoten kümmern könnten und dadurch auf weitere Änderungen sehr schnell reagiert werden kann.
+
+Was die Testdaten betrifft, wurden dort nicht alle Freiheitsgrade ausgenutzt. In weiteren Versuchen kann herausgefunden werden, welche Art von Graph sich am besten mit der Breitensuche in x10 verträgt. Zum Beispiel können alle Knoten den gleichen Grad haben oder einige einen viel höheren als andere. Es können zusammenhängende mit unzusammenhängenden Graphen verglichen werden. Vielleicht spielt auch der Durchmesser eines Graphen eine Rolle. 
+
+% TODO: Fazit
+
+% chapter fazit_und_zuk_nftige_arbeit (end)

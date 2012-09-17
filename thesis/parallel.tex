@@ -113,15 +113,15 @@ Es ist sehr wahrscheinlich, dass ein Knoten in einer Iteration gleichzeitig übe
 
 \subsubsection{Adjazenzlisten löschen} % (fold)
 \label{ssub:adjazenslisten_löschen}
-Eine weitere Optimierung ist nur verfügbar, wenn alle von einem Knoten aus erreichbaren Knoten innerhalb einer getrennten Datenstruktur liege, wie zum Beispiel bei den Adjazenzlisten. Man muss sich klar machen, die Optimierung \enquote{Knoten nur einmal versenden} nur dafür sorgt, dass eine Place A nicht mehrmals den selben Knoten k an Place B schickt. Place B kann aber weiterhin von jedem anderen Place einmal Knoten k geschickt bekommen. Damit nicht jedes mal, wenn Place B Knoten k empfängt, über alle adjazenten Knoten iteriert wird, kann Place B die Adjazenzliste von k nach dem ersten Auftreten von Knoten k auch löschen. Damit deswegen keine Sonderfallbehandlung eingebaut werden muss, existiert pro Place eine globale leere Liste für diesen Zweck. Jedes Mal, wenn Place B Knoten k empfängt, wird über die Adjazenzliste iteriert und danach die Liste auf die leere Dummyliste gesetzt. So passiert nur beim ersten Auftreten des Knotens wirklich eine Iteration. 
+Eine weitere Optimierung ist nur verfügbar, wenn alle von einem Knoten aus erreichbaren Knoten innerhalb einer getrennten Datenstruktur liegen, wie zum Beispiel bei den Adjazenzlisten. Es ist so, dass die Optimierung \enquote{Knoten nur einmal versenden} nur dafür sorgt, dass ein Place A nicht mehrmals den selben Knoten k an Place B schickt. Place B kann aber weiterhin von jedem anderen Place einmal Knoten k geschickt bekommen. Damit nicht jedes mal, wenn Place B Knoten k empfängt, über alle adjazenten Knoten iteriert wird, kann Place B die Adjazenzliste von k nach dem ersten Auftreten von Knoten k löschen. Um deswegen keine Sonderfallbehandlung einbauen zu müssen, existiert pro Place eine globale leere Liste für diesen Zweck. Um die asymptotische Laufzeit zu erhalten, ist es wichtig, dass diese Liste wirklich nur einmal existiert. Jedes Mal, wenn Place B Knoten k empfängt, wird über seine Adjazenzliste iteriert und danach, anstelle des Zeigers auf die Adjazenzliste von Knoten k, der Zeiger auf die leere Dummyliste geschrieben. Auf diese Weise passiert nur beim ersten Auftreten des Knotens eine Iteration über alle Nachfolgerknoten. 
 
 Das Ergebnis ist trotzdem immer korrekt, da eine BFS-Distanz nur einmal während des gesamten Algorithmus gesetzt wird. Es ist sicher, dass nach der Iteration, in der Knoten k das erstmal auftrat, alle von k erreichbaren Knoten in der Liste der aktiven Knoten sind. Somit kann die Adjazenzliste verworfen werden.
 
-Ein Problem dieser Optimierung ist, dass der Algorithmus nur einmal ausgeführt werden kann. Eine Unsicherheitsfaktor ist außerdem die Garbage Collection, die so relativ viel zu tun bekommt. Man könnte die Adjazenzliste auch in einen Pool von toten Listen hängen, um die GC zu umgehen.
+Ein Problem dieser Optimierung ist, dass der Algorithmus nur einmal ausgeführt werden kann, da er die Datenstruktur zerstört. Eine Unsicherheitsfaktor ist außerdem die Garbage Collection, die so relativ viel zu tun bekommt und den Algorithmus deswegen unvorhersehbar verlangsam könnte. Man könnte die Adjazenzliste auch in einen Pool von toten Listen hängen, um die GC zu umgehen.
 % subsubsection adjazenzlisten_löschen (end)
 \subsubsection{Zusammenlegung der ersten und letzten Phase} % (fold)
 \label{ssub:zusammenlegung_der_ersten_und_letzten_phase}
-Es ist möglich, in der letzten Phase die aktiven Knoten nicht in eine Liste zu schreiben, sondern sofort in die Sendepuffer einzuordnen. Damit spart man sich eine Iteration.
+Es ist möglich, in der letzten Phase die aktiven Knoten nicht in eine eigene Liste zu schreiben, sondern sofort in die Sendepuffer einzuordnen. Auf diese Weise muss man pro BFS-Iteration nur einmal alle aktiven Knoten anschauen, nicht zweimal.
 % subsubsection zusammenlegung_der_ersten_und_letzten_phase (end)
 % subsection optimierungen (end)
 
@@ -240,6 +240,6 @@ Ein Detail wichtiges Detail, dass bisher noch keine Erwähnung fand, findet sich
 
 \section{Optimierungen} % (fold)
 \label{sec:optimierungen}
-Auch bei der Dekomposition in zwei Dimensionen gibt es zu beachten, dass die Listen, die in Phase 3 erstellt und in Phase 4 versendet werden, Duplikate enthalten können. Um so dichter ein Graph ist, um so wichtiger ist es, diese Listen frei von Duplikaten zu machen. Siehe dazu Abschnitt \ref{sub:duplikate_in_sendepuffern}
+Auch bei der Dekomposition in zwei Dimensionen gibt es zu beachten, dass die Listen, die in Phase 3 erstellt und in Phase 4 versendet werden, Duplikate enthalten können. Um so dichter ein Graph ist, um so wichtiger ist es, diese Listen frei von Duplikaten zu machen. Siehe dazu Abschnitt \ref{sub:duplikate_in_sendepuffern}. Ohne weitere Abwandlungen kann auch die Optimierung \ref{ssub:zusammenlegung_der_ersten_und_letzten_phase} angewandt werden. Je nach gewählter Datenstruktur können auch die Adjazenzlisten wie in \ref{ssub:adjazenslisten_löschen} gelöscht werden, was bei der Implementierung zu dieser Arbeit gemacht wurde. 
 % section optimierungen (end)
 % chapter paralleler_algorithmus (end)

@@ -5,7 +5,7 @@
 
 \section{Graphen} % (fold)
 \label{sec:graphen}
-Da die Breitensuche ein asymptotisch relativ schneller Algorithmus ist, sind relativ große Testgraphen nötig, um einigermaßen aussagekräftige Ergebnisse zu produzieren. Für diese Arbeit wurden Graphen in der Größenordnung von 100 000 Knoten gewählt. Diese wiederum relativ kleine Ausdehnung wurde gewählt, da der Testmodus beinhaltet, dass bei gleichbleibender Knotenanzahl die Dichte des Graphen variiert. Sehr dicht besiedelte Graphen mit 100 000 Knoten passen gerade noch in den Arbeitsspeicher. Würde noch größere Graphen verwendet, müsste entweder die Dichte des Graphen beschränkt werden oder das Betriebssysteme müsste Daten auslagern, was die Messergebnisse unbrauchbar machen würde. 
+Da die Breitensuche ein asymptotisch relativ schneller Algorithmus ist, sind relativ große Testgraphen nötig, um einigermaßen aussagekräftige Ergebnisse zu produzieren. Für diese Arbeit wurden Graphen in der Größenordnung von 100 000 Knoten gewählt. Diese wiederum relativ kleine Ausdehnung wurde gewählt, da der Testmodus beinhaltet, dass bei gleichbleibender Knotenanzahl die Dichte des Graphen variiert. Sehr dicht besiedelte Graphen mit 100 000 Knoten passen gerade noch in den Arbeitsspeicher. Würden noch größere Graphen verwendet, müsste entweder die Dichte des Graphen beschränkt werden oder das Betriebssysteme müsste Daten auslagern, was die Messergebnisse unbrauchbar machen würde. Da die asymptotische Laufzeit der Breitensuche aber O(n + m) ist \cite{SWB-283374373}, ist zu erwarten, dass bei gleicher (absoluter) Kantenzahl und erhöhter Knotenzahl, die Laufzeit identisch ist. Ein Beispiel: BFS auf einem Graph mit 100 000 Knoten und durchschnittlichem Knotengrad von 1000 (ergibt 100 Mio Kanten) dauert gleichlang wie die BFS auf einem Graph mit 1 000 000 Knoten und durchschnittlichem Knotengrad von 100 (ergibt ebenso 100 Mio Kanten).
 
 Es wurde ein Tool namens graph-generator \cite{graph-generator:2009:Online} eingesetzt, um zufällige Graphen zu generieren. Wie gesagt wurde als Knotenanzahl konstant 100 000 gewählt. Um einen Graph zu erstellen werden folgende Parameter gewählt:
 \begin{description}
@@ -47,10 +47,73 @@ Die vollständigen Messergebnis finden sich in Anhang \ref{Anhang-Messwerte}. Wi
 
 \section{Serieller Fall, 1D mit einem Place und 2D mit einem Place} % (fold)
 \label{sec:serieller_fall_vs_1d_mit_einem_place}
-Jeder Algorithmus muss pro Iteration jeden aktiven Knoten mindestens einmal anfassen. Außerdem muss jeder Algorithmus pro Iteration jeden Knoten mindestens einmal anfassen, der von einem der aktiven Knoten erreichbar ist. Der serielle Algorithmus tut genau das und nicht mehr. In Tests wurde herausgefunden, dass eine Iteration mittels einer herkömmlichen for-Schleife mit anschließendem direkten Zugriff mittels Index deutlich schneller ist (ca. 30\%), als eine foreach-Schleife. Der 1D-Algorithmus muss pro Iteration die Knoten sortieren (jeden aktiven Knoten einmal anfassen), dann verschicken, was im Fall mit nur einem Place eine einfache Zeigerzuweisung ist, und dann nochmal jeden aktiven Knoten anfassen, um alle erreichbaren Knoten zu erreichen. Der 1D-Algorithmus muss also zweimal über alle aktievn Knoten iterieren, was zumindest theoretisch langsamer sein sollte. Interessanterweise waren bei dieser Implementierung die foreach-Schleifen ein wenig schneller als die for-Schleifen. 
+Jeder Algorithmus muss pro Iteration jeden aktiven Knoten mindestens einmal anfassen. Außerdem muss jeder Algorithmus pro Iteration jeden der Knoten mindestens einmal anfassen, der von einem der aktiven Knoten aus erreichbar ist. Der serielle Algorithmus tut genau das und nicht mehr. In Tests wurde herausgefunden, dass eine Iteration mittels einer herkömmlichen for-Schleife mit anschließendem direkten Zugriff mittels Index deutlich schneller ist (ca. 30\%), als eine foreach-Schleife. Der 1D-Algorithmus muss pro Iteration die Knoten sortieren (jeden aktiven Knoten einmal anfassen), dann verschicken, was im Fall mit nur einem Place eine einfache Zeigerzuweisung ist, und dann nochmal jeden aktiven Knoten anfassen, um alle erreichbaren Knoten zu erreichen. Der 1D-Algorithmus muss also zweimal über alle aktievn Knoten iterieren, was zumindest theoretisch langsamer sein sollte. Die verwendete optimierte Version legt diese beide Phasen aber zusammen. Zusätzliche Arbeit hat der 1D Algorithmus also nur beim Zurückkopieren des gesamten BFS-Distanz-Arrays. Scheinbar ist der 1D Algorithmus selbst im seriellen Fall schneller, als der serielle Algorithmus. Dass die Laufzeiten bei den kleineren Graphen trotzdem ein Wenig länger sind, liegt daran, dass bei den kleinen Graphen da Zurückkopieren des Arrays ausschlaggebend ist.
 
-Im Falle der Ausführung mit einem Place ist ansonsten der Code zwischen den beiden Implementierungen identisch. Dass der 1D-Algorithmus für dichte Graphen etwas schneller ist, ist aber nicht zu übersehen. Das kann im Grunde nur mit undurchsichtigen Optimierungen des Compiler zusammenhängen, zumal nach der 1D Paritionierung das komplette Bfs-Distanz Array zusätzlich kopiert werden muss, was die Implementierung nochmals langsamer machen sollte. 
+Wieso der serielle Algorithmus auf Listenbasis nicht, wie eigentlich erwartet, der schnellste ist, ist nicht ohne weiteres zu erklären. Zufall in Verbindung mit der Garbage Collection sind in Anbetracht der Deutlichkeit der Ergebnisse auszuschließen. Eine mögliche Erklärung ist, dass der Compiler den einen Code besser optimieren konnte, als den anderen, ohne dass sofort offensichtlich ist, woran das liegt.
+
+Wie aus Abbildung \ref{Vergleich_Seriell} hervorgeht, ist der 2D Algorithmus deutlich langsamer als die beiden anderen. Der 2D Algorithmus hat 2 Kommunikationsphasen pro Iteration. In den beiden Phasen wir aber jeweils nur mit $sqrt(p)$ anderen Places kommuniziert (bei p Places), während der 1D Algorithmus potentiell mit allen anderen kommuniziert. Im seriellen Fall ist diese zusätzliche Komplexität natürlich nicht nötig, was den Algorithmus verlangsamt.
 % section serieller_fall_vs_1d_mit_einem_place (end)  
+
+\begin{figure}
+\centering
+\label{Vergleich_Seriell}
+\caption{Vergleich der Laufzeiten bei serieller Ausführung, jeweils schnellste gemessene Laufzeit.}
+\begin{tikzpicture}
+    \begin{axis}[
+        xlabel=Knotengrad,
+        ylabel=Zeit in ms]
+    \addplot[smooth,mark=*,blue] plot coordinates {
+        (5,29)
+        (50,61)
+        (100,93)
+        (250,184)
+        (500,330)
+        (700,448)
+        (800,508)
+        (900,564)
+        (1000,621)
+        (1200,767)
+        (1500,910)
+        (2000,1213)
+    };
+    \addlegendentry{Seriell}
+
+    \addplot[smooth,color=red,mark=*]
+        plot coordinates {
+        (5,62)
+        (50,88)
+        (100,114)
+        (250,164)
+        (500,261)
+        (700,340)
+        (800,376)
+        (900,415)
+        (1000,451)
+        (1200,526)
+        (1500,643)
+        (2000,828)
+        };
+    \addlegendentry{1D}
+
+    \addplot[smooth,color=green,mark=*]
+        plot coordinates {
+        (5,85)
+        (50,155)
+        (100,234)
+        (250,444)
+        (500,808)
+        (700,1096)
+        (800,1239)
+        (900,1383)
+        (1000,1526)
+        (1200,1754)
+        (1500,2247)
+        (2000, 2969)
+        };
+    \addlegendentry{2D}
+    \end{axis}
+\end{tikzpicture}
+\end{figure}
 
 \section{Ergebnisse der Parallelisierung} % (fold)
 \label{sec:ergebnisse_der_parallelisierung}

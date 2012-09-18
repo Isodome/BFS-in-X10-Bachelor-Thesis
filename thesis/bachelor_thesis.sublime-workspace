@@ -43,53 +43,21 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "evaluation.tex",
-			"settings":
-			{
-				"buffer_size": 4747,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tables.tex",
-			"settings":
-			{
-				"buffer_size": 806,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "future.tex",
-			"settings":
-			{
-				"buffer_size": 3662,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "invasive.tex",
-			"settings":
-			{
-				"buffer_size": 21118,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "thesis.tex",
-			"settings":
-			{
-				"buffer_size": 3781,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
 	"command_palette":
 	{
-		"height": 147.0,
+		"height": 67.0,
 		"selected_items":
 		[
+			[
+				"paragra",
+				"Snippet: Paragraph"
+			],
+			[
+				"snip",
+				"Snippet: Sub Paragraph"
+			],
 			[
 				"todo",
 				"Show TODOs: Project and open files"
@@ -220,6 +188,14 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/code/runall.sh",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav50.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav5.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav100.csv",
@@ -232,18 +208,13 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav1200.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav1500.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav2000.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
 		"/Users/dominic/Downloads/ALL PREMS 14 SEPTEMBER 2012/dropbox.txt",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Downloads/10.SEP.HQ MIXX and more elsee/10.SEP.HQ MIXX and more else.txt",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
 		"/Volumes/SL/Users/domi/Documents/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/code/bfs/Bfs1DListInvasive.x10",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
@@ -269,7 +240,6 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/.gitignore",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.fdb_latexmk",
 		"/Users/dominic/Desktop/test.c",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/Thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.sublime-project",
@@ -314,6 +284,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Anhang",
+			"ms",
 			"csv",
 			" \\\\",
 			"thesis",
@@ -453,188 +425,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "evaluation.tex",
-					"settings":
-					{
-						"buffer_size": 4747,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1691,
-								1691
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "tables.tex",
-					"settings":
-					{
-						"buffer_size": 806,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								94,
-								94
-							],
-							[
-								150,
-								150
-							],
-							[
-								207,
-								207
-							],
-							[
-								265,
-								265
-							],
-							[
-								323,
-								323
-							],
-							[
-								381,
-								381
-							],
-							[
-								439,
-								439
-							],
-							[
-								497,
-								497
-							],
-							[
-								555,
-								555
-							],
-							[
-								614,
-								614
-							],
-							[
-								673,
-								673
-							],
-							[
-								732,
-								732
-							],
-							[
-								791,
-								791
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "future.tex",
-					"settings":
-					{
-						"buffer_size": 3662,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3617,
-								3617
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "invasive.tex",
-					"settings":
-					{
-						"buffer_size": 21118,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3800,
-								3800
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 359.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "thesis.tex",
-					"settings":
-					{
-						"buffer_size": 3781,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								372,
-								372
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3198.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -687,6 +479,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"appen",
+				"appendix.tex"
+			],
 			[
 				"inva",
 				"invasive.tex"

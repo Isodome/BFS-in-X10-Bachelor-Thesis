@@ -2,8 +2,12 @@ package dr;
 
 import java.awt.font.NumericShaper;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -19,14 +23,59 @@ public class CsvAnalyser {
 		dfs.setDecimalSeparator('.');
 		twoDForm = new DecimalFormat("#.##", dfs);
 	}
-	
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-;
+
+		if (args.length != 1) {
+			System.err.println("Please give exactly one argument");
+			System.exit(1);
+		}
 		
 		String filename = args[0];
+		File fileOrDirectory = new File(filename);
+		if (fileOrDirectory.isFile()) {
+			analyseCsv(filename);
+		} else if (fileOrDirectory.isDirectory()) {
+			String[] csvFiles = fileOrDirectory.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					// TODO Auto-generated method stub
+					return name.trim().endsWith(".csv");
+				}
+			});
+			String absPath = fileOrDirectory.getAbsolutePath().trim();
+			for (String file : csvFiles) {
+				if (!absPath.endsWith("/")) {
+					absPath += "/";
+				}
+				analyseCsv(absPath + file.trim());
+			}
+		}
+	}
+
+	private static void analyseCsv(String filename) {
+		String content = fileToString(filename);
+		String result = doStuff(content);
+		appendToFile(result, filename);
+	}
+
+	private static void appendToFile(String text, String filename) {
+		try {
+			// Create file
+			FileWriter fstream = new FileWriter(filename, true);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(text);
+			// Close the output stream
+			out.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+	}
+
+	private static String fileToString(String filename) {
 		String content = null;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -50,11 +99,7 @@ public class CsvAnalyser {
 			content = null;
 			e.printStackTrace();
 		}
-
-		if (content != null) {
-			String result = doStuff(content);
-			System.out.print(result);
-		}
+		return content;
 	}
 
 	private static String doStuff(String content) {
@@ -76,44 +121,42 @@ public class CsvAnalyser {
 				idx++;
 				if (idx == NUMBER_OF_VALUES) {
 					idx = 0;
-					testcases ++;
+					testcases++;
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < average.length; i++) {
-			average[i] /= (double)testcases;
+			average[i] /= (double) testcases;
 		}
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append('\n');
 		sb.append("Fastest Run,,,,,\n");
-		sb.append("Seriell,"+ mins[0] + ",,,,\n" );
+		sb.append("Seriell," + mins[0] + ",,,,\n");
 		sb.append("1D");
-		for (int i=1; i < 6; i++) {
+		for (int i = 1; i < 6; i++) {
 			sb.append("," + mins[i]);
 		}
 		sb.append("\n2D");
-		for (int i=6; i < 11; i++) {
+		for (int i = 6; i < 11; i++) {
 			sb.append("," + mins[i]);
 		}
-		sb.append("\n\n");
-		
+		sb.append("\n,,,,,\n");
+
 		sb.append("Average Time,,,,,\n");
-		sb.append("Seriell,"+ twoDForm.format(average[0]) + ",,,,\n" );
+		sb.append("Seriell," + twoDForm.format(average[0]) + ",,,,\n");
 		sb.append("1D");
-		for (int i=1; i < 6; i++) {
+		for (int i = 1; i < 6; i++) {
 			sb.append("," + twoDForm.format(average[i]));
 		}
 		sb.append("\n2D");
-		for (int i=6; i < 11; i++) {
+		for (int i = 6; i < 11; i++) {
 			sb.append("," + twoDForm.format(average[i]));
 		}
-		
+		sb.append("\n");
 		return sb.toString();
 	}
-
-
 
 }

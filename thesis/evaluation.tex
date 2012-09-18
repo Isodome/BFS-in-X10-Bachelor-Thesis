@@ -51,77 +51,83 @@ Jeder Algorithmus muss pro Iteration jeden aktiven Knoten mindestens einmal anfa
 
 Wieso der serielle Algorithmus auf Listenbasis nicht, wie eigentlich erwartet, der schnellste ist, ist nicht ohne weiteres zu erklären. Zufall in Verbindung mit der Garbage Collection sind in Anbetracht der Deutlichkeit der Ergebnisse auszuschließen. Eine mögliche Erklärung ist, dass der Compiler den einen Code besser optimieren konnte, als den anderen, ohne dass sofort offensichtlich ist, woran das liegt.
 
-Wie aus Abbildung \ref{Vergleich_Seriell} hervorgeht, ist der 2D Algorithmus deutlich langsamer als die beiden anderen. Der 2D Algorithmus hat 2 Kommunikationsphasen pro Iteration. In den beiden Phasen wir aber jeweils nur mit $sqrt(p)$ anderen Places kommuniziert (bei p Places), während der 1D Algorithmus potentiell mit allen anderen kommuniziert. Im seriellen Fall ist diese zusätzliche Komplexität natürlich nicht nötig, was den Algorithmus verlangsamt.
+Wie aus Abbildung \ref{Vergleich_Seriell} hervorgeht, ist der 2D Algorithmus deutlich langsamer als die beiden anderen. Der 2D Algorithmus hat 2 Kommunikationsphasen pro Iteration. In den beiden Phasen wir aber jeweils nur mit $\sqrt(p)$ anderen Places kommuniziert (bei p Places)\cite{Buluc:2011}, während der 1D Algorithmus potentiell mit allen anderen kommuniziert. Im seriellen Fall ist diese zusätzliche Komplexität natürlich nicht nötig, was den Algorithmus verlangsamt.
 % section serieller_fall_vs_1d_mit_einem_place (end)  
 
 \begin{figure}
-\centering
-\label{Vergleich_Seriell}
-\caption{Vergleich der Laufzeiten bei serieller Ausführung, jeweils schnellste gemessene Laufzeit.}
-\begin{tikzpicture}
-    \begin{axis}[
-        xlabel=Knotengrad,
-        ylabel=Zeit in ms]
-    \addplot[smooth,mark=*,blue] plot coordinates {
-        (5,29)
-        (50,61)
-        (100,93)
-        (250,184)
-        (500,330)
-        (700,448)
-        (800,508)
-        (900,564)
-        (1000,621)
-        (1200,767)
-        (1500,910)
-        (2000,1213)
-    };
-    \addlegendentry{Seriell}
+	\centering
+	\label{Vergleich_Seriell}
+	\caption{Vergleich der Laufzeiten bei serieller Ausführung, jeweils schnellste gemessene Laufzeit.}
+	\begin{tikzpicture}
+	    \begin{axis}[
+	        xlabel=Knotengrad,
+	        ylabel=Zeit in ms]
+	    \addplot[smooth,mark=*,blue] plot coordinates {
+	        (5,29)
+	        (50,61)
+	        (100,93)
+	        (250,184)
+	        (500,330)
+	        (700,448)
+	        (800,508)
+	        (900,564)
+	        (1000,621)
+	        (1200,767)
+	        (1500,910)
+	        (2000,1213)
+	    };
+	    \addlegendentry{Seriell}
 
-    \addplot[smooth,color=red,mark=*]
-        plot coordinates {
-        (5,62)
-        (50,88)
-        (100,114)
-        (250,164)
-        (500,261)
-        (700,340)
-        (800,376)
-        (900,415)
-        (1000,451)
-        (1200,526)
-        (1500,643)
-        (2000,828)
-        };
-    \addlegendentry{1D}
+	    \addplot[smooth,color=red,mark=*]
+	        plot coordinates {
+	        (5,62)
+	        (50,88)
+	        (100,114)
+	        (250,164)
+	        (500,261)
+	        (700,340)
+	        (800,376)
+	        (900,415)
+	        (1000,451)
+	        (1200,526)
+	        (1500,643)
+	        (2000,828)
+	        };
+	    \addlegendentry{1D}
 
-    \addplot[smooth,color=green,mark=*]
-        plot coordinates {
-        (5,85)
-        (50,155)
-        (100,234)
-        (250,444)
-        (500,808)
-        (700,1096)
-        (800,1239)
-        (900,1383)
-        (1000,1526)
-        (1200,1754)
-        (1500,2247)
-        (2000, 2969)
-        };
-    \addlegendentry{2D}
-    \end{axis}
-\end{tikzpicture}
+	    \addplot[smooth,color=green,mark=*]
+	        plot coordinates {
+	        (5,85)
+	        (50,155)
+	        (100,234)
+	        (250,444)
+	        (500,808)
+	        (700,1096)
+	        (800,1239)
+	        (900,1383)
+	        (1000,1526)
+	        (1200,1754)
+	        (1500,2247)
+	        (2000, 2969)
+	        };
+	    \addlegendentry{2D}
+	    \end{axis}
+	\end{tikzpicture}
 \end{figure}
 
 \section{Ergebnisse der Parallelisierung} % (fold)
 \label{sec:ergebnisse_der_parallelisierung}
+Da die Breitensuche mit dem 2D Dekomposition keine vergleichbaren Ergebnisse lieferte, wird hier nur der serielle Algorithmus mit dem 1D Algorithmus verglichen. Mehr zu der 2D Breitensuche steht in Kapitel \ref{sec:die_2d_breitensuche}.
 
 % section ergebnisse_der_parallelisierung (end)
 
 \section{Die 2D Breitensuche} % (fold)
 \label{sec:die_2d_breitensuche}
+Die 2D Breitensuche ist in jedem Testfall der mit Abstand langsamste Algorithmus gewesen, was so nicht zu erwarten war. Der implementierte Algorithmus ist zunächst deutlich komplexer, als die anderen beiden. Doch es gibt zwei Vorteile, die diesen ALgorithmus doch studierenswert machen. Erstens sind die Gruppen, die miteinander kommunizieren deutlich kleiner. In der ersten Kommunikationsphase sendet jeder Place an eine ganze Spalte, und empfängt von einer ganzen Zeile. Das sind $2 * \sqrt(p)$ Places, insgesamt also $O(p * 2 + \sqrt(p) * \frac{1}{2}) = O(p * \sqrt(p))= O(p^{\frac{3}{2}})$ Kommunikationsvorgänge im System. Im Vergleich dazu kommuniziert der 1D Algorithmus mit allen p Places, also $O(p^2)$ Kommunikationsvorgänge. Der zweite Vorteil der Implementierung wie in \ref{Buluc:2011} ist die Möglichkeit, aller Kommunikation und Synchronisation auf drei MPI Operationan abzubilden.
 
+Beide dieser Vorteile sind bei der X10 Implementierung, die auf nur einem CPU läuft, hinfällig. Zunächst wurden die MPI Operationen in X10 \enquote{nachprogrammiert}. Um das zu tun, muss \textit{at} verwendet werden, dass einen für diesen Zweck unnützen Rückkanal hat. Bei der Verwendung einer hochperformante MPI Hardware muss ein Datum nur einmal gesendet werden, wenn es an mehrere Empfänger gehen soll. Das ist in X10-Syntax nicht möglich. Die zusätzliche Kommunikation ist also teurer, als sie sein müsste. 
+Der zweite Vorteil, eben dass weniger Kommunikationsvorgänge im System sind, ist aus zwei Gründen hier nicht ausschlaggebend. Zum einen sind dermaßen wenig Places im Spiel, dass die Zahlen sich fast gleichen, zum anderen haben erste Tests gezeigt, dass die Kommunikationsphasen etwa viermal so schnell sind, wie die Iterationsphasen, was wiederum auf die Testumgebung ohne wirklich getrennte Places zurückzuführen ist.
+
+Wie in \cite{Buluc:2011} ist also die 2D Implementierung eher die schlechtere, wobei in den Dimensionen dieser Arbeit die Unterschiede gravierender sind. Ob in  größeren Testumgebungen die Ergebnisse anders ausfallen, muss in einer weiteren Arbeit untersucht werden.
 % section die_2d_breitensuche (end)
 % chapter ergebnisse_und_diskussion (end)

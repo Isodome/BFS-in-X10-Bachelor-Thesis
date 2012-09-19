@@ -111,7 +111,17 @@ public class Bfs1DList extends BfsAlgorithm {
                 val sourcePlace = here.id;
                 if (start / arrayPartSize == here.id) {
                     d(here.id)(start) = 0;
-					sendBuffer(start / arrayPartSize).add(start);                }
+                    val currentList = adj(here.id)(start);
+                    adj(here.id)(start) = emptyList;
+                    val currentSize = currentList.size();
+                    for (var j:Int = 0; j< currentSize; j++) {
+                        val to = currentList(j);
+                        if (!dTemp(to)) {
+                            sendBuffer(to / arrayPartSize).add(to);
+                            dTemp(to) = true;
+                        }
+                    }
+                }
                 //addTiminig("Local init done");
 
                 while(!done) {
@@ -131,7 +141,7 @@ public class Bfs1DList extends BfsAlgorithm {
                     }
 					*/
                     //addTiminig("Iteration " + depth + " Sorting");
-                    current.clear();
+                    //current.clear();
                     finish for( targetPlace in PlaceGroup.WORLD) {
                         val buffer : ArrayList[Int] = sendBuffer(targetPlace.id);
                         if (!buffer.isEmpty()) {
@@ -160,10 +170,10 @@ public class Bfs1DList extends BfsAlgorithm {
 								done = false;
                                 d(here.id)(vertex) = depth;
                                 val currentList = adj(here.id)(vertex);
-		                        adj(here.id)(from) = emptyList;
+		                        adj(here.id)(vertex) = emptyList;
 		            			val currentSize = currentList.size();
-		            			for (var i:Int = 0; i< currentSize; i++) {
-		                			val to = currentList(i);
+		            			for (var j:Int = 0; j< currentSize; j++) {
+		                			val to = currentList(j);
 		                            if (!dTemp(to)) {
 		                                sendBuffer(to / arrayPartSize).add(to);
 		                                dTemp(to) = true;

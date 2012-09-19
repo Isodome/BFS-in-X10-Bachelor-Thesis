@@ -12,7 +12,7 @@ fi
 BASENAME=`basename $GRAPH_FILE`
 
 if [ -z "$2"]; then
-	RESULTS_DIR="$2"
+	RESULTS_DIR=$2
 else 
 	RESULTS_DIR=../TestResults/
 fi
@@ -20,8 +20,8 @@ fi
 
 
 
-./run.sh $GRAPH_FILE | tee $RESULTS_DIR/BASENAME.csv
-./run.sh $GRAPH_FILE | tee -a $RESULTS_DIR/BASENAME.csv
-./run.sh $GRAPH_FILE | tee -a $RESULTS_DIR/BASENAME.csv
+./run.sh $GRAPH_FILE | tee $RESULTS_DIR/$BASENAME.csv
+./run.sh $GRAPH_FILE | tee -a $RESULTS_DIR/$BASENAME.csv
+./run.sh $GRAPH_FILE | tee -a $RESULTS_DIR/$BASENAME.csv
 
 echo -e -n "\a"

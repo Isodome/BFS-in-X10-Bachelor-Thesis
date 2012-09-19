@@ -39,8 +39,10 @@ public class BfsSerialList extends BfsAlgorithm {
         // nothing to do
     }
     public def run(start : Int) : Array[Int](1) {
-        var d : Array[Int](1) = new Array[Int](vertexCount, INF);
+        val d : Array[Int](1) = new Array[Int](vertexCount, INF);
+        val dTemp = new Array[Boolean](vertexCount, false);
         d(start) = 0;
+        dTemp(start) = true;
 
         var current : List[Int] = new ArrayList[Int]();
         var nexts : List[Int] = new ArrayList[Int]();
@@ -50,14 +52,16 @@ public class BfsSerialList extends BfsAlgorithm {
         var depth : Int = 1;
 
         while(!current.isEmpty()) {
-            for (vertex in current) {
+            for (var j:Int =0; j < current.size(); j++) {
+               val vertex = current(j);
             	val currentList = adj(vertex);
             	val currentSize = currentList.size();
             	for (var i:Int = 0; i< currentSize; i++) {
                 	val to = currentList(i);
-                    if (d(to) == INF) {
+                    if (!dTemp(to)) {
                         nexts.add(to);
                         d(to) = depth;
+                        dTemp(to) = true;
                     }
                 }
             }

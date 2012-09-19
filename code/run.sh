@@ -8,7 +8,7 @@ echo -n "Seriell,"
 
 export X10_NPLACES=1
 echo -n `sleep 10
-./bfs_startstart -alg serial_list  -q $GRAPHFILE`
+./bfs_start -alg serial_list  -q $GRAPHFILE`
 echo  ",,,,,"
 
 
@@ -17,52 +17,52 @@ export X10_NPLACES=1
 echo -n "1D,"
 sleep 10
 sleep 10
-./bfs_startstart -alg 1d_list  -q $GRAPHFILE
+./bfs_start -alg 1d_list  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=2
 sleep 10
-./bfs_startstart -alg 1d_list  -q $GRAPHFILE
+./bfs_start -alg 1d_list  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=4
 sleep 10
-./bfs_startstart -alg 1d_list -q $GRAPHFILE
+./bfs_start -alg 1d_list -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=8
 sleep 10
-./bfs_startstart -alg 1d_list  -q $GRAPHFILE
+./bfs_start -alg 1d_list  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=9
 sleep 10
-./bfs_startstart -alg 1d_list  -q $GRAPHFILE
+./bfs_start -alg 1d_list  -q $GRAPHFILE
 
 
 export X10_NPLACES=1
 echo -n -e "\n2D,"
 sleep 10
-./bfs_startstart -alg 2d_list_alt  -q $GRAPHFILE
+./bfs_start -alg 2d_list_alt  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=2
 sleep 10
-./bfs_startstart -alg 2d_list_alt  -q $GRAPHFILE
+./bfs_start -alg 2d_list_alt  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=4
 sleep 10
-./bfs_startstart -alg 2d_list_alt  -q $GRAPHFILE
+./bfs_start -alg 2d_list_alt  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=8
 sleep 10
-./bfs_startstart -alg 2d_list_alt  -q $GRAPHFILE
+./bfs_start -alg 2d_list_alt  -q $GRAPHFILE
 echo -n ","
 
 export X10_NPLACES=9
 sleep 10
-./bfs_startstart -alg 2d_list_alt  -q $GRAPHFILE
+./bfs_start -alg 2d_list_alt  -q $GRAPHFILE
 
 echo -e "\n,,,,,"

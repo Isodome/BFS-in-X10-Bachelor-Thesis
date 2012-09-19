@@ -15,8 +15,8 @@ import java.text.DecimalFormatSymbols;
 
 public class CsvAnalyser {
 
-	private static final int NUMBER_OF_VALUES = 11;
-	private static DecimalFormat twoDForm = new DecimalFormat("#.##");
+	private static final int NUMBER_OF_VALUES = 1 + 5 + 5 + 5;
+	private static DecimalFormat twoDForm;
 
 	static {
 		DecimalFormatSymbols dfs = DecimalFormatSymbols.getInstance();
@@ -143,6 +143,10 @@ public class CsvAnalyser {
 		for (int i = 6; i < 11; i++) {
 			sb.append("," + mins[i]);
 		}
+		sb.append("\nInvasive");
+		for (int i = 11; i < 16; i++) {
+			sb.append("," + mins[i]);
+		}
 		sb.append("\n,,,,,\n");
 
 		sb.append("Average Time,,,,,\n");
@@ -154,6 +158,10 @@ public class CsvAnalyser {
 		sb.append("\n2D");
 		for (int i = 6; i < 11; i++) {
 			sb.append("," + twoDForm.format(average[i]));
+		}
+		sb.append("\nInvasive");
+		for (int i = 11; i < 16; i++) {
+			sb.append("," + average[i]);
 		}
 		sb.append("\n");
 		return sb.toString();

@@ -161,7 +161,7 @@ public class CsvAnalyser {
 		}
 		sb.append("\nInvasive");
 		for (int i = 11; i < 16; i++) {
-			sb.append("," + average[i]);
+			sb.append("," + twoDForm.format(average[i]));
 		}
 		sb.append("\n");
 		return sb.toString();

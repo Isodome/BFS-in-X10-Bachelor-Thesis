@@ -123,6 +123,16 @@ Da die Breitensuche mit dem 2D Dekomposition keine vergleichbaren Ergebnisse lie
 	\begin{tikzpicture}
 		\begin{axis}[nodes near coords,enlargelimits=0.2,width=450, height=250]
 		    \addplot+[
+		        smooth,
+		        dashed,
+		        black,
+		        mark=none]
+		    coordinates {
+		    	(0,1)
+		    	(2000,1)
+		    };
+
+		    \addplot+[red,
 		        point meta=explicit symbolic]
 		    coordinates {
 		        (5,1) [1]
@@ -140,7 +150,7 @@ Da die Breitensuche mit dem 2D Dekomposition keine vergleichbaren Ergebnisse lie
 		    };
 		    \addlegendentry{Effizienz}
 
-		    \addplot+[
+		    \addplot+[blue,
 		        point meta=explicit symbolic]
 		    coordinates {
 		        (5,1) [1]
@@ -157,12 +167,7 @@ Da die Breitensuche mit dem 2D Dekomposition keine vergleichbaren Ergebnisse lie
 			    (2000,1.142) [4]
 			};
 		    \addlegendentry{Speedup}
-		    \addplot+[
-		        point meta = none]
-		    coordinates {
-		    	(0,1)
-		    	(2000,1)
-		    };
+
 		\end{axis}
 	\end{tikzpicture}
 \end{figure}

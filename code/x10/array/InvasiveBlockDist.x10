@@ -41,6 +41,7 @@ public class InvasiveBlockDist extends PEDist {
         // Create PlaceGroup
         val temp = new ArrayList[Place]();
         temp.addAll(amounts.keySet());
+        temp.sort( (x:Place, y: Place) => x.id.compareTo(y.id));
         pg = new SparsePlaceGroup(temp.toArray().sequence());
 
         var offset : Int = 0;

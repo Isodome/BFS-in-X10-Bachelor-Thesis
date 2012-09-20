@@ -1,26 +1,31 @@
 100kav5,,,,,
 ,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,33,,,,,
+Seriell,33,,,,
 1D,62,124,78,204,324
 2D,85,289,570,302,560
+Invasive,83,87,110,164,269
 ,,,,,
 ,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,29,,,,,
+Seriell,29,,,,
 1D,63,247,75,178,345
 2D,88,509,524,266,639
+Invasive,80,88,80,163,247
 ,,,,,
 ,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,30,,,,,
+Seriell,30,,,,
 1D,63,211,79,179,446
 2D,86,98,590,318,446
+Invasive,82,87,85,157,243
 ,,,,,
 
 Fastest Run,,,,,
 Seriell,29,,,,
 1D,62,124,75,178,324
 2D,85,98,524,266,446
+Invasive,80,87,80,157,243
 ,,,,,
 Average Time,,,,,
 Seriell,30.67,,,,
 1D,62.67,194,77.33,187,371.67
 2D,86.33,298.67,561.33,295.33,548.33
+Invasive,81.67,87.33,91.67,161.33,253

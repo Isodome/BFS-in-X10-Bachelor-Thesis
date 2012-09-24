@@ -4,7 +4,7 @@ import x10.util.*;
 
 public class SGraphParser implements Parser {
 
-	private static val bufferSize : Int = 200;
+	private static val bufferSize : Int = 1000;
 
 	public def fillGraphInDataStructure (gs : parser.GraphStructure, filename :String) : void {
 		finish {

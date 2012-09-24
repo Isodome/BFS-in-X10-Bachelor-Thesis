@@ -252,4 +252,10 @@ public class Bfs2DListAlt extends BfsAlgorithm {
         }
         return Math.max(1, rows);
     }
+    static public def say(s:String) {
+        if (here.id ==0) {
+            x10.io.Console.OUT.println(s);
+        }
+    }
+
 }

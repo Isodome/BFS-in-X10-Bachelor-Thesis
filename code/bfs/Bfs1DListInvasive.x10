@@ -40,12 +40,14 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
 
     public def addEdge(from : Int, to : Int) {
         assert (from <= vertexCount && to <= vertexCount) : "Vertex out of range";
-            localAdjacency(from).add(to);
+            atomic localAdjacency(from).add(to);
     }
 
     public def addEdge(from : Int, to : Array[Int]) {
-        for (i in to) {
-            localAdjacency(from).add(to(i));
+        atomic {
+            for (i in to) {
+                localAdjacency(from).add(to(i));
+            }
         }
     }
     public def checkStartNode(numberToCheck : Int) : boolean {
@@ -64,15 +66,21 @@ public class Bfs1DListInvasive extends BfsAlgorithm {
         adj = DistArray.make[ArrayList[Int]](dist, (i:Point) => new ArrayList[Int]());
         bfsDistance =  DistArray.make[Int](dist, INF);
 
-
-        finish for (place in adj.dist.places()) async {
-        	val myRegion = adj.dist.get(place);
-        	val copyBuf = new Array[ArrayList[Int]](myRegion, (i:Point) => localAdjacency(i));
-        	at(place) {
-        		for (idx in myRegion) {
-        			adj(idx) = copyBuf(idx);
-        		}
-        	}
+        say("spreadData");
+        finish for (place in adj.dist.places()) {
+            val locAdj = adj;
+            async {
+            	val myRegion = locAdj.dist.get(place);
+            	val copyBuf = new Array[ArrayList[Int]](myRegion);
+                for (idx in myRegion) {
+                    copyBuf(idx) = localAdjacency(idx);
+                }
+            	at(place) {
+            		for (idx in myRegion) {
+            			locAdj(idx) = copyBuf(idx);
+            		}
+            	}
+            }
         }
         localAdjacency = null; // feed to garbage collection
     }

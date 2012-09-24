@@ -149,14 +149,15 @@ public class Bfs1DList extends BfsAlgorithm {
                                 recBuffers(here.id)(here.id) = buffer;
                                 sendBuffer(here.id) = new ArrayList[Int]();
                             } else {
-								async at(targetPlace) {
-									recBuffers(here.id)(sourcePlace) = buffer;
+								async {
+                                    at(targetPlace) {
+									   recBuffers(here.id)(sourcePlace) = buffer;
+                                    }
+                                    buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
 								}
-								buffer.clear(); // only clear the local copy, even if targetPlace and sourcePlace are even!
                             }
                         }
                     }
-
                     team.barrier(here.id);
                     //addTiminig("Iteration " + depth + " Communication");
                     val receiveBuffers : Array[ArrayList[Int]] = recBuffers(here.id);
@@ -207,9 +208,7 @@ public class Bfs1DList extends BfsAlgorithm {
 
 
     static public def say(s:String) {
-        atomic{
-            x10.io.Console.OUT.println(s);
-        }
+            x10.io.Console.OUT.println("["+ here.id +"]"+s);
     }
 
 }

@@ -1,18 +1,24 @@
-,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,7,,,,
-1D,9,12,17,64,122
-2D,26,27,35,85,193
-Invasive,24,31,28,61,104
-,,,,,
-,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,6,,,,
-1D,13,11,15,66,140
-2D,26,27,38,109,152
-Invasive,23,30,28,65,90
-,,,,,
-,1 Place,2 Places,4 Places,8 Places, 9 Places
-Seriell,6,,,,
-1D,14,12,18,66,118
-2D,27,27,36,87,193
-Invasive,28,26,30,60,112
-,,,,,
+,1 Place,2 Places,4 Places,8 Places
+Seriell,7,,,
+1D,9,12,17,64
+2D,26,27,35,85
+,,,,
+,1 Place,2 Places,4 Places,8 Places
+Seriell,6,,,
+1D,13,11,15,66
+2D,26,27,38,109
+,,,,
+,1 Place,2 Places,4 Places,8 Places
+Seriell,6,,,
+1D,14,12,18,66
+2D,27,27,36,87
+,,,,
+Fastest Run,,,,
+Seriell,6,,,
+1D,9,11,15,64
+2D,26,27,35,85
+,,,,
+Average Time,,,,
+Seriell,6.33,,,
+1D,12,11.67,16.67,65.33
+2D,26.33,27,36.33,93.67

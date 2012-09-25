@@ -18,17 +18,13 @@ else
 	GRAPHFOLDER="$1"
 fi
 
-if [ -z "$2" ]; then
-	echo "No result dir specified"
-	exit
-else 
-	RESULTS_DIR="$2"
-fi
+RESULTS_DIR="$2"
 
 
-mkdir $1
+
+mkdir $2
 FILES=`find $1 -name "*.sgraph"`
-echo "Found Files: $FILES" > /dev/stderr
+echo -e "Found Files: \n $FILES" > /dev/stderr
 for f in $FILES
 do
 	echo "test"

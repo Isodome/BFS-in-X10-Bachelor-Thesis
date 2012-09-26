@@ -192,19 +192,22 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_700_801.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_560_1125.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_375_1500.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_1_10000.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_180_3000.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex [28pdfTeX warning : destination with the same identifier  has been already used, duplicate ignored",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/titlepage.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/declaration.tex",
@@ -219,7 +222,6 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex [23] [24",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_verteilung.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_groesse.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables.tex",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
@@ -239,14 +241,12 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/100kav2000.csv",
 		"/Users/dominic/Downloads/ALL PREMS 14 SEPTEMBER 2012/dropbox.txt",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-project",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/conclusion.tex",
 		"/Users/dominic/Downloads/10.SEP.HQ MIXX and more elsee/10.SEP.HQ MIXX and more else.txt",
 		"/Volumes/SL/Users/domi/Documents/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/code/bfs/Bfs1DListInvasive.x10",
 		"/Users/dominic/Documents/workspace/WikiProcessing/wiki_first_backwards.sgraph",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Makefile",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/bachelor_thesis.sublime-workspace",
 		"/Users/dominic/Downloads/wodiejvmist.txt",
@@ -298,7 +298,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 96.0,
 		"where_history":
 		[
 			""
@@ -309,6 +309,30 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"einer",
+			"Aktivität",
+			"Aktivitäten",
+			"in",
+			"aktivi",
+			"masterac",
+			"masterak",
+			"aktivit",
+			"aktiv",
+			"Akti",
+			"ist",
+			"exakt",
+			"img:2d-decomposition",
+			"umgehen",
+			"habe",
+			"der",
+			"rechnen",
+			"x10",
+			"Aktivität",
+			"Aktivitäten",
+			"Activitäten",
+			"Rechenleistung",
+			"dabei",
+			"wurde",
 			"1125",
 			"erneut",
 			"Users",
@@ -412,31 +436,7 @@
 			"\\cite{v}",
 			"english",
 			"englisch",
-			"Evaluation",
-			"\n",
-			"\": ",
-			"\":",
-			"[\"\"]",
-			"Conclusion",
-			"itemize",
-			"j",
-			"i",
-			"Mon",
-			"itemize",
-			"Conclusion",
-			"itemize",
-			"dots",
-			"Conclusion",
-			"chapter",
-			"Conclusion",
-			"wildcard",
-			"all",
-			"\",\n",
-			"example",
-			"public",
-			"[[",
-			"Buddi",
-			"		"
+			"Evaluation"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -444,6 +444,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Activity",
+			"Activities",
+			"Activity",
+			"Activities"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -509,6 +513,34 @@
 		"selected_items":
 		[
 			[
+				"bib",
+				"thesis.bib"
+			],
+			[
+				"evalua",
+				"evaluation.tex"
+			],
+			[
+				"inva",
+				"invasive.tex"
+			],
+			[
+				"para",
+				"parallel.tex"
+			],
+			[
+				"par",
+				"parallel.tex"
+			],
+			[
+				"basi",
+				"basics.tex"
+			],
+			[
+				"in",
+				"introduction.tex"
+			],
+			[
 				"appe",
 				"appendix.tex"
 			],
@@ -521,16 +553,8 @@
 				"invasive.tex"
 			],
 			[
-				"par",
-				"parallel.tex"
-			],
-			[
 				"invasi",
 				"invasive.tex"
-			],
-			[
-				"in",
-				"introduction.tex"
 			],
 			[
 				"titl",
@@ -553,10 +577,6 @@
 				"tables.tex"
 			],
 			[
-				"inva",
-				"invasive.tex"
-			],
-			[
 				"fut",
 				"future.tex"
 			],
@@ -577,16 +597,8 @@
 				"content.tex"
 			],
 			[
-				"para",
-				"parallel.tex"
-			],
-			[
 				"parall",
 				"parallel.tex"
-			],
-			[
-				"basi",
-				"basics.tex"
 			],
 			[
 				"introdu",
@@ -603,10 +615,6 @@
 			[
 				"intro",
 				"introduction.tex"
-			],
-			[
-				"bib",
-				"thesis.bib"
 			],
 			[
 				"pe",

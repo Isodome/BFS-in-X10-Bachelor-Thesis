@@ -115,7 +115,7 @@ Die Liste der aktiven Knoten für jede PE einmal vorhanden. Es handelt sich dabe
 		\For{counter $\in$ length-1..0}
 
 			// Skip to the list containing the first element
-			\While{min $\le$ activeNodes(listIndex).size}
+			\While{min $\ge$ activeNodes(listIndex).size}
 				\State min -= activeNodes(listIndex).size
 				\State listIndex++;
 			\EndWhile

@@ -192,14 +192,14 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
@@ -298,7 +298,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 96.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -309,6 +309,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"werden",
+			"muss",
+			"Bei",
+			"nochmals",
+			"mittels",
+			"variiert",
+			"die",
+			"ddie",
+			"liegt",
+			"der",
+			"mit",
+			"Programm",
+			"Jedes",
+			"x10",
+			"und",
+			"description",
 			"einer",
 			"Aktivität",
 			"Aktivitäten",
@@ -420,23 +436,7 @@
 			"bfsDistanz",
 			"Knoten",
 			"knoten",
-			"Knoten",
-			"algpseudocode",
-			"parallel.tex",
-			"sequenzieller_algorithmus",
-			"für",
-			"subsection name",
-			"subsection",
-			"werden",
-			"entsprechen",
-			"FAQ",
-			"verändert",
-			"begin",
-			"bibtex",
-			"\\cite{v}",
-			"english",
-			"englisch",
-			"Evaluation"
+			"Knoten"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -444,6 +444,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"X10",
 			"Activity",
 			"Activities",
 			"Activity",
@@ -513,6 +514,14 @@
 		"selected_items":
 		[
 			[
+				"eval",
+				"evaluation.tex"
+			],
+			[
+				"eva",
+				"evaluation.tex"
+			],
+			[
 				"bib",
 				"thesis.bib"
 			],
@@ -579,14 +588,6 @@
 			[
 				"fut",
 				"future.tex"
-			],
-			[
-				"eva",
-				"evaluation.tex"
-			],
-			[
-				"eval",
-				"evaluation.tex"
 			],
 			[
 				"conl",

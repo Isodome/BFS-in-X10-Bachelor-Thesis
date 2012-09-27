@@ -6,7 +6,7 @@ Im Rahmen dieser Arbeit konnten einige Ideen und Ansätze nicht umgesetzt werden
 
 Um die bestehende Arbeit besser zu testen und um die Vor- und Nachteile besser zu verstehen, sollte der existierende Code auf einem echten Rechencluster getestet werden. Die Bedingungen unterscheiden sich stark von der parallelen Ausführung auf nur einem Prozessor. Zum einen können mit einem Rechencluster, das echten verteilten Speicher hat, wesentlich größere Graphen getestet werden. Größere Graphen bedeuten immer auch größeres Parallelisierungspotential. Zum anderen ist X10 laut den Entwicklern dafür gemacht, effiziente Programme für große verteilte Rechensysteme zu programmieren. Aus diesen zwei Gründen ist zu erwarten, dass der in dieser Arbeit erreichte Speedup weit unter dem Potential der Breitensuche geblieben ist. 
 
-Zudem muss die Breitensuche natürlich auf der TODO Hardware getestet werden, die im Rahmen des invasIC Projekts entsteht.
+Zudem muss die Breitensuche natürlich auf der Invasiven Hardware getestet werden, die im Rahmen des invasIC Projekts entsteht.
 
 Auch implementierungstechnisch gibt weitere Variationsmöglichkeiten, deren Auswirkung auf Geschwindigkeit und Beschleunigung getestet werden kann. Die einzelnen Processing Elements können auch autonomer Implementiert werden, als sie es im Moment sind. Wenn jede PE ein eigenes Intervall des Graphen bekommt und darauf autonom rechnet, würde die Synchronisation zwischen den einzelnen PEs komplett wegfallen. In der aktuellen Codebasis wäre das eine Barriere weniger. Außerdem sparte man sich die Funktionsaufrufe und die Arithmetik, um die Liste der aktiven Knoten aufzuteilen. Der Nachteil dieser Implementierung wäre, dass von einem Place zu einem anderen pro Iteration mehrere Kommunikationen stattfinden, falls mehrere PEs zum gleichen Place senden müssen. 
 
@@ -14,6 +14,10 @@ In der invasiven Implementierung werden im Moment keine Processing Elements abge
 
 Auch nicht getestet wurde, wie es sich ein Programm verhält, wenn die Datenhaltung auf eine veränderte Situation der Rechenleitung reagiert. Dieser Ansatz geht im Gegensatz zu dem gerade genannten davon aus, dass Rechenleistung genutzt werden soll, egal auf welchem Place sie liegt. Wenn also Rechenleistung abgegeben wurde oder neue hinzukam, müssen die Graphdaten dynamisch entsprechend an den richtigen Ort kopiert werden. Womöglich können die Daten so verteilt werden, dass ab einem gewissen Zeitpunkt für jeden Knoten mindestens zwei Places verantwortlich sind und dadurch auf weitere Änderungen sehr schnell reagiert werden kann.
 
-% TODO: Fazit
+\underline{Fazit:}
+In dieser Arbeit wurden zwei Strategien, die Breitensuche zu Parallelisieren, auf die moderne Programmiersprache X10 übertragen und getestet. Dazu wurde in mehreren Iterationen durch Tests und Veränderungen am Code, der Algorithmus so weit wie möglich optimiert und an die Parallelitätskonstrukte von X10 angepasst. Eine der beiden Strategien, die 1D-Breitensuche wurde zusätzliche für das invasive Framework invadeX10 angepasst. Dabei wurde besonders auf die dabei neu auftretenden Probleme und deren Lösungen eingegangen, sowie erwähnt, an welchen Stellen noch zusätzliche Arbeit notwendig ist.
+
+Die Messungen ergaben, dass sich die 1D-Dekomposition im kleinen Maßstab wesentlich besser eignet, als die 2D-Dekomposition, deren zusätzliche Komplexität sich nicht auszahlt. Ob überhaupt eine Parallelisierung sinnvoll ist, hing dabei stark von dem gewählten Graph ab. Es scheint, als bräuchte man eine mindeste Anzahl von Knoten und einen möglichst gleichverteilten Knotengrad, um gute Ergebnisse zu erhalten. Die verwendete Hardware in Verbindung mit den verwendete Messmethoden lassen eine Übertragbarkeit der Ergebnisse auf Rechencluster aber nicht zu. Ebenso sind die Ergebnisse für Shared-Memory Systeme kaum aussagekräftig. Die Algorithmen sind nur ein Zwischenschritt auf dem Weg zum invasiven Rechnen oder den Manycore-Systemen der Zukunft.
+
 
 % chapter fazit_und_zuk_nftige_arbeit (end)

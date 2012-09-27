@@ -192,37 +192,49 @@
 	},
 	"file_history":
 	[
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_verteilung.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_groesse.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav100.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1000.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1200.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1500.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav2000.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav250.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav5.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav50.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav500.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav700.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav800.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav900.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/100k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/10k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/200k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/300k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/400k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/500k.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_180_3000.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_1_10000.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_375_1500.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_560_1125.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_700_801.sgraph.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/titlepage.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/declaration.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_700_801.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_560_1125.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_375_1500.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_1_10000.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_180_3000.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex [28pdfTeX warning : destination with the same identifier  has been already used, duplicate ignored",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/titlepage.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/declaration.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/10k.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/200k.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/500k.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/300k.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/400k.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/100k.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex [23] [24",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_groesse.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables.tex",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/content.tex",
@@ -298,7 +310,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 96.0,
 		"where_history":
 		[
 			""
@@ -309,6 +321,17 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"Fastest Run",
+			"Average Time",
+			"\\end{figure}\\begin{center}\n",
+			"center",
+			"\\begin{figure} ",
+			"csvautotabular",
+			"\\\\ \\vspace{1cm}",
+			"tiny",
+			"small",
+			"csvautotabular",
+			"for",
 			"werden",
 			"muss",
 			"Bei",
@@ -425,18 +448,7 @@
 			"ansmath",
 			"aktiviert",
 			"performante",
-			"Adjazenzlisten",
-			"Adjazenzarrays",
-			"Adjazenzlisten",
-			"itemize",
-			"item",
-			"paralleler_algorithmus",
-			"Algorithmus",
-			"title",
-			"bfsDistanz",
-			"Knoten",
-			"knoten",
-			"Knoten"
+			"Adjazenzlisten"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -444,6 +456,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Fastest",
+			"Average",
 			"X10",
 			"Activity",
 			"Activities",
@@ -514,6 +528,38 @@
 		"selected_items":
 		[
 			[
+				"app",
+				"appendix.tex"
+			],
+			[
+				"appe",
+				"appendix.tex"
+			],
+			[
+				"dec",
+				"declaration.tex"
+			],
+			[
+				"thes",
+				"thesis.tex"
+			],
+			[
+				"title",
+				"titlepage.tex"
+			],
+			[
+				"inva",
+				"invasive.tex"
+			],
+			[
+				"ev",
+				"evaluation.tex"
+			],
+			[
+				"fu",
+				"future.tex"
+			],
+			[
 				"futu",
 				"future.tex"
 			],
@@ -534,10 +580,6 @@
 				"evaluation.tex"
 			],
 			[
-				"inva",
-				"invasive.tex"
-			],
-			[
 				"para",
 				"parallel.tex"
 			],
@@ -552,10 +594,6 @@
 			[
 				"in",
 				"introduction.tex"
-			],
-			[
-				"appe",
-				"appendix.tex"
 			],
 			[
 				"appen",
@@ -576,14 +614,6 @@
 			[
 				"cls",
 				"thesisclass.cls"
-			],
-			[
-				"thes",
-				"thesis.tex"
-			],
-			[
-				"ev",
-				"evaluation.tex"
 			],
 			[
 				"table",

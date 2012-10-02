@@ -192,22 +192,34 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
+		"/Users/dominic/Downloads/Tunersvn/utils.cpp",
+		"/Users/dominic/Downloads/client.c",
+		"/Users/dominic/Downloads/11.txt",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_verteilung.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_groesse.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_dichte.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav100.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1000.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1200.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1500.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav2000.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav250.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav5.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables_groesse.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav900.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav800.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav700.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav50.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav500.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav700.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav800.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav900.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav5.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav250.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav2000.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1500.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1200.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav100.csv",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Dichte/100kav1000.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/100k.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/10k.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/groesse/200k.sgraph.csv",
@@ -219,19 +231,10 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_375_1500.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_560_1125.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_700_801.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/titlepage.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/declaration.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex [28pdfTeX warning : destination with the same identifier  has been already used, duplicate ignored",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex [23] [24",
@@ -310,7 +313,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 96.0,
+		"height": 99.0,
 		"where_history":
 		[
 			""
@@ -318,9 +321,33 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"dinic",
+			"dass",
+			"stellt",
+			"gewiss",
+			"Graph",
+			"bei",
+			"beschränkt",
+			"ist",
+			"m",
+			"infty",
+			"dass",
+			"ab",
+			"schlecht",
+			"langsa",
+			"grundsätzlich",
+			"erwiesen",
+			"ern",
+			"Aussage",
+			"nur",
+			"fazit",
+			"8cm",
+			" \\\\ \\vspace{1cm}",
+			"7.5cm",
+			"8cm",
 			"Fastest Run",
 			"Average Time",
 			"\\end{figure}\\begin{center}\n",
@@ -424,31 +451,7 @@
 			"genau",
 			"1d_bfs_abstract",
 			"2d",
-			"graphic",
-			"itemize",
-			"pseudocode",
-			"figure",
-			"[h]",
-			"shift+enter",
-			"super+a",
-			"wurde",
-			"x10rt_allreduce",
-			"allreduce",
-			"subsubsection",
-			"ist",
-			"verwendet",
-			"Matrixmultiplikation",
-			"Spaltenbreite",
-			"amsmath",
-			"uffer}\n					\\If{$bfsDistance(u) == \\infty$}\n						\\State{Update bfsDistance(u)}\n						\\State{Put u in current}\n					\\EndIf\n				\\EndFor",
-			"besitzt",
-			"ist",
-			"matrix",
-			"amsmath",
-			"ansmath",
-			"aktiviert",
-			"performante",
-			"Adjazenzlisten"
+			"graphic"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -528,11 +531,31 @@
 		"selected_items":
 		[
 			[
-				"app",
-				"appendix.tex"
+				"bib",
+				"thesis.bib"
+			],
+			[
+				"basi",
+				"basics.tex"
 			],
 			[
 				"appe",
+				"appendix.tex"
+			],
+			[
+				"eva",
+				"evaluation.tex"
+			],
+			[
+				"fu",
+				"future.tex"
+			],
+			[
+				"ap",
+				"appendix.tex"
+			],
+			[
+				"app",
 				"appendix.tex"
 			],
 			[
@@ -556,24 +579,12 @@
 				"evaluation.tex"
 			],
 			[
-				"fu",
-				"future.tex"
-			],
-			[
 				"futu",
 				"future.tex"
 			],
 			[
 				"eval",
 				"evaluation.tex"
-			],
-			[
-				"eva",
-				"evaluation.tex"
-			],
-			[
-				"bib",
-				"thesis.bib"
 			],
 			[
 				"evalua",
@@ -586,10 +597,6 @@
 			[
 				"par",
 				"parallel.tex"
-			],
-			[
-				"basi",
-				"basics.tex"
 			],
 			[
 				"in",

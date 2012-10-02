@@ -74,7 +74,16 @@ Der Pseudocode für eine sequentielle Breitensuche kann wie in Algorithmus \ref{
 \label{sub:analyse}
 Eine Breitensuche hat die asymptotische Laufzeit von $O(n + m)$, wenn n die Anzahl der Knoten und m die Anzahl der Kanten ist. Informell ist das dadurch begründbar, dass die innerste Schleife (Zeile 9-13) höchstens m mal durchlaufen wird (insgesamt, nicht pro Schleifendurchlauf der äußeren Schleife). Da jeder Knoten höchstens einmal zu \textit{current} hinzugefügt wird und in jeder Iteration \textit{current} geleert wird, kann die Bedingung in Zeile 7 höchstens n mal erfüllt sein. Ebenso kann jeder Knoten höchstens einmal in Zeile 8 aus current genommen werden. Damit wird Zeile 9 $O(n)$ mal erreicht. Zeile 9 wird also sowohl höchstens n mal, als auch höchstens m mal erreicht. Eine obere Schranke im O-Kalkül ist damit $O(max(n,m))$, was gerade $O(n + m)$ entspricht.
 % subsection analyse (end)
-
+\subsection{Breitensuche in der Wikipedia} % (fold)
+\label{sub:wikipedia_und_die_philosophie}
+Ein Anwendungsbeispiel für die Breitensuche liefert der bekannte Webcomic xkcd. Es wird folgende Behauptung aufgestellt: Wenn man in der Wikipedia wiederholt auf den ersten Link klickt (der nicht in Klammern steht), gelangt man irgendwann zu dem Arikel über Philosphie \cite{xkcd:Online}. Im Rahmen dieser Arbeit wurde die deutsche Wikipedia heruntergeladen, zu einem Graph verarbeitet und mittels Breitensuche herausgefunden,
+\begin{enumerate}
+	\item dass diese Behauptung für ca. 42\% der Artikel wahr ist,
+	\item dass man durchschnittlich 5,52 mal klicken muss, um zum Artikel \enquote{Philosphie} zu gelangen, falls das denn möglich ist,
+	\item dass es einen Zykel gibt: Philosphie $\rightarrow$ Wissenschaft $\rightarrow$ Wissen $\rightarrow$ Erkenntnistheorie $\rightarrow$ Philosphie. Punkt 1 gilt also für alle vier Wikipediaartikel
+	\item und dass die Wissenschaft noch \enquote{zentraler} in der Wikipedia ist. Die durchschnittliche Klickanzahl ist hier bei nur 4,49.
+\end{enumerate}
+Den eigentlichen Zweck des Graphs, nämlich als Testdatum zu fungieren, konnte er leider nicht erfüllen, da er einfach zu klein ist, um sich für die Parallelisierung zu eignen.
 % section breitensuche (end)
 
 \section{Invasives Rechnen} % (fold)

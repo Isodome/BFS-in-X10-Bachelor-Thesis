@@ -1,13 +1,14 @@
- %!TEX root = thesis.tex
+%!TEX root = thesis.tex
+
 \subsection{Dichte} % (fold)
 \label{sub:dichte}
 Die hier behandelten Graphen haben 100 000 Knoten bei einem minimalen Knotengrad von 1. Nach oben ist der Knotengrad nicht beschränkt. Als Dichte wird hier das Verhältnis von Kanten zu Knoten bezeichnet. Dieses Verhältnis ist gleichzeitig der durchschnittliche Knotengrad. Der Knotengrad ist nur 100 000, damit sehr dichte Graphen trotzdem noch in den Hauptspeicher passen. Die vollständigen Ergebnisse der Testreihe sind unter \ref{Anhang-Messwerte-Dichte} angehängt.
 
 Die Messergebnisse liefern kein eindeutiges Bild. Aus Abbildung \ref{fig:max_speedup} ist ersichtlich, dass eine minimale Graphengröße vorhanden sein muss, damit es sich überhaupt lohnt, parallel an einer Instanz des BFS zu arbeiten. Dabei scheint nicht nur die Anzahl der Knoten relevant zu sein, sondern auch die Anzahl der Kanten. Auffällig ist, dass der Speedup mit steigender Dichte nicht wächst. Der maximal erreichte Speedup liegt im Bereich zwischen 1.2 und 1.3, ausgenommen den einen Ausreißer. Der Ausreißer ist ohne weitere Analyse des Graphen nicht zu erklären. Es ist unwahrscheinlich, dass gerade bei einer bestimmten Graphdichte die Parallelisierung dermaßen viel besser funktioniert, als bei allen anderen Graphdichten. Wahrscheinlicher ist es, dass der Zufallsgenerator einen Graph generiert hat, der wenig Kanten zwischen Knoten hat, die auf unterschiedlichen Places liegen. Es kann auch sein, dass durch Zufall die Last auf den Places bei diesem Graph eher gleichmäßig verteilt ist. 
 
-In Abbildung \ref{fig:verteilung_dichte} ist der Speedup von vier beispielhaft gewählten Graphen aus der Testreihe über dem Grad der Parallelität aufgetragen. Es ist zu sehen, wie langsam der 1D-Algorithmus mit dem durchschnittlichen Knotengrad von 5 war. Der Speedup ist für alle parallelen Messungen weit unter 1. Auch ist zu sehen, wie ähnlich die Speedupkurven von 500 und 2000 verlaufen, dass also scheinbar ab einer bestimmten Grenze, die bei den Tests bei ca. 500 lag, kein verbesserter Speedup mehr allein durch dichtere Graphen erreichbar ist. Im Kapitel \ref{sub:verteilung} ist nachzulesen, dass die hier gewählten Grenzen des Knotengrads nicht ideal für die Parallelsierung sind. Ob der durchschnittliche Knotengrad einen stärkeren Einfluss hat, wenn der Graph gleichmäßiger ist, müssen weitere Tests zeigen.
 
-\begin{figure}
+
+\begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}
 		\begin{axis}[nodes near coords,
@@ -68,6 +69,8 @@ In Abbildung \ref{fig:verteilung_dichte} ist der Speedup von vier beispielhaft g
 	\caption{Speedup aufgetragen über dem durschnittlichen Knotengrad. Für jede Dichte ist hier der maximal erreichte Speedup aufgetragen. Die Beschriftung der Datenpunkte bedeutet, mit wie vielen Places dieser Speedup erreicht wurde.}
 	\label{fig:max_speedup}
 \end{figure}
+
+In Abbildung \ref{fig:verteilung_dichte} ist der Speedup von vier beispielhaft gewählten Graphen aus der Testreihe über dem Grad der Parallelität aufgetragen. Es ist zu sehen, wie langsam der 1D-Algorithmus mit dem durchschnittlichen Knotengrad von 5 war. Der Speedup ist für alle parallelen Messungen weit unter 1. Auch ist zu sehen, wie ähnlich die Speedupkurven von 500 und 2000 verlaufen, dass also scheinbar ab einer bestimmten Grenze, die bei den Tests bei ca. 500 lag, kein verbesserter Speedup mehr allein durch dichtere Graphen erreichbar ist. Im Kapitel \ref{sub:verteilung} ist nachzulesen, dass die hier gewählten Grenzen des Knotengrads nicht ideal für die Parallelsierung sind. Ob der durchschnittliche Knotengrad einen stärkeren Einfluss hat, wenn der Graph gleichmäßiger ist, müssen weitere Tests zeigen.
 
 \begin{figure}
 	\centering

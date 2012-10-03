@@ -192,14 +192,16 @@
 	},
 	"file_history":
 	[
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
+		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_dichte.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_verteilung.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/future.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/basics.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/appendix.tex",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/parallel.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesis.bib",
 		"/Users/dominic/Downloads/Tunersvn/utils.cpp",
@@ -231,12 +233,10 @@
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_375_1500.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_560_1125.sgraph.csv",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/Laufzeiten/Verteilung/av750_700_801.sgraph.csv",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/invasive.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/titlepage.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/declaration.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/introduction.tex",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation_groesse.tex [28pdfTeX warning : destination with the same identifier  has been already used, duplicate ignored",
-		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/thesisclass.cls",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/evaluation.tex [23] [24",
 		"/Users/dominic/Documents/Uni/Semester06/Bachelorarbeit/BFS-in-X10-Bachelor-Thesis/thesis/tables.tex",
 		"/Users/dominic/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
@@ -313,7 +313,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 99.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -324,6 +324,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"darauf",
+			"weswegen",
+			"dabei",
+			"waren",
+			"besser",
 			"dinic",
 			"dass",
 			"stellt",
@@ -446,12 +451,7 @@
 			"liegt",
 			"Acit",
 			"sich",
-			"somit",
-			"vor",
-			"genau",
-			"1d_bfs_abstract",
-			"2d",
-			"graphic"
+			"somit"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -531,6 +531,22 @@
 		"selected_items":
 		[
 			[
+				"cls",
+				"thesisclass.cls"
+			],
+			[
+				"fur",
+				"future.tex"
+			],
+			[
+				"inva",
+				"invasive.tex"
+			],
+			[
+				"eva",
+				"evaluation.tex"
+			],
+			[
 				"bib",
 				"thesis.bib"
 			],
@@ -541,10 +557,6 @@
 			[
 				"appe",
 				"appendix.tex"
-			],
-			[
-				"eva",
-				"evaluation.tex"
 			],
 			[
 				"fu",
@@ -569,10 +581,6 @@
 			[
 				"title",
 				"titlepage.tex"
-			],
-			[
-				"inva",
-				"invasive.tex"
 			],
 			[
 				"ev",
@@ -617,10 +625,6 @@
 			[
 				"titl",
 				"titlepage.tex"
-			],
-			[
-				"cls",
-				"thesisclass.cls"
 			],
 			[
 				"table",
